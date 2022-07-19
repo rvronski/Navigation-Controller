@@ -8,17 +8,14 @@
 import UIKit
 
 class PostViewController: UIViewController{
-    
+    let vc = FeedViewController()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
-        self.view.addSubview(self.text)
+        self.view.backgroundColor = .lightGray
+        self.navigationItem.title = vc.post.title
     }
     
-    lazy var text:UITextView = {
-        let text = UITextView(frame: CGRect(x: 0, y: 0, width: 25, height: 100), textContainer: NSTextContainer())
-        return text
-    }()
-
+    
     
 }
