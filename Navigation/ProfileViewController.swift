@@ -8,18 +8,21 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-    lazy var profileHeader: ProfileHeaderView = {
-        let view = ProfileHeaderView(frame: .zero)
-        return view
+    private lazy var profileHeader: ProfileHeaderView = {
+        let profileHeader = ProfileHeaderView(frame: .zero)
+        return profileHeader
     }()
+    
+      
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .lightGray
+        self.view.backgroundColor = .white
         self.view.addSubview(profileHeader)
+        self.navigationItem.title = "Профиль"
         }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.profileHeader.frame = self.view.bounds
+        self.profileHeader.frame = CGRect(x: 0, y: 88, width: 414, height: 808)
     }
 }
 
