@@ -14,7 +14,7 @@ class PostViewController: UIViewController{
         super.viewDidLoad()
         self.view.backgroundColor = .lightGray
         self.navigationItem.title = vc.post.title
-        var button = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(modalMenu))
+        let button = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(modalMenu))
         navigationItem.rightBarButtonItem = button
     }
     
