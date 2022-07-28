@@ -119,7 +119,7 @@ class ProfileHeaderView: UIView {
     private func stackViewConstraint() -> [NSLayoutConstraint] {
         let topConstraint = self.stackView.topAnchor.constraint(equalTo: self.topAnchor, constant:27)
         let widthConstraint = self.stackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.57)
-        let leadingConstraint = self.stackView.leadingAnchor.constraint(greaterThanOrEqualTo: self.avatarImage.trailingAnchor, constant: 20)
+        let leadingConstraint = self.stackView.leadingAnchor.constraint(equalTo: self.avatarImage.trailingAnchor, constant: 20)
         return [topConstraint, widthConstraint, leadingConstraint]
     }
 

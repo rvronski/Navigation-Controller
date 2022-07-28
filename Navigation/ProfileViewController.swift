@@ -16,8 +16,10 @@ class ProfileViewController: UIViewController {
     
     private lazy var button: UIButton = {
       let button = UIButton(frame: CGRect(x: 16, y: 300, width: 0, height: 50))
-        button.backgroundColor = .blue
+        button.backgroundColor = .orange
+        button.layer.cornerRadius = 16
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Нажми", for: .normal)
         return button
     }()
       
@@ -33,10 +35,10 @@ class ProfileViewController: UIViewController {
         }
     private func buttonConstraints() -> [NSLayoutConstraint] {
         let bottomConstraint = self.button.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-        let leadingConstraint = self.button.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16)
-        let centerConstraint = self.button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+        let leadingConstraint = self.button.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
+        let trailingConstraint = self.button.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         let heightContraint = self.button.heightAnchor.constraint(equalToConstant: 50)
-        return [bottomConstraint, centerConstraint, leadingConstraint, heightContraint]
+        return [bottomConstraint, trailingConstraint, leadingConstraint, heightContraint]
     }
     
     private func profileHeaderViewConstraints() -> [NSLayoutConstraint] {
