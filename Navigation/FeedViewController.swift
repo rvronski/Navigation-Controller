@@ -8,13 +8,24 @@
 import UIKit
 
 class FeedViewController: UIViewController {
+    private lazy var stackViewButtons: UIStackView = {
+        let stackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
+        stackView.distribution = .fillEqually
+        stackView.spacing = 10
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.view.addSubview(self.button)
-        self.button.center = view.center
-    
+        self.view.addSubview(self.stackViewButtons)
+        self.stackViewButtons.addArrangedSubview(self.button1)
+        self.stackViewButtons.addArrangedSubview(self.button)
+        let stackViewConstraints = stackViewConstraints()
+        NSLayoutConstraint.activate(stackViewConstraints)
         
     }
     private lazy var button: UIButton = {
@@ -22,13 +33,31 @@ class FeedViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 0.5
         button.layer.borderColor = UIColor.gray.cgColor
-        button.setTitle(post.title, for: .normal)
+        button.setTitle("me", for: .normal)
+        button.setTitleColor(.gray, for: .normal)
+        button.addTarget(self, action: #selector(self.didTapButton), for: .touchUpInside)
+
+        return button
+    }()
+    
+    private lazy var button1: UIButton = {
+        let button = UIButton(frame: CGRect(x: 100, y: 500, width: 200, height: 50))
+        button.layer.cornerRadius = 10
+        button.layer.borderWidth = 0.5
+        button.layer.borderColor = UIColor.gray.cgColor
+        button.setTitle("Push", for: .normal)
         button.setTitleColor(.gray, for: .normal)
         button.addTarget(self, action: #selector(self.didTapButton), for: .touchUpInside)
     
         return button
     }()
     
+    private func stackViewConstraints() -> [NSLayoutConstraint] {
+        let centrXConstraint = self.stackViewButtons.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+        let centrYConstraint = self.stackViewButtons.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+        let trailingConstraint = self.stackViewButtons.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20)
+        return [centrXConstraint, centrYConstraint, trailingConstraint]
+    }
     struct Post {
         var title: String
     }
@@ -46,8 +75,3 @@ class FeedViewController: UIViewController {
     
     
 
-//Создайте FeedViewController и ProfileViewController и добавьте их как root view controller у навигационных контроллеров.
-//Добавьте PostViewController для показа выбранного поста. Поменяйте заголовок у контроллера и цвет главной view. Добавьте кнопку на FeedViewController и сделайте переход на экран поста. Контроллер должен показаться в стеке UINavigationController.
-//Создайте структуру Post со свойством title: String. Создайте объект типа Post в FeedViewController и передайте его в PostViewController. В классе PostViewController выставьте title полученного поста в качестве заголовка контроллера.
-//На PostViewController добавьте Bar Button Item в навигейшн бар. При нажатии на него должен открываться новый контроллер InfoViewController. Контроллер должен показаться модально.
-//На InfoViewController создайте кнопку. При нажатии на неё должен показаться UIAlertController с заданным title, message и двумя UIAlertAction. При нажатии на UIAlertAction в консоль должно выводиться сообщение.
