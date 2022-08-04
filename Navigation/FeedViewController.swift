@@ -68,6 +68,8 @@ class FeedViewController: UIViewController {
         let vc = PostViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
+   
+    
 }
 
 

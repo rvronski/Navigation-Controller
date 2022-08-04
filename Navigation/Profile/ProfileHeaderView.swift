@@ -77,7 +77,7 @@ class ProfileHeaderView: UIView {
         status.textAlignment = .center
         status.placeholder = "Статус"
         status.clearsOnBeginEditing = true
-        status.becomeFirstResponder()
+//        status.becomeFirstResponder()
         status.translatesAutoresizingMaskIntoConstraints = false
         return status
     }()
@@ -101,7 +101,7 @@ class ProfileHeaderView: UIView {
         super.init(frame: frame)
         
         self.setupView()
-        
+        self.setupGesture()
     }
     
     required init?(coder: NSCoder) {
@@ -156,4 +156,14 @@ class ProfileHeaderView: UIView {
    
         NSLayoutConstraint.activate(avatarViewConstraints + stackViewConstraints + statusTextFieldConstraints + buttonConstraints )
     }
+    
+    private func setupGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        self.addGestureRecognizer(tapGesture)
+    }
+    @objc private func hideKeyboard() {
+        self.endEditing(true)
+        
+    }
+   
 }
