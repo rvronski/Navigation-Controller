@@ -46,7 +46,7 @@ class LogInViewController: UIViewController {
     }()
     
     private lazy var stackView: UIStackView = {
-       let stackView = UIStackView()
+        let stackView = UIStackView()
         stackView.spacing = 0
         stackView.layer.cornerRadius = 10
         stackView.layer.borderWidth = 0.5
@@ -62,10 +62,10 @@ class LogInViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
-        button.backgroundColor = .systemBlue
+        button.setBackgroundImage(UIImage(named: "Blue_pixel.png"), for: .normal)
         button.setTitle("Log in", for: .normal)
-        button.setTitleColor(UIColor.white, for: .highlighted)
         button.addTarget(self, action: #selector(self.didTapButton), for: .touchUpInside)
+        button.clipsToBounds = true
         return button
     }()
     
@@ -117,15 +117,14 @@ class LogInViewController: UIViewController {
         let topConsraint = self.stackView.topAnchor.constraint(lessThanOrEqualTo: self.logoImage.bottomAnchor, constant: 120)
         let leftAnchor = self.stackView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 16)
         let rightAnchor = self.stackView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -16)
-//        let centerYAnchor = self.stackView.centerYAnchor.constraint(equalTo: self.scrollView.centerYAnchor, constant: 50)
+        
         let heightConstraint = self.stackView.heightAnchor.constraint(equalToConstant: 100)
-    return [ leftAnchor, rightAnchor,topConsraint, heightConstraint]
+        return [ leftAnchor, rightAnchor,topConsraint, heightConstraint]
     }
     private func buttonConstraints() -> [NSLayoutConstraint] {
         let topConsraint = self.button.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 16)
         let leftAnchor = self.button.leftAnchor.constraint(equalTo: self.stackView.leftAnchor)
         let rightAnchor = self.button.rightAnchor.constraint(equalTo: self.stackView.rightAnchor)
-//        let centerYConstraint = self.button.centerYAnchor.constraint(equalTo: self.scrollView.centerYAnchor,constant: 166)
         let heightConstraint = self.button.heightAnchor.constraint(equalToConstant: 50)
         return [topConsraint, leftAnchor, rightAnchor, heightConstraint]
     }
@@ -149,7 +148,7 @@ class LogInViewController: UIViewController {
     }
     
     @objc func didTapButton() {
-     let vc = ProfileViewController()
+        let vc = ProfileViewController()
         self.navigationController?.pushViewController(vc, animated: true)
         self.hideKeyboard()
     }
