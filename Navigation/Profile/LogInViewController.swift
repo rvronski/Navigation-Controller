@@ -92,41 +92,27 @@ class LogInViewController: UIViewController {
         self.scrollView.addSubview(self.button)
         self.scrollView.addSubview(self.logoImage)
         
-        let scrollViewConstraints = scrollViewConstraints()
-        let imageConstraints = imageConstraints()
-        let stackConstraints = stackConstraints()
-        let buttonConstraints = buttonConstraints()
-        NSLayoutConstraint.activate(scrollViewConstraints + stackConstraints + buttonConstraints + imageConstraints)
-    }
-    private func scrollViewConstraints() -> [NSLayoutConstraint] {
-        let topConstraint = self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor)
-        let trailingConstraint = self.scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
-        let leadingConstraint  = self.scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
-        let bottomConstraint = self.scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
-        return [topConstraint,trailingConstraint, leadingConstraint, bottomConstraint]
-    }
-    
-    private func imageConstraints() -> [NSLayoutConstraint] {
-        let centerYConstraint = self.logoImage.centerYAnchor.constraint(lessThanOrEqualTo: self.scrollView.centerYAnchor, constant: -120)
-        let centerXConstraint = self.logoImage.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor)
-        let heightConstraint = self.logoImage.heightAnchor.constraint(equalToConstant: 100)
-        let widthConstraint = self.logoImage.widthAnchor.constraint(equalTo: self.logoImage.heightAnchor, multiplier: 1)
-        return [centerYConstraint, centerXConstraint, heightConstraint, widthConstraint]
-    }
-    private func stackConstraints() -> [NSLayoutConstraint] {
-        let topConsraint = self.stackView.topAnchor.constraint(lessThanOrEqualTo: self.logoImage.bottomAnchor, constant: 120)
-        let leftAnchor = self.stackView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 16)
-        let rightAnchor = self.stackView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -16)
-        
-        let heightConstraint = self.stackView.heightAnchor.constraint(equalToConstant: 100)
-        return [ leftAnchor, rightAnchor,topConsraint, heightConstraint]
-    }
-    private func buttonConstraints() -> [NSLayoutConstraint] {
-        let topConsraint = self.button.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 16)
-        let leftAnchor = self.button.leftAnchor.constraint(equalTo: self.stackView.leftAnchor)
-        let rightAnchor = self.button.rightAnchor.constraint(equalTo: self.stackView.rightAnchor)
-        let heightConstraint = self.button.heightAnchor.constraint(equalToConstant: 50)
-        return [topConsraint, leftAnchor, rightAnchor, heightConstraint]
+        NSLayoutConstraint.activate([
+            self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            
+            self.logoImage.centerYAnchor.constraint(lessThanOrEqualTo: self.scrollView.centerYAnchor, constant: -220),
+            self.logoImage.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
+            self.logoImage.heightAnchor.constraint(equalToConstant: 100),
+            self.logoImage.widthAnchor.constraint(equalTo: self.logoImage.heightAnchor, multiplier: 1),
+            
+            self.stackView.topAnchor.constraint(lessThanOrEqualTo: self.logoImage.bottomAnchor, constant: 120),
+            self.stackView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 16),
+            self.stackView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -16),
+            self.stackView.heightAnchor.constraint(equalToConstant: 100),
+            
+            self.button.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 16),
+            self.button.leftAnchor.constraint(equalTo: self.stackView.leftAnchor),
+            self.button.rightAnchor.constraint(equalTo: self.stackView.rightAnchor),
+            self.button.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -150,7 +136,6 @@ class LogInViewController: UIViewController {
     @objc func didTapButton() {
         let vc = ProfileViewController()
         self.navigationController?.pushViewController(vc, animated: true)
-        self.hideKeyboard()
     }
     @objc func didShowKeyboard(_ notification: Notification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
