@@ -26,24 +26,33 @@ class PostTableViewCell: UITableViewCell {
         let descriptionLabel = UILabel()
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.lineBreakMode = .byWordWrapping
-        descriptionLabel.numberOfLines = 50
+        descriptionLabel.numberOfLines = 0
+        descriptionLabel.font = UIFont.systemFont(ofSize: 14)
+        descriptionLabel.textColor = .systemGray
         return descriptionLabel
     }()
     
     private lazy var authorLabel: UILabel = {
        let authorLabel = UILabel()
+        authorLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        authorLabel.textColor = .black
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
+        authorLabel.numberOfLines = 2
         return authorLabel
     }()
     
     private lazy var likesLabel: UILabel = {
      let likesLabel = UILabel()
         likesLabel.translatesAutoresizingMaskIntoConstraints = false
+        likesLabel.font = UIFont.systemFont(ofSize: 16)
+        likesLabel.textColor = .black
         return likesLabel
     }()
 
     private lazy var viewsLabel: UILabel = {
         let viewsLabel = UILabel()
+        viewsLabel.font = UIFont.systemFont(ofSize: 16)
+        viewsLabel.textColor = .black
         viewsLabel.translatesAutoresizingMaskIntoConstraints = false
         return viewsLabel
     }()
