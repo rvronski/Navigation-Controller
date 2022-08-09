@@ -57,12 +57,20 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostTableViewCell else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
+            return cell
+        }
         cell.setup(with: posts[indexPath.row])
                 
         return cell
     }
+   
     
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+    }
             
         
    
