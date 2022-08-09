@@ -10,8 +10,14 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        let tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 50
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
+        tableView.dataSource = self
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
         
      return tableView
     }()
@@ -21,6 +27,9 @@ class ProfileViewController: UIViewController {
         self.setupView()
     
     }
+
+   private var posts:[Post] = [post1, post2, post3]
+    
     private func setupView(){
         self.view.backgroundColor = .systemBackground
         self.view.addSubview(tableView)
@@ -37,8 +46,25 @@ class ProfileViewController: UIViewController {
         ])
     }
     
-    extension ProfileViewController: UITableViewDataSource {
-          
-       
-    }
+   
 }
+
+extension ProfileViewController: UITableViewDataSource {
+   
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.posts.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
+        cell.setup(with: posts[indexPath.row])
+                
+        return cell
+    }
+    
+            
+        
+   
+}
+
