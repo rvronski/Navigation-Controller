@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         self.window = UIWindow(windowScene: windowScene)
-        let navController = UINavigationController(rootViewController: ProfileViewController())
+        let navController = UINavigationController(rootViewController: LogInViewController())
         let secondNavController = UINavigationController(rootViewController: FeedViewController())
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [

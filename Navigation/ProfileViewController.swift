@@ -28,6 +28,7 @@ class ProfileViewController: UIViewController {
         self.view.backgroundColor = .white
         self.view.addSubview(profileHeader)
         self.view.addSubview(button)
+        self.setupGesture()
         self.navigationItem.title = "Профиль"
         let profileHeaderViewConstraints = self.profileHeaderViewConstraints()
         let buttonConstraints = self.buttonConstraints()
@@ -47,6 +48,14 @@ class ProfileViewController: UIViewController {
         let rightConstraint = self.profileHeader.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         let heightConstraint = self.profileHeader.heightAnchor.constraint(equalToConstant: 220)
         return [topAnchor, leftConstraint, rightConstraint, heightConstraint]
+    }
+    private func setupGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    @objc private func hideKeyboard() {
+        self.view.endEditing(true)
+        
     }
 }
 
