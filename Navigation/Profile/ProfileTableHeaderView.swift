@@ -13,7 +13,6 @@ class ProfileHeaderView: UIView {
         let imageView = UIImageView(frame: CGRect(x: 16, y: 16, width: 100, height: 100))
         imageView.backgroundColor = .orange
         imageView.contentMode = .scaleToFill
-        imageView.layer.cornerRadius = 50
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.image = UIImage(named: "IMG_1824")
@@ -107,6 +106,11 @@ class ProfileHeaderView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.avatarImage.layer.cornerRadius = self.avatarImage.frame.height/2
+    }
+    
     private func avatarViewConstraint() -> [NSLayoutConstraint] {
         let topConstraint = self.avatarImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 16)
         let leadingConstraint = self.avatarImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)

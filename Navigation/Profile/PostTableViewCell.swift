@@ -29,6 +29,7 @@ class PostTableViewCell: UITableViewCell {
         descriptionLabel.numberOfLines = 0
         descriptionLabel.font = UIFont.systemFont(ofSize: 14)
         descriptionLabel.textColor = .systemGray
+        descriptionLabel.setContentHuggingPriority(UILayoutPriority(1), for: .vertical)
         return descriptionLabel
     }()
     
@@ -38,6 +39,7 @@ class PostTableViewCell: UITableViewCell {
         authorLabel.textColor = .black
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
         authorLabel.numberOfLines = 2
+        authorLabel.setContentHuggingPriority(UILayoutPriority(1), for: .vertical)
         return authorLabel
     }()
     
@@ -46,6 +48,7 @@ class PostTableViewCell: UITableViewCell {
         likesLabel.translatesAutoresizingMaskIntoConstraints = false
         likesLabel.font = UIFont.systemFont(ofSize: 16)
         likesLabel.textColor = .black
+        likesLabel.setContentHuggingPriority(UILayoutPriority(1), for: .horizontal)
         return likesLabel
     }()
 
@@ -54,6 +57,7 @@ class PostTableViewCell: UITableViewCell {
         viewsLabel.font = UIFont.systemFont(ofSize: 16)
         viewsLabel.textColor = .black
         viewsLabel.translatesAutoresizingMaskIntoConstraints = false
+        viewsLabel.setContentHuggingPriority(UILayoutPriority(1), for: .horizontal)
         return viewsLabel
     }()
 
