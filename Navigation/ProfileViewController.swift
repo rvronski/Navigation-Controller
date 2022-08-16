@@ -22,6 +22,7 @@ class ProfileViewController: UIViewController {
         tableView.estimatedRowHeight = 50
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosCell")
         tableView.dataSource = self
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
        
@@ -70,23 +71,50 @@ class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
+   
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0  {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PhotosCell", for: indexPath) as! PhotosTableViewCell
+            return cell
+             } else {
+                 guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostTableViewCell else {  let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
+                     return cell
+                 }
+                return cell
+            }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostTableViewCell else {
+                   let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
+                   return cell
+               }
+               cell.setup(with: posts[indexPath.row])
+        return cell
+    }
     
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
+        } else {
+            
         self.posts.count
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostTableViewCell else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
-            return cell
-        }
-        cell.setup(with: posts[indexPath.row])
-                
-        return cell
+        return 1
     }
+  
+
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostTableViewCell else {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
+//            return cell
+//        }
+//        cell.setup(with: posts[indexPath.row])
+     
+    
+    
    
     
     
@@ -94,7 +122,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         
     }
             
-        
-   
 }
+   
+
 
