@@ -38,8 +38,6 @@ class PostTableViewCell: UITableViewCell {
         authorLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         authorLabel.textColor = .black
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
-        authorLabel.numberOfLines = 2
-        authorLabel.setContentHuggingPriority(UILayoutPriority(1), for: .vertical)
         return authorLabel
     }()
     
@@ -89,7 +87,8 @@ class PostTableViewCell: UITableViewCell {
             self.authorLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
             
             self.postImageView.topAnchor.constraint(equalTo: self.authorLabel.bottomAnchor, constant: 16),
-            self.postImageView.widthAnchor.constraint(equalTo: self.contentView.widthAnchor),
+            self.postImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            self.postImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             self.postImageView.heightAnchor.constraint(equalTo: self.postImageView.widthAnchor),
             
             self.descriptionLabel.topAnchor.constraint(equalTo: self.postImageView.bottomAnchor, constant: 16),
