@@ -117,11 +117,10 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 0 && indexPath.section == 0 {
             let vc1 = PhotosViewController()
             self.navigationController?.pushViewController(vc1, animated: true)
-        } else {
-            return
         }
     }
     
