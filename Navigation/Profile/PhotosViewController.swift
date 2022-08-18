@@ -36,7 +36,7 @@ class PhotosViewController: UIViewController {
         self.setupView()
         self.setupNavigationBar()
         
-}
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -46,7 +46,7 @@ class PhotosViewController: UIViewController {
     private func setupNavigationBar() {
         self.navigationItem.title = "Photo Gallery"
     }
-   private var photos:[Photos] = [ photo1, photo2, photo3, photo4, photo5, photo6, photo7]
+    private var photos:[Photos] = [ photo1, photo2, photo3, photo4, photo5, photo6, photo7, photo8, photo9, photo10, photo11, photo12, photo13, photo14, photo15, photo16, photo17, photo18, photo19, photo20]
     
     private func setupView() {
         self.view.addSubview(photosCollectionView)
@@ -57,13 +57,13 @@ class PhotosViewController: UIViewController {
             self.photosCollectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
             self.photosCollectionView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
             self.photosCollectionView.rightAnchor.constraint(equalTo: self.view.rightAnchor)
-        
-        
-        
+            
+            
+            
         ])
     }
-
-  
+    
+    
 }
 extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -84,12 +84,12 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-   
+        
         let itemWidth = (collectionView.frame.width - 32) / Constants.numberOfItemsInLine
-
+        
         return CGSize(width: itemWidth, height: itemWidth)
         
     }
-
+    
     
 }

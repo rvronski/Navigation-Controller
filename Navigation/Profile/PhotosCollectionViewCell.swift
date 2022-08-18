@@ -10,7 +10,7 @@ import UIKit
 class PhotosCollectionViewCell: UICollectionViewCell {
     
     private lazy var photoImageView: UIImageView = {
-       let photoImageView = UIImageView()
+        let photoImageView = UIImageView()
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
         return photoImageView
     }()
@@ -35,7 +35,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
             self.photoImageView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor),
             self.photoImageView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor),
             self.photoImageView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
-        
+            
         ])
     }
 }

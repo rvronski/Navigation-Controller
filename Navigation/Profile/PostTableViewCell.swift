@@ -8,12 +8,9 @@
 import UIKit
 
 class PostTableViewCell: UITableViewCell {
-
-        
     
-
     private lazy var postImageView: UIImageView = {
-       let postImageView = UIImageView()
+        let postImageView = UIImageView()
         postImageView.translatesAutoresizingMaskIntoConstraints = false
         postImageView.backgroundColor = .black
         postImageView.contentMode = .scaleAspectFit
@@ -21,7 +18,7 @@ class PostTableViewCell: UITableViewCell {
         
         return postImageView
     }()
-
+    
     private lazy var descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -34,24 +31,23 @@ class PostTableViewCell: UITableViewCell {
     }()
     
     private lazy var authorLabel: UILabel = {
-       let authorLabel = UILabel()
+        let authorLabel = UILabel()
         authorLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         authorLabel.textColor = .black
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
         authorLabel.numberOfLines = 2
-        authorLabel.setContentHuggingPriority(UILayoutPriority(1), for: .vertical)
         return authorLabel
     }()
     
     private lazy var likesLabel: UILabel = {
-     let likesLabel = UILabel()
+        let likesLabel = UILabel()
         likesLabel.translatesAutoresizingMaskIntoConstraints = false
         likesLabel.font = UIFont.systemFont(ofSize: 16)
         likesLabel.textColor = .black
         likesLabel.setContentHuggingPriority(UILayoutPriority(1), for: .horizontal)
         return likesLabel
     }()
-
+    
     private lazy var viewsLabel: UILabel = {
         let viewsLabel = UILabel()
         viewsLabel.font = UIFont.systemFont(ofSize: 16)
@@ -60,7 +56,7 @@ class PostTableViewCell: UITableViewCell {
         viewsLabel.setContentHuggingPriority(UILayoutPriority(1), for: .horizontal)
         return viewsLabel
     }()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupView()
@@ -83,13 +79,14 @@ class PostTableViewCell: UITableViewCell {
         self.contentView.addSubview(authorLabel)
         self.contentView.addSubview(likesLabel)
         self.contentView.addSubview(viewsLabel)
-
+        
         NSLayoutConstraint.activate([
             self.authorLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16),
             self.authorLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
             
             self.postImageView.topAnchor.constraint(equalTo: self.authorLabel.bottomAnchor, constant: 16),
-            self.postImageView.widthAnchor.constraint(equalTo: self.contentView.widthAnchor),
+            self.postImageView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor),
+            self.postImageView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor),
             self.postImageView.heightAnchor.constraint(equalTo: self.postImageView.widthAnchor),
             
             self.descriptionLabel.topAnchor.constraint(equalTo: self.postImageView.bottomAnchor, constant: 16),
@@ -100,21 +97,21 @@ class PostTableViewCell: UITableViewCell {
             self.likesLabel.topAnchor.constraint(equalTo: self.descriptionLabel.bottomAnchor, constant: 16),
             self.likesLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
             self.likesLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16),
-
+            
             self.viewsLabel.topAnchor.constraint(equalTo: self.descriptionLabel.bottomAnchor, constant: 16),
             self.viewsLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
             self.viewsLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16)
-
             
-        
-        
-        
-        
+            
+            
+            
+            
+            
         ])
     }
-   
-
-
-
+    
+    
+    
+    
 }
 
