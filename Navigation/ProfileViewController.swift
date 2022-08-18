@@ -35,13 +35,16 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         self.setupView()
         self.setupGesture()
-        
+        self.tabBarController?.tabBar.isHidden = false
         
     }
 
    private var posts:[Post] = [post1, post2, post3]
-   var photos:[Photos] = [ photo1, photo2, photo3, photo4]
-    
+  
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
     private func setupView(){
         self.view.backgroundColor = .systemBackground
         self.view.addSubview(profileHeader)
@@ -104,12 +107,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         }
         return 0
     }
-
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostTableViewCell else {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
-//            return cell
-//        }
-//        cell.setup(with: posts[indexPath.row])
      
     
     
@@ -119,7 +116,15 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
     }
-            
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 && indexPath.section == 0 {
+            let vc1 = PhotosViewController()
+            self.navigationController?.pushViewController(vc1, animated: true)
+        } else {
+            return
+        }
+    }
+    
 }
    
 
