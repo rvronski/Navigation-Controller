@@ -36,6 +36,7 @@ class PostTableViewCell: UITableViewCell {
         authorLabel.textColor = .black
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
         authorLabel.numberOfLines = 2
+
         return authorLabel
     }()
     
@@ -85,8 +86,12 @@ class PostTableViewCell: UITableViewCell {
             self.authorLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
             
             self.postImageView.topAnchor.constraint(equalTo: self.authorLabel.bottomAnchor, constant: 16),
+
             self.postImageView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor),
             self.postImageView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor),
+
+            self.postImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            self.postImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             self.postImageView.heightAnchor.constraint(equalTo: self.postImageView.widthAnchor),
             
             self.descriptionLabel.topAnchor.constraint(equalTo: self.postImageView.bottomAnchor, constant: 16),
