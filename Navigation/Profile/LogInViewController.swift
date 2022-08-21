@@ -81,6 +81,7 @@ class LogInViewController: UIViewController {
         super.viewDidLoad()
         self.setupView()
         self.setupGesture()
+        self.tabBarController?.tabBar.isHidden = true
         
     }
     private func setupView() {
