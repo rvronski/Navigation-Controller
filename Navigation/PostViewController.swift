@@ -13,7 +13,7 @@ class PostViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .lightGray
-        self.navigationItem.title = vc.post.title
+        self.navigationItem.title = vc.post4.title
         let button = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(modalMenu))
         navigationItem.rightBarButtonItem = button
     }

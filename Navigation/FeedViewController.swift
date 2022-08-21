@@ -62,7 +62,7 @@ class FeedViewController: UIViewController {
         var title: String
     }
     
-    var post = Post(title: "Привет!")
+    var post4 = Post(title: "Привет!")
     
     @objc private func didTapButton() {
         let vc = PostViewController()

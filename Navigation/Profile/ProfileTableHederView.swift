@@ -1,8 +1,8 @@
 //
-//  ProfileView.swift
+//  ProfileTableHederView.swift
 //  Navigation
 //
-//  Created by ROMAN VRONSKY on 23.07.2022.
+//  Created by ROMAN VRONSKY on 07.08.2022.
 //
 
 import UIKit
@@ -52,7 +52,7 @@ class ProfileHeaderView: UIView {
 
     private lazy var setStatusButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 16, y: 166, width: 100, height: 50))
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = 4
         button.backgroundColor = .systemBlue
         button.setTitle("Show status", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -77,7 +77,7 @@ class ProfileHeaderView: UIView {
         status.textAlignment = .center
         status.placeholder = "Статус"
         status.clearsOnBeginEditing = true
-//        status.becomeFirstResponder()
+        status.becomeFirstResponder()
         status.translatesAutoresizingMaskIntoConstraints = false
         return status
     }()
@@ -101,7 +101,7 @@ class ProfileHeaderView: UIView {
         super.init(frame: frame)
         
         self.setupView()
-        self.setupGesture()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -131,10 +131,10 @@ class ProfileHeaderView: UIView {
         return [topConstraint, leadingConstraint, heightConstraint, widthConstraint]
     }
     private func buttonConstraints() -> [NSLayoutConstraint] {
-        let topConstraint = self.setStatusButton.topAnchor.constraint(greaterThanOrEqualTo: self.statusTextField.bottomAnchor, constant: 16)
+        let topConstraint = self.setStatusButton.topAnchor.constraint(greaterThanOrEqualTo: self.avatarImage.bottomAnchor, constant: 36)
         let leadingConstraint = self.setStatusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
         let centerConstraint = self.setStatusButton.centerXAnchor.constraint(equalTo: self.centerXAnchor)
-        let bottomConstraint = self.setStatusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5)
+        let bottomConstraint = self.setStatusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         let heightConstraint = self.setStatusButton.heightAnchor.constraint(equalToConstant: 50)
         return [topConstraint, leadingConstraint, heightConstraint, bottomConstraint, centerConstraint ]
     }
@@ -156,14 +156,4 @@ class ProfileHeaderView: UIView {
    
         NSLayoutConstraint.activate(avatarViewConstraints + stackViewConstraints + statusTextFieldConstraints + buttonConstraints )
     }
-    
-    private func setupGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        self.addGestureRecognizer(tapGesture)
-    }
-    @objc private func hideKeyboard() {
-        self.endEditing(true)
-        
-    }
-   
 }

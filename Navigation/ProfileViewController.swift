@@ -14,48 +14,87 @@ class ProfileViewController: UIViewController {
         return profileHeader
     }()
     
-    private lazy var button: UIButton = {
-      let button = UIButton(frame: CGRect(x: 16, y: 300, width: 0, height: 50))
-        button.backgroundColor = .orange
-        button.layer.cornerRadius = 16
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Нажми", for: .normal)
-        return button
+    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 50
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
+        tableView.dataSource = self
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
+       
+        
+     return tableView
     }()
-      
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
-        self.view.addSubview(profileHeader)
-        self.view.addSubview(button)
+        self.setupView()
         self.setupGesture()
-        self.navigationItem.title = "Профиль"
-        let profileHeaderViewConstraints = self.profileHeaderViewConstraints()
-        let buttonConstraints = self.buttonConstraints()
-        NSLayoutConstraint.activate(profileHeaderViewConstraints + buttonConstraints)
-        }
-    private func buttonConstraints() -> [NSLayoutConstraint] {
-        let bottomConstraint = self.button.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-        let leadingConstraint = self.button.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
-        let trailingConstraint = self.button.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
-        let heightContraint = self.button.heightAnchor.constraint(equalToConstant: 50)
-        return [bottomConstraint, trailingConstraint, leadingConstraint, heightContraint]
-    }
-    
-    private func profileHeaderViewConstraints() -> [NSLayoutConstraint] {
-        let topAnchor = self.profileHeader.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
-        let leftConstraint = self.profileHeader.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
-        let rightConstraint = self.profileHeader.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
-        let heightConstraint = self.profileHeader.heightAnchor.constraint(equalToConstant: 220)
-        return [topAnchor, leftConstraint, rightConstraint, heightConstraint]
-    }
-    private func setupGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        self.view.addGestureRecognizer(tapGesture)
-    }
-    @objc private func hideKeyboard() {
-        self.view.endEditing(true)
         
     }
+
+   private var posts:[Post] = [post1, post2, post3]
+    
+    private func setupView(){
+        self.view.backgroundColor = .systemBackground
+        self.view.addSubview(profileHeader)
+        self.view.addSubview(tableView)
+        
+        NSLayoutConstraint.activate([
+            
+            self.profileHeader.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            self.profileHeader.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.profileHeader.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.profileHeader.heightAnchor.constraint(equalToConstant: 220),
+            
+            self.tableView.topAnchor.constraint(equalTo: self.profileHeader.bottomAnchor),
+            self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+            
+        ])
+    }
+    
+    private func setupGesture() {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+            self.view.addGestureRecognizer(tapGesture)
+        }
+        @objc private func hideKeyboard() {
+            self.view.endEditing(true)
+    
+        }
+   
+}
+
+extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    
+   
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.posts.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostTableViewCell else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
+            return cell
+        }
+        cell.setup(with: posts[indexPath.row])
+                
+        return cell
+    }
+   
+    
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+    }
+            
+        
+   
 }
 
