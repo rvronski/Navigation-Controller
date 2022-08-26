@@ -7,17 +7,23 @@
 
 import UIKit
 
+//protocol ProfileViewDelegate: AnyObject {
+//    func tapAvatarView()
+//}
+
 class ProfileHeaderView: UIView {
-    
-    private lazy var avatarImage: UIImageView = {
-        let imageView = UIImageView(frame: CGRect(x: 16, y: 16, width: 100, height: 100))
+   
+    lazy var avatarImage: UIImageView = {
+        let imageView = UIImageView()
         imageView.backgroundColor = .orange
         imageView.contentMode = .scaleToFill
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.image = UIImage(named: "IMG_1824")
         imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.zPosition = .greatestFiniteMagnitude
         return imageView
     }()
     
@@ -110,13 +116,14 @@ class ProfileHeaderView: UIView {
         super.layoutSubviews()
         self.avatarImage.layer.cornerRadius = self.avatarImage.frame.height/2
     }
+  
     
-    private func avatarViewConstraint() -> [NSLayoutConstraint] {
+     func avatarViewConstraint() -> [NSLayoutConstraint] {
         let topConstraint = self.avatarImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 16)
         let leadingConstraint = self.avatarImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
         let widthConstraint = self.avatarImage.widthAnchor.constraint(lessThanOrEqualTo: self.widthAnchor, multiplier: 0.2415)
         let heightAnchor = self.avatarImage.heightAnchor.constraint(equalTo: self.avatarImage.widthAnchor)
-       
+
         return [topConstraint,leadingConstraint, widthConstraint, heightAnchor ]
     }
     
@@ -151,6 +158,8 @@ class ProfileHeaderView: UIView {
         self.stackView.addArrangedSubview(self.disctiptionLabel)
         self.addSubview(self.setStatusButton)
         self.addSubview(statusTextField)
+        self.bringSubviewToFront(self.avatarImage)
+        
         
         let avatarViewConstraints = self.avatarViewConstraint()
         let stackViewConstraints = self.stackViewConstraint()
@@ -160,7 +169,7 @@ class ProfileHeaderView: UIView {
    
         NSLayoutConstraint.activate(avatarViewConstraints + stackViewConstraints + statusTextFieldConstraints + buttonConstraints )
     }
-    
+  private var isImageViewEncreased = false
     private func setupGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         self.addGestureRecognizer(tapGesture)
@@ -169,5 +178,6 @@ class ProfileHeaderView: UIView {
         self.endEditing(true)
         
     }
-   
+    
+    
 }

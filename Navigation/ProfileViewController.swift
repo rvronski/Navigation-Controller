@@ -8,13 +8,22 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-    private lazy var profileHeader: ProfileHeaderView = {
-        let profileHeader = ProfileHeaderView(frame:CGRect(x: 0, y: 88, width: 100, height: 100))
+    private lazy var avatarView: AvatarView = {
+        let avatarView = AvatarView()
+        avatarView.translatesAutoresizingMaskIntoConstraints = false
+        avatarView.delegate = self
+        return avatarView
+    }()
+    
+    
+    lazy var profileHeader: ProfileHeaderView = {
+        let profileHeader = ProfileHeaderView()
+        profileHeader.avatarImage.layer.zPosition = .greatestFiniteMagnitude
         profileHeader.translatesAutoresizingMaskIntoConstraints = false
         return profileHeader
     }()
-    let photoCell = PhotosTableViewCell()
     
+    var center = ProfileHeaderView().avatarImage.center
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -30,11 +39,21 @@ class ProfileViewController: UIViewController {
         
      return tableView
     }()
+//    private lazy var viewForAvatar: UIImageView = {
+//        let viewForAvatar = UIImageView()
+//        viewForAvatar.translatesAutoresizingMaskIntoConstraints = false
+//        viewForAvatar.backgroundColor = .black
+////        viewForAvatar.alpha = 0.5
+//
+//        return viewForAvatar
+//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
         self.setupGesture()
+        self.setupGestureAvatarView()
+        
         self.tabBarController?.tabBar.isHidden = false
         
     }
@@ -44,13 +63,30 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
+        self.avatarView.isHidden = true
     }
     private func setupView(){
         self.view.backgroundColor = .systemBackground
-        self.view.addSubview(profileHeader)
+        
         self.view.addSubview(tableView)
+        self.view.addSubview(avatarView)
+        self.view.addSubview(profileHeader)
+//        self.view.bringSubviewToFront(profileHeader)
+        self.view.bringSubviewToFront(avatarView)
+//        self.avatarView.bringSubviewToFront(profileHeader)
+        self.avatarView.bringSubviewToFront(self.avatarView.header.avatarImage)
+//        self.view.bringSubviewToFront(profileHeader)
+//        self.profileHeader.bringSubviewToFront(avatarView)
         
         NSLayoutConstraint.activate([
+           
+           
+            
+            self.avatarView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            self.avatarView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            self.avatarView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            self.avatarView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            self.avatarView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
             
             self.profileHeader.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             self.profileHeader.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
@@ -62,9 +98,46 @@ class ProfileViewController: UIViewController {
             self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
             
-        ])
+        ] )
+    }
+   private var avatarWidthConstraint: NSLayoutConstraint?
+   private var avatarHeightConstraint: NSLayoutConstraint?
+   
+    var isAvatarIncreased = false
+    private func setupGestureAvatarView() {
+        let avatarImage = self.profileHeader.avatarImage
+    let tapGestureRecognaizer = UITapGestureRecognizer(target: self, action: #selector(self.tapAvatar))
+    tapGestureRecognaizer.numberOfTapsRequired = 1
+    tapGestureRecognaizer.numberOfTouchesRequired = 1
+    avatarImage.addGestureRecognizer(tapGestureRecognaizer)
+    
+}
+@objc func tapAvatar() {
+    self.changeLayoutAvatar()
+}
+    func changeLayoutAvatar() {
+        let closeButton = avatarView.closeButton
+        let avatarImage = self.profileHeader.avatarImage
+        let widthScreen = UIScreen.main.bounds.width
+        let widthAvatar = avatarImage.bounds.width
+        let width = widthScreen / widthAvatar
+        let startPoint = self.center
+        UIView.animateKeyframes(withDuration: 2, delay: 0, options: .calculationModeCubic) {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1) { [self] in
+                self.avatarView.isHidden = self.isAvatarIncreased ? true : false;                self.avatarView.alpha = 0.5
+                avatarImage.transform = self.isAvatarIncreased ? .identity : CGAffineTransform(scaleX: width, y: width)
+                avatarImage.layer.borderWidth = self.isAvatarIncreased ? 3 : 0
+                avatarImage.center = self.isAvatarIncreased ? startPoint : CGPoint(x: self.avatarView.bounds.midX, y: self.avatarView.bounds.midY)
+                avatarImage.layer.cornerRadius = self.isAvatarIncreased ? avatarImage.frame.height/2 : 0
+                closeButton.isHidden = self.isAvatarIncreased ? true : false
+            }
+            
+        } completion: { _ in
+            self.isAvatarIncreased.toggle()
+        }
     }
     
+
     private func setupGesture() {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
             self.view.addGestureRecognizer(tapGesture)
@@ -77,6 +150,7 @@ class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
+    
    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0  {
@@ -126,5 +200,11 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
 }
    
-
-
+extension ProfileViewController: AvatarViewDelegate {
+    func changeLayout() {
+        self.changeLayoutAvatar()
+       }
+}
+//    
+//
+//
