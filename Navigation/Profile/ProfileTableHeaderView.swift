@@ -7,9 +7,9 @@
 
 import UIKit
 
-//protocol ProfileViewDelegate: AnyObject {
-//    func tapAvatarView()
-//}
+protocol ProfileTableViewDelegate: AnyObject {
+    func changeLayout() 
+}
 
 class ProfileHeaderView: UIView {
    
@@ -86,7 +86,7 @@ class ProfileHeaderView: UIView {
         status.translatesAutoresizingMaskIntoConstraints = false
         return status
     }()
-    
+    weak var delegate: ProfileTableViewDelegate?
     private var statusText: String = " "
     
     @objc func statusTextChanged(_ textField: UITextField){
@@ -107,6 +107,7 @@ class ProfileHeaderView: UIView {
         
         self.setupView()
         self.setupGesture()
+        self.gestureAvatar()
     }
     
     required init?(coder: NSCoder) {
@@ -169,7 +170,13 @@ class ProfileHeaderView: UIView {
    
         NSLayoutConstraint.activate(avatarViewConstraints + stackViewConstraints + statusTextFieldConstraints + buttonConstraints )
     }
-  private var isImageViewEncreased = false
+    private func gestureAvatar() {
+        let gestureAvatar = UITapGestureRecognizer(target: self, action: #selector(tapAvatar))
+        self.avatarImage.addGestureRecognizer(gestureAvatar)
+    }
+    @objc func tapAvatar() {
+        self.delegate?.changeLayout()
+    }
     private func setupGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         self.addGestureRecognizer(tapGesture)
@@ -181,3 +188,4 @@ class ProfileHeaderView: UIView {
     
     
 }
+
