@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import StorageService
 class ProfileViewController: UIViewController {
     private lazy var avatarView: AvatarView = {
         let avatarView = AvatarView()
