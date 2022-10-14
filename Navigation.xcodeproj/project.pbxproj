@@ -31,7 +31,6 @@
 		45FA849A28F8CCF300F71E79 /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = 45FA848A28F8CCF200F71E79 /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45FA849D28F8CCF300F71E79 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45FA848828F8CCF200F71E79 /* StorageService.framework */; };
 		45FA849E28F8CCF300F71E79 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45FA848828F8CCF200F71E79 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		45FA84A628F8CD3C00F71E79 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4594EEFA28A0695C000B408C /* Post.swift */; };
 		45FA84A728F8CD3D00F71E79 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4594EEFA28A0695C000B408C /* Post.swift */; };
 /* End PBXBuildFile section */
 
@@ -173,7 +172,6 @@
 				451FE958288C5B1B0024A924 /* ProfileTableHeaderView.swift */,
 				451FE95128834D240024A924 /* ProfileViewController.swift */,
 				455CCAC628B570B7005590E2 /* AvatarView.swift */,
-				4594EEFA28A0695C000B408C /* Post.swift */,
 				457AA3A628AC3CB600BFB8A9 /* Photos.swift */,
 				45CF81C528A2597A006F6960 /* PostTableViewCell.swift */,
 				457AA3A428A9855900BFB8A9 /* PhotosTableViewCell.swift */,
@@ -197,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				45FA849828F8CCF300F71E79 /* StorageServiceTests.swift */,
+				4594EEFA28A0695C000B408C /* Post.swift */,
 			);
 			path = StorageServiceTests;
 			sourceTree = "<group>";
@@ -368,7 +367,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				45FA848C28F8CCF200F71E79 /* StorageService.docc in Sources */,
-				45FA84A628F8CD3C00F71E79 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,7 +528,6 @@
 		451FE94B2880BA270024A924 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -558,7 +555,6 @@
 		451FE94C2880BA270024A924 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -646,7 +642,6 @@
 		45FA84A228F8CCF300F71E79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JZPU7337NX;
@@ -664,7 +659,6 @@
 		45FA84A328F8CCF300F71E79 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JZPU7337NX;
