@@ -7,6 +7,7 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 class PostTableViewCell: UITableViewCell {
     
     private lazy var postImageView: UIImageView = {
@@ -65,14 +66,16 @@ class PostTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+private lazy var imageProcessor = ImageProcessor()
     func setup(with viewModel: Post) {
-        self.postImageView.image = UIImage(named: viewModel.image )
+//        self.postImageView.image = UIImage(named: viewModel.image )
+        imageProcessor.processImage(sourceImage: UIImage(named: viewModel.image)!, filter: .noir) { postImageView.image = $0}
         self.authorLabel.text = viewModel.author
         self.descriptionLabel.text = viewModel.description
         self.viewsLabel.text =  "Views: \(viewModel.views)"
         self.likesLabel.text = "Likes: \(viewModel.likes)"
     }
+    
     
     func setupView() {
         self.contentView.addSubview(postImageView)
