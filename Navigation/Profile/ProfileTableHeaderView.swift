@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 protocol ProfileTableViewDelegate: AnyObject {
     func changeLayout() 
@@ -117,39 +118,6 @@ class ProfileHeaderView: UIView {
         super.layoutSubviews()
         self.avatarImage.layer.cornerRadius = self.avatarImage.frame.height/2
     }
-  
-    
-     func avatarViewConstraint() -> [NSLayoutConstraint] {
-        let topConstraint = self.avatarImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 16)
-        let leadingConstraint = self.avatarImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
-        let widthConstraint = self.avatarImage.widthAnchor.constraint(lessThanOrEqualTo: self.widthAnchor, multiplier: 0.2415)
-        let heightAnchor = self.avatarImage.heightAnchor.constraint(equalTo: self.avatarImage.widthAnchor)
-
-        return [topConstraint,leadingConstraint, widthConstraint, heightAnchor ]
-    }
-    
-    private func stackViewConstraint() -> [NSLayoutConstraint] {
-        let topConstraint = self.stackView.topAnchor.constraint(equalTo: self.topAnchor, constant:27)
-        let widthConstraint = self.stackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.57)
-        let leadingConstraint = self.stackView.leadingAnchor.constraint(equalTo: self.avatarImage.trailingAnchor, constant: 20)
-        return [topConstraint, widthConstraint, leadingConstraint]
-    }
-
-    private func statusTextFieldConstraints() -> [NSLayoutConstraint] {
-        let topConstraint = self.statusTextField.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 16)
-        let leadingConstraint = self.statusTextField.leadingAnchor.constraint(equalTo: self.stackView.leadingAnchor)
-        let heightConstraint = self.statusTextField.heightAnchor.constraint(equalToConstant: 40)
-        let widthConstraint = self.statusTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.57)
-        return [topConstraint, leadingConstraint, heightConstraint, widthConstraint]
-    }
-    private func buttonConstraints() -> [NSLayoutConstraint] {
-        let topConstraint = self.setStatusButton.topAnchor.constraint(greaterThanOrEqualTo: self.statusTextField.bottomAnchor, constant: 16)
-        let leadingConstraint = self.setStatusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
-        let centerConstraint = self.setStatusButton.centerXAnchor.constraint(equalTo: self.centerXAnchor)
-        let bottomConstraint = self.setStatusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5)
-        let heightConstraint = self.setStatusButton.heightAnchor.constraint(equalToConstant: 50)
-        return [topConstraint, leadingConstraint, heightConstraint, bottomConstraint, centerConstraint ]
-    }
 
     private func setupView() {
         self.backgroundColor = .systemGray5
@@ -160,15 +128,34 @@ class ProfileHeaderView: UIView {
         self.addSubview(self.setStatusButton)
         self.addSubview(statusTextField)
         self.bringSubviewToFront(self.avatarImage)
+         
+        avatarImage.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.width.lessThanOrEqualToSuperview().multipliedBy(0.2415)
+            make.height.equalTo(avatarImage.snp.width)
+        }
         
+        stackView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(27)
+            make.width.equalToSuperview().multipliedBy(0.57)
+            make.leading.equalTo(avatarImage.snp.trailing).offset(20)
+        }
+        statusTextField.snp.makeConstraints { make in
+            make.top.equalTo(stackView.snp.bottom).offset(16)
+            make.leading.equalTo(stackView.snp.leading)
+            make.height.equalTo(40)
+            make.width.equalToSuperview().multipliedBy(0.57)
+        }
         
-        let avatarViewConstraints = self.avatarViewConstraint()
-        let stackViewConstraints = self.stackViewConstraint()
-        let statusTextFieldConstraints = self.statusTextFieldConstraints()
-        let buttonConstraints = self.buttonConstraints()
-   
-   
-        NSLayoutConstraint.activate(avatarViewConstraints + stackViewConstraints + statusTextFieldConstraints + buttonConstraints )
+        setStatusButton.snp.makeConstraints { make in
+            make.top.greaterThanOrEqualTo(statusTextField.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().inset(5)
+            make.height.equalTo(50)
+        }
+        
     }
     private func gestureAvatar() {
         let gestureAvatar = UITapGestureRecognizer(target: self, action: #selector(tapAvatar))
