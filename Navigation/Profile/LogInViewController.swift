@@ -135,11 +135,18 @@ class LogInViewController: UIViewController {
     }
     
     @objc func didTapButton() {
-        
+#if DEBUG
+        let service = TestUserService()
+        guard let client = service.input(login: loginTextField.text!) else { return }
+        let vc = ProfileViewController(user1: client)
+        self.navigationController?.pushViewController(vc, animated: true)
+#else
         let service = CurrentUserService()
         guard let client = service.input(login: loginTextField.text!) else { return }
         let vc = ProfileViewController(user1: client)
         self.navigationController?.pushViewController(vc, animated: true)
+#endif
+        
         
     }
     @objc func didShowKeyboard(_ notification: Notification) {

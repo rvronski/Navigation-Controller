@@ -76,12 +76,8 @@ private let user1: User
     }
     
     private func setupView(){
-        #if DEBUG
+
         self.view.backgroundColor = .systemBackground
-        #else
-        self.view.backgroundColor = .systemGreen
-        #endif
-        
         self.view.addSubview(tableView)
         self.view.addSubview(avatarView)
         self.view.addSubview(profileHeader)
