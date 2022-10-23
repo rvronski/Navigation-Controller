@@ -135,8 +135,12 @@ class LogInViewController: UIViewController {
     }
     
     @objc func didTapButton() {
-        let vc = ProfileViewController()
+        
+        let service = CurrentUserService()
+        guard let client = service.input(login: loginTextField.text!) else { return }
+        let vc = ProfileViewController(user1: client)
         self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     @objc func didShowKeyboard(_ notification: Notification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
