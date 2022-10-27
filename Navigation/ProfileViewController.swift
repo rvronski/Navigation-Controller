@@ -10,17 +10,17 @@ import StorageService
 
 class ProfileViewController: UIViewController {
     
-private let user1: User
-    
-    init(user1: User){
-        self.user1 = user1
+private let user: User
+
+    init(user: User){
+        self.user = user
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private lazy var avatarView: AvatarView = {
         let avatarView = AvatarView()
         avatarView.translatesAutoresizingMaskIntoConstraints = false
@@ -33,10 +33,10 @@ private let user1: User
         let profileHeader = ProfileHeaderView()
         profileHeader.delegate = self
         profileHeader.translatesAutoresizingMaskIntoConstraints = false
-        profileHeader.avatarImage.image = user1.avatar
-        profileHeader.nameLabel.text = user1.name
-        profileHeader.disctiptionLabel.text = user1.status
-        
+        profileHeader.avatarImage.image = user.avatar
+        profileHeader.nameLabel.text = user.name
+        profileHeader.disctiptionLabel.text = user.status
+
         return profileHeader
     }()
     
@@ -67,7 +67,7 @@ private let user1: User
     
     private var posts:[Post] = [post1, post2, post3]
     
-    var user: User?
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

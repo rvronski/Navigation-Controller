@@ -17,7 +17,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = UIWindow(windowScene: windowScene)
         let navController = UINavigationController(rootViewController: LogInViewController())
         let secondNavController = UINavigationController(rootViewController: FeedViewController())
-        
+        let loginVC = LogInViewController()
+        let inspector = LoginInspector()
+        loginVC.loginDelegate = inspector
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [
             navController, secondNavController
@@ -28,11 +30,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             ? UIImage(systemName: "person")
             : UIImage(systemName: "chart.bar.doc.horizontal")
         }
+        
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()
-        
+       
     }
-    
     
     
     
@@ -42,6 +44,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
+       
+        
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
