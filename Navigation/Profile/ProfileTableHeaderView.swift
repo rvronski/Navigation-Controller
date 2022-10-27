@@ -13,13 +13,15 @@ protocol ProfileTableViewDelegate: AnyObject {
 
 class ProfileHeaderView: UIView {
    
+   
+    
+    
     lazy var avatarImage: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .orange
         imageView.contentMode = .scaleToFill
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.white.cgColor
-        imageView.image = UIImage(named: "IMG_1824")
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -27,35 +29,33 @@ class ProfileHeaderView: UIView {
         return imageView
     }()
     
-    private lazy var nameLabel: UILabel = {
+     lazy var nameLabel: UILabel = {
         let nameLabel = UILabel(frame: CGRect(x: 152, y: 27, width: 100, height: 21.5))
-        nameLabel.text = "Роман Вронский"
         nameLabel.font = UIFont(name: "bold", size: 18)
         nameLabel.textColor = .black
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         return nameLabel
     }()
     
-    private lazy var disctiptionLabel: UILabel = {
+     lazy var disctiptionLabel: UILabel = {
         let discriptionLabel = UILabel(frame: CGRect(x: 152 , y: 58.5, width: 100, height: 21.5))
-        discriptionLabel.text = "Waiting for something..."
         discriptionLabel.font = UIFont(name: "regular", size: 14)
         discriptionLabel.textColor = .gray
         discriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         return discriptionLabel
     }()
     
-    private lazy var stackView: UIStackView = {
+     lazy var stackView: UIStackView = {
         let stackView = UIStackView(frame: CGRect(x: 152, y: 27, width: 100, height: 73))
         stackView.distribution = .fillEqually
-        stackView.spacing = 30
+        stackView.spacing = 20
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
 
-    private lazy var setStatusButton: UIButton = {
+     lazy var setStatusButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 16, y: 166, width: 100, height: 50))
         button.layer.cornerRadius = 10
         button.backgroundColor = .systemBlue
@@ -70,7 +70,7 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-    private lazy var statusTextField: UITextField = {
+     lazy var statusTextField: UITextField = {
         let status = UITextField(frame: CGRect(x: 152, y: 110, width: 100, height: 40))
         status.textColor = .black
         status.layer.cornerRadius = 12
