@@ -11,9 +11,7 @@ protocol LoginViewControllerDelegate {
     func check(log: String, pass: String) -> Bool
 }
 
-protocol LoginFactory {
-    func makeLoginInspector() -> LoginInspector
-}
+
 
 public final class Checker {
     
@@ -43,10 +41,3 @@ struct LoginInspector: LoginViewControllerDelegate {
     }
 }
 
-struct MyLoginFactory: LoginFactory {
-    func makeLoginInspector() -> LoginInspector {
-        <#code#>
-    }
-    
-    
-}

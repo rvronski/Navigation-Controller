@@ -147,8 +147,8 @@ class LogInViewController: UIViewController {
             tapAlert()
         } else {
             let vc = ProfileViewController(user: client!)
-            
-            self.loginDelegate = LoginInspector()
+            let loginFactory = MyLoginFactory().makeLoginInspector()
+            self.loginDelegate = loginFactory
             let input = self.loginDelegate?.check(log: loginTextField.text!, pass: passwordTextField.text!)
             if input == true {
                 
