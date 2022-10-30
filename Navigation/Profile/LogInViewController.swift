@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LogInViewController: UIViewController {
+class LoginViewController: UIViewController {
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -147,9 +147,10 @@ class LogInViewController: UIViewController {
             tapAlert()
         } else {
             let vc = ProfileViewController(user: client!)
-            let loginFactory = MyLoginFactory().makeLoginInspector()
-            self.loginDelegate = loginFactory
-            let input = self.loginDelegate?.check(log: loginTextField.text!, pass: passwordTextField.text!)
+//            let loginFactory = MyLoginFactory().makeLoginInspector()
+//            self.loginDelegate = loginFactory
+            let input = SceneDelegate().createLoginInspector().check(log: loginTextField.text!, pass: passwordTextField.text!)
+//            let input = self.loginDelegate?.check(log: loginTextField.text!, pass: passwordTextField.text!)
             if input == true {
                 
                 self.navigationController?.pushViewController(vc, animated: true)

@@ -20,15 +20,19 @@ public final class Checker {
     private let login = "rvronski"
     private let password = "qwerty"
     
+//    func check(log: String, pass: String) -> Bool {
+//        if login == log  {
+//            if password == pass {
+//                return true
+//            } else {
+//                return false
+//            }
+//        }
+//        return false
+//    }
+    
     func check(log: String, pass: String) -> Bool {
-        if login == log  {
-            if password == pass {
-                return true
-            } else {
-                return false
-            }
-        }
-        return false
+        login == log  && password == pass ? true : false
     }
 }
 
