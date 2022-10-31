@@ -10,12 +10,13 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         self.window = UIWindow(windowScene: windowScene)
-        let navController = UINavigationController(rootViewController: LogInViewController())
+        let navController = UINavigationController(rootViewController: LoginViewController())
         let secondNavController = UINavigationController(rootViewController: FeedViewController())
         
         let tabBarController = UITabBarController()
@@ -28,20 +29,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             ? UIImage(systemName: "person")
             : UIImage(systemName: "chart.bar.doc.horizontal")
         }
+        
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()
         
     }
     
-    
-    
+    func createLoginInspector() -> LoginInspector {
+        let factory = MyLoginFactory()
+        let loginInspector = factory.makeLoginInspector()
+        let loginVC = LoginViewController()
+        loginVC.loginDelegate = loginInspector
+        return loginInspector
+    }
     
 
     func sceneDidDisconnect(_ scene: UIScene) {
+
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
+       
+        
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
@@ -67,4 +77,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
-
