@@ -16,9 +16,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         self.window = UIWindow(windowScene: windowScene)
-        let navController = UINavigationController(rootViewController: LoginViewController())
+       
         let secondNavController = UINavigationController(rootViewController: FeedViewController())
-        
+        let factory = MyLoginFactory()
+        let loginInspector = factory.makeLoginInspector()
+        let loginVC = LoginViewController()
+        let navController = UINavigationController(rootViewController: loginVC )
+        loginVC.loginDelegate = loginInspector
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [
             navController, secondNavController
@@ -35,13 +39,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
     }
     
-    func createLoginInspector() -> LoginInspector {
-        let factory = MyLoginFactory()
-        let loginInspector = factory.makeLoginInspector()
-        let loginVC = LoginViewController()
-        loginVC.loginDelegate = loginInspector
-        return loginInspector
-    }
+//    func createLoginInspector() -> LoginInspector {
+//        let factory = MyLoginFactory()
+//        let loginInspector = factory.makeLoginInspector()
+//        let loginVC = LoginViewController()
+//        loginVC.loginDelegate = loginInspector
+//        return loginInspector
+    
     
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -75,5 +79,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
-
 }
+
