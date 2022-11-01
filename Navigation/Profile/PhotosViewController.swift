@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import iOSIntPackage
 class PhotosViewController: UIViewController {
     
     private enum Constants {
@@ -89,6 +89,14 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
         
         return CGSize(width: itemWidth, height: itemWidth)
         
+    }
+    
+    
+}
+extension PhotosViewController: ImageLibrarySubscriber {
+    
+    func receive(images: [UIImage]) {
+        <#code#>
     }
     
     
