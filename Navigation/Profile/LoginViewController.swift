@@ -149,10 +149,10 @@ class LoginViewController: UIViewController {
             let vc = ProfileViewController(user: client!)
 //            let loginFactory = MyLoginFactory().makeLoginInspector()
 //            self.loginDelegate = loginFactory
-            let input = SceneDelegate().createLoginInspector().check(log: loginTextField.text!, pass: passwordTextField.text!)
-//            let input = self.loginDelegate?.check(log: loginTextField.text!, pass: passwordTextField.text!)
+//            let input = SceneDelegate().createLoginInspector().check(log: loginTextField.text!, pass: passwordTextField.text!)
+            let input = self.loginDelegate?.check(log: loginTextField.text!, pass: passwordTextField.text!)
             if input == true {
-                
+                print(input!)
                 self.navigationController?.pushViewController(vc, animated: true)
             } else if input == false {
                 tapAlert()
