@@ -9,7 +9,7 @@ import UIKit
 import iOSIntPackage
 class PhotosViewController: UIViewController {
     
-    let facade: () = ImagePublisherFacade().subscribe(PhotosViewController())
+//    let facade: () = ImagePublisherFacade().subscribe(PhotosViewController())
     
     
     private enum Constants {
@@ -99,7 +99,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
 extension PhotosViewController: ImageLibrarySubscriber {
     
     func receive(images: [UIImage]) {
-        self.photosCollectionView.reloadData()
+        print(images)
     }
     
     

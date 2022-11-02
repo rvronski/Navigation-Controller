@@ -17,10 +17,11 @@ class LoginViewController: UIViewController {
     private lazy var passwordTextField: UITextField = {
         let passwordTextField = UITextField()
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        passwordTextField.placeholder = "Password"
+//        passwordTextField.placeholder = "Password"
         passwordTextField.layer.borderColor = UIColor.lightGray.cgColor
         passwordTextField.layer.borderWidth = 0.5
         passwordTextField.textColor = .black
+        passwordTextField.text = "qwerty"
         passwordTextField.font = UIFont(name: "sysemFont", size: 16)
         passwordTextField.autocapitalizationType = .none
         passwordTextField.isSecureTextEntry = true
@@ -33,7 +34,8 @@ class LoginViewController: UIViewController {
     private lazy var loginTextField: UITextField = {
         var loginTextfield = UITextField()
         loginTextfield.translatesAutoresizingMaskIntoConstraints = false
-        loginTextfield.placeholder = "Login"
+//        loginTextfield.placeholder = "Login"
+        loginTextfield.text = "rvronski"
         loginTextfield.layer.borderColor = UIColor.gray.cgColor
         loginTextfield.font = UIFont(name: "sysemFont", size: 16)
         loginTextfield.textColor = .black
