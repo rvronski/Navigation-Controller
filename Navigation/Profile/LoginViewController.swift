@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LogInViewController: UIViewController {
+class LoginViewController: UIViewController {
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -115,6 +115,7 @@ class LogInViewController: UIViewController {
             self.button.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
+   var loginDelegate: LoginViewControllerDelegate?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -141,10 +142,33 @@ class LogInViewController: UIViewController {
 #else
         let service = CurrentUserService()
 #endif
-        guard let client = service.input(login: loginTextField.text!) else { return }
-        let vc = ProfileViewController(user1: client)
-        self.navigationController?.pushViewController(vc, animated: true)
+        let client = service.input(login: loginTextField.text!)
+        if client == nil {
+            tapAlert()
+        } else {
+            let vc = ProfileViewController(user: client!)
+//            let loginFactory = MyLoginFactory().makeLoginInspector()
+//            self.loginDelegate = loginFactory
+//            let input = SceneDelegate().createLoginInspector().check(log: loginTextField.text!, pass: passwordTextField.text!)
+            let input = self.loginDelegate?.check(log: loginTextField.text!, pass: passwordTextField.text!)
+            if input == true {
+                print(input!)
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else if input == false {
+                tapAlert()
+            }
+        }
     }
+    func tapAlert()  {
+        let alertControler = UIAlertController(title: "Неверный логин или пароль", message: "Введите логин и пароль еще раз", preferredStyle: .alert)
+       let firstAction = UIAlertAction(title: "Ok", style: .default){ _ in
+           self.loginTextField.becomeFirstResponder()
+       }
+
+       alertControler.addAction(firstAction)
+        self.present(alertControler, animated: true)
+
+   }
     @objc func didShowKeyboard(_ notification: Notification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
@@ -173,3 +197,4 @@ class LogInViewController: UIViewController {
     }
     
 }
+
