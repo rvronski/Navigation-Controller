@@ -9,6 +9,9 @@ import UIKit
 import iOSIntPackage
 class PhotosViewController: UIViewController {
     
+    let facade: () = ImagePublisherFacade().subscribe(PhotosViewController())
+    
+    
     private enum Constants {
         static let numberOfItemsInLine: CGFloat = 3
     }
@@ -96,7 +99,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
 extension PhotosViewController: ImageLibrarySubscriber {
     
     func receive(images: [UIImage]) {
-        <#code#>
+        self.photosCollectionView.reloadData()
     }
     
     
