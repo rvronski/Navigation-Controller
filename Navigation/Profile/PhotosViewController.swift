@@ -9,9 +9,14 @@ import UIKit
 import iOSIntPackage
 class PhotosViewController: UIViewController {
     
-//    let facade: () = ImagePublisherFacade().subscribe(PhotosViewController())
+    let facade = ImagePublisherFacade()
+    private func subscribe() {
+        facade.subscribe(self)
+    }
     
-    
+//    private func timeImterval(image: [UIImage]) {
+//        facade.addImagesWithTimer(time: 1.0, repeat: 3, userImages: newArray)
+//    }
     private enum Constants {
         static let numberOfItemsInLine: CGFloat = 3
     }
@@ -36,8 +41,10 @@ class PhotosViewController: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("🍎 view did load")
         self.setupView()
         self.setupNavigationBar()
+        self.receive(images: newArray)
         
     }
     
@@ -49,8 +56,8 @@ class PhotosViewController: UIViewController {
     private func setupNavigationBar() {
         self.navigationItem.title = "Photo Gallery"
     }
-    private var photos:[Photos] = [ photo1, photo2, photo3, photo4, photo5, photo6, photo7, photo8, photo9, photo10, photo11, photo12, photo13, photo14, photo15, photo16, photo17, photo18, photo19, photo20]
-    
+     var photos:[Photos] = [ photo1, photo2, photo3, photo4, photo5, photo6, photo7, photo8, photo9, photo10, photo11, photo12, photo13, photo14, photo15, photo16, photo17, photo18, photo19, photo20]
+   
     private func setupView() {
         self.view.addSubview(photosCollectionView)
         self.view.backgroundColor = .systemBackground
@@ -70,7 +77,7 @@ class PhotosViewController: UIViewController {
 }
 extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.photos.count
+        newArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -78,7 +85,9 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DefultCell", for: indexPath)
             return cell
         }
-        cell.setup(with: photos[indexPath.row])
+        print("🍋 setup cell")
+        cell.setup(with: newArray[indexPath.row])
+        self.receive(images: newArray)
         return cell
     }
     
@@ -99,7 +108,9 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
 extension PhotosViewController: ImageLibrarySubscriber {
     
     func receive(images: [UIImage]) {
-        print(images)
+        facade.addImagesWithTimer(time: 2, repeat: 1, userImages: images)
+        self.photosCollectionView.reloadData()
+        print("🍉")
     }
     
     
