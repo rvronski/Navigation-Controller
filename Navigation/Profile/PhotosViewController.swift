@@ -45,7 +45,7 @@ class PhotosViewController: UIViewController {
         self.setupView()
         self.setupNavigationBar()
         self.receive(images: newArray)
-        
+        subscribe()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,7 +87,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
         }
         print("🍋 setup cell")
         cell.setup(with: newArray[indexPath.row])
-        self.receive(images: newArray)
+//        self.receive(images: newArray)
         return cell
     }
     
@@ -108,7 +108,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
 extension PhotosViewController: ImageLibrarySubscriber {
     
     func receive(images: [UIImage]) {
-        facade.addImagesWithTimer(time: 2, repeat: 1, userImages: images)
+        facade.addImagesWithTimer(time: 5, repeat: 20, userImages: images)
         self.photosCollectionView.reloadData()
         print("🍉")
     }

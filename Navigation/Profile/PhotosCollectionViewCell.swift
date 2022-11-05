@@ -27,12 +27,13 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     
     
     func setup(with image: UIImage) {
-//        let photoVC = PhotosViewController()
-//        let array = [image]
-//        photoVC.receive(images: array)
-//        for i in array {
-            self.photoImageView.image = image
-//        }
+        let photoVC = PhotosViewController()
+        let array = [image]
+        for i in array {
+            
+            self.photoImageView.image = i
+            photoVC.receive(images: array)
+        }
     }
     func setupView() {
         self.contentView.addSubview(photoImageView)
