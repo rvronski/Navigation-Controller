@@ -12,11 +12,10 @@ class PhotosViewController: UIViewController {
     let facade = ImagePublisherFacade()
     private func subscribe() {
         facade.subscribe(self)
+        
+        facade.addImagesWithTimer(time: 2, repeat: 20, userImages: newArray)
     }
     
-//    private func timeImterval(image: [UIImage]) {
-//        facade.addImagesWithTimer(time: 1.0, repeat: 3, userImages: newArray)
-//    }
     private enum Constants {
         static let numberOfItemsInLine: CGFloat = 3
     }
@@ -44,8 +43,7 @@ class PhotosViewController: UIViewController {
         print("🍎 view did load")
         self.setupView()
         self.setupNavigationBar()
-        self.receive(images: newArray)
-        subscribe()
+        self.subscribe()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,7 +75,7 @@ class PhotosViewController: UIViewController {
 }
 extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        newArray.count
+        filterFoto.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -86,8 +84,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
             return cell
         }
         print("🍋 setup cell")
-        cell.setup(with: newArray[indexPath.row])
-//        self.receive(images: newArray)
+        cell.setup(with: filterFoto[indexPath.row])
         return cell
     }
     
@@ -108,10 +105,11 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
 extension PhotosViewController: ImageLibrarySubscriber {
     
     func receive(images: [UIImage]) {
-        facade.addImagesWithTimer(time: 5, repeat: 20, userImages: images)
+        filterFoto = images
         self.photosCollectionView.reloadData()
         print("🍉")
     }
-    
+   
     
 }
+var filterFoto: [UIImage] = []

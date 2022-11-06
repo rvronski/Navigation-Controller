@@ -20,10 +20,7 @@ class ImageManager {
         }
           return photoArray
         }
-        
-    
-        
-    }
+}
     
 let processor = ImageManager()
 let photoVC = PhotosViewController()
