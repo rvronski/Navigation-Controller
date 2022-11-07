@@ -59,10 +59,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
-        let PhotosVC = PhotosViewController()
-        PhotosVC.facade.removeSubscription(for: PhotosVC)
-        PhotosVC.facade.rechargeImageLibrary()
-       print("🍅 отписка")
+    
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
     }

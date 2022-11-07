@@ -13,7 +13,7 @@ class PhotosViewController: UIViewController {
     private func subscribe() {
         facade.subscribe(self)
         
-        facade.addImagesWithTimer(time: 2, repeat: 20, userImages: newArray)
+        facade.addImagesWithTimer(time: 0.5, repeat: 20, userImages: newArray)
     }
     
     private enum Constants {
@@ -50,7 +50,13 @@ class PhotosViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        facade.removeSubscription(for: self)
+        facade.rechargeImageLibrary()
+        print("🍅 отписка")
+    }
     private func setupNavigationBar() {
         self.navigationItem.title = "Photo Gallery"
     }
