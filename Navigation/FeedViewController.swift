@@ -8,66 +8,87 @@
 import UIKit
 
 class FeedViewController: UIViewController {
-    private lazy var stackViewButtons: UIStackView = {
-        let stackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
-        stackView.distribution = .fillEqually
-        stackView.spacing = 10
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .lightGray
         self.view.addSubview(self.button)
-        self.view.addSubview(self.stackViewButtons)
-        self.stackViewButtons.addArrangedSubview(self.button1)
-        self.stackViewButtons.addArrangedSubview(self.button)
-        let stackViewConstraints = stackViewConstraints()
-        NSLayoutConstraint.activate(stackViewConstraints)
+        self.view.addSubview(self.textField)
+        self.view.addSubview(self.checkLabel)
+        
+        stackViewConstraints()
+       
+        button.tapButton = { [weak self] in
+            let result = FeedModel().check(word: (self?.textField.text)!)
+            if result == true {
+                self?.checkLabel.backgroundColor = .green
+            } else {
+                self?.checkLabel.backgroundColor = .red
+            }
+        }
         
     }
-    private lazy var button: UIButton = {
-        let button = UIButton(frame: CGRect(x: 100, y: 500, width: 200, height: 50))
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 0.5
-        button.layer.borderColor = UIColor.gray.cgColor
-        button.setTitle("me", for: .normal)
-        button.setTitleColor(.gray, for: .normal)
-        button.addTarget(self, action: #selector(self.didTapButton), for: .touchUpInside)
+    private lazy var button = CustomButton(buttonText: "Push", textColor: .white, background: .systemBlue, frame: .zero)
+    
+    private lazy var textField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.layer.borderWidth = 0.5
+        textField.layer.borderColor = UIColor.black.cgColor
+        textField.backgroundColor = .white
+        textField.layer.cornerRadius = 16
+        textField.textAlignment = .center
+        return textField
+    }()
+    private lazy var checkLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = .white
+        label.layer.borderWidth = 0.5
+        label.layer.borderColor = UIColor.black.cgColor
+        label.layer.cornerRadius = 50
+        label.clipsToBounds = true
+        return label
+    }()
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        checkLabel.layer.cornerRadius = checkLabel.frame.height/2
+//
+//    }
 
-        return button
-    }()
-    
-    private lazy var button1: UIButton = {
-        let button = UIButton(frame: CGRect(x: 100, y: 500, width: 200, height: 50))
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 0.5
-        button.layer.borderColor = UIColor.gray.cgColor
-        button.setTitle("Push", for: .normal)
-        button.setTitleColor(.gray, for: .normal)
-        button.addTarget(self, action: #selector(self.didTapButton), for: .touchUpInside)
-    
-        return button
-    }()
-    
-    private func stackViewConstraints() -> [NSLayoutConstraint] {
-        let centrXConstraint = self.stackViewButtons.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
-        let centrYConstraint = self.stackViewButtons.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
-        let trailingConstraint = self.stackViewButtons.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20)
-        return [centrXConstraint, centrYConstraint, trailingConstraint]
+    private func stackViewConstraints() {
+        NSLayoutConstraint.activate([
+            
+            self.button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.button.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            self.button.heightAnchor.constraint(equalToConstant: 50),
+            self.button.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30),
+            self.button.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -30),
+            self.textField.bottomAnchor.constraint(equalTo: self.button.topAnchor, constant: -20),
+            self.textField.trailingAnchor.constraint(equalTo: self.button.trailingAnchor),
+            self.textField.leadingAnchor.constraint(equalTo: self.button.leadingAnchor),
+            self.textField.heightAnchor.constraint(equalToConstant: 50),
+            
+            self.checkLabel.bottomAnchor.constraint(equalTo: self.textField.topAnchor, constant: -20),
+            self.checkLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.checkLabel.heightAnchor.constraint(equalToConstant: 100),
+            self.checkLabel.widthAnchor.constraint(equalTo: self.checkLabel.heightAnchor)
+        ])
+        
+        
     }
     struct Post {
         var title: String
     }
     
     var post4 = Post(title: "Привет!")
-    
-    @objc private func didTapButton() {
-        let vc = PostViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
+//
+//    @objc private func didTapButton() {
+//        let vc = PostViewController()
+//        self.navigationController?.pushViewController(vc, animated: true)
+//    }
    
     
 }
