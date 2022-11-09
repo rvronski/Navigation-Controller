@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import iOSIntPackage
 class PhotosCollectionViewCell: UICollectionViewCell {
     
     private lazy var photoImageView: UIImageView = {
@@ -23,9 +23,17 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    let imageProcessor = ImageProcessor()
     
-    func setup(with image: Photos) {
-        self.photoImageView.image = UIImage(named: image.imageName)
+    
+    func setup(with image: UIImage) {
+//        let photoVC = PhotosViewController()
+//        let array = [image]
+//        for i in array {
+            
+            self.photoImageView.image = image
+//            photoVC.receive(images: array)
+//        }
     }
     func setupView() {
         self.contentView.addSubview(photoImageView)

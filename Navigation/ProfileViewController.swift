@@ -62,6 +62,7 @@ private let user: User
         self.setupView()
         self.setupGesture()
         self.tabBarController?.tabBar.isHidden = false
+    
         
     }
     
