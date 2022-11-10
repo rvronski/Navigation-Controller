@@ -18,7 +18,7 @@ class FeedViewController: UIViewController {
         self.view.addSubview(self.checkLabel)
         
         stackViewConstraints()
-       
+        setupGesture()
         button.tapButton = { [weak self] in
             let result = FeedModel().check(word: (self?.textField.text)!)
             if result == true {
@@ -84,12 +84,15 @@ class FeedViewController: UIViewController {
     }
     
     var post4 = Post(title: "Привет!")
-//
-//    @objc private func didTapButton() {
-//        let vc = PostViewController()
-//        self.navigationController?.pushViewController(vc, animated: true)
-//    }
-   
+
+    private func setupGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    @objc private func hideKeyboard() {
+        self.view.endEditing(true)
+        
+    }
     
 }
 
