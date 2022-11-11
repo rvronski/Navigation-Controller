@@ -16,7 +16,7 @@ class ImageManager {
     func filterImage(image: [Photos]) -> [UIImage] {
         var photoArray = [UIImage]()
         for i in image {
-            imageProcessor.processImage(sourceImage: UIImage(named: i.imageName )!, filter: .noir) { photoArray.append($0!) }
+            imageProcessor.processImage(sourceImage: UIImage(named: i.imageName )!, filter: .fade) { photoArray.append($0!) }
         }
           return photoArray
         }
