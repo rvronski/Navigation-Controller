@@ -8,6 +8,9 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    
+    weak var coordinator: LoginCoordinator?
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -138,25 +141,25 @@ class LoginViewController: UIViewController {
     }
     
     @objc func didTapButton() {
-#if DEBUG
-        let service = TestUserService()
-        
-#else
-        let service = CurrentUserService()
-#endif
-        let client = service.input(login: loginTextField.text!)
-        if client == nil {
-            tapAlert()
-        } else {
-            let vc = ProfileViewController(user: client!)
-            let input = self.loginDelegate?.check(log: loginTextField.text!, pass: passwordTextField.text!)
-            if input == true {
-                print(input!)
-                self.navigationController?.pushViewController(vc, animated: true)
-            } else if input == false {
-                tapAlert()
-            }
-        }
+//#if DEBUG
+//        let service = TestUserService()
+//
+//#else
+//        let service = CurrentUserService()
+//#endif
+//        let client = service.input(login: loginTextField.text!)
+//        if client == nil {
+//            tapAlert()
+//        } else {
+//            let loginInspector = LoginInspector()
+//            self.loginDelegate? = loginInspector
+//            let input = loginInspector.check(log: loginTextField.text!, pass: passwordTextField.text!)
+//            if input == true {
+        coordinator?.pushProfileView(user: CurrentUserService().user)
+//            } else if input == false {
+//                tapAlert()
+//            }
+//        }
     }
     func tapAlert()  {
         let alertControler = UIAlertController(title: "Неверный логин или пароль", message: "Введите логин и пароль еще раз", preferredStyle: .alert)

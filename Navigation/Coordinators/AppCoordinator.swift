@@ -17,8 +17,27 @@ final class AppCoordinator: Coordinatable {
     }
 
     func start() -> UIViewController {
-       
+        let loginViewCoordinator = LoginCoordinator(factory: factory, moduleType: .login)
+        let feedViewCoordinator = FeedCoordinator(factory: factory, moduleType: .feed)
+        let tabBarController = AppTabBarController(viewControllers:
+                                                    [loginViewCoordinator.start(),
+                                                     feedViewCoordinator.start()                                                     ])
+        addCoordinator(coordinator: loginViewCoordinator)
+        addCoordinator(coordinator: feedViewCoordinator)
+        
+        return tabBarController
+        
     }
 
+    func addCoordinator(coordinator: Coordinatable) {
+        guard coordinators.contains(where: { $0 === coordinator }) else {
+            return
+        }
+        coordinators.append(coordinator)
+    }
 
+    func removeCoordinator(coordinator: Coordinatable) {
+        coordinators = coordinators.filter { $0 === coordinator }
+    }
+    
 }

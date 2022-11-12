@@ -8,6 +8,9 @@
 import UIKit
 
 class LoginCoordinator: ModuleCoordinatable {
+   
+    private(set) var coordinators: [Coordinatable] = []
+    var module: Module?
     
     private let factory: AppFactory
     
@@ -18,15 +21,18 @@ class LoginCoordinator: ModuleCoordinatable {
         self.moduleType = moduleType
     }
     
-    private(set)var coordinators: [Coordinatable] = []
-    var module: Module?
-    
     func start() -> UIViewController {
         let module = factory.makeModule(ofType: moduleType)
         let viewController = module.view
         viewController.tabBarItem = moduleType.tabBarItem
+        return viewController
     }
     
+    func pushProfileView(user: User) {
+        let profileVC = ProfileViewController(user: user)
+        (module?.view as? UINavigationController)?.pushViewController(profileVC, animated: true)
+        
+    }
     
     
     

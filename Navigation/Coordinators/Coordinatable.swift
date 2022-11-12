@@ -16,8 +16,8 @@ protocol Coordinatable: AnyObject {
 }
 
 protocol ModuleCoordinatable: Coordinatable {
-    var module: Module { get }
-    var moduleTtype: Module.ModuleType { get }
+    var module: Module? { get }
+    var moduleType: Module.ModuleType { get }
 }
 
 extension Coordinatable {
