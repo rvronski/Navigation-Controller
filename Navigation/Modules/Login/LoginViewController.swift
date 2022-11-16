@@ -9,7 +9,16 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    weak var coordinator: LoginCoordinator?
+    private let viewModel: LoginViewModelProtocol
+    
+    init(viewModel: LoginViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -141,25 +150,25 @@ class LoginViewController: UIViewController {
     }
     
     @objc func didTapButton() {
-//#if DEBUG
-//        let service = TestUserService()
-//
-//#else
-//        let service = CurrentUserService()
-//#endif
-//        let client = service.input(login: loginTextField.text!)
-//        if client == nil {
-//            tapAlert()
-//        } else {
-//            let loginInspector = LoginInspector()
-//            self.loginDelegate? = loginInspector
-//            let input = loginInspector.check(log: loginTextField.text!, pass: passwordTextField.text!)
-//            if input == true {
-        coordinator?.pushProfileView(user: CurrentUserService().user)
-//            } else if input == false {
-//                tapAlert()
-//            }
-//        }
+#if DEBUG
+        let service = TestUserService()
+
+#else
+        let service = CurrentUserService()
+#endif
+        let client = service.input(login: loginTextField.text!)
+        if client == nil {
+            tapAlert()
+        } else {
+            let loginInspector = LoginInspector()
+            self.loginDelegate? = loginInspector
+            let input = loginInspector.check(log: loginTextField.text!, pass: passwordTextField.text!)
+            if input == true {
+                viewModel.didTapLoginButton(viewInput: .tapLoginButton(client!))
+            } else if input == false {
+                tapAlert()
+            }
+        }
     }
     func tapAlert()  {
         let alertControler = UIAlertController(title: "Неверный логин или пароль", message: "Введите логин и пароль еще раз", preferredStyle: .alert)

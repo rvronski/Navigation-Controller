@@ -17,7 +17,7 @@ final class AppCoordinator: Coordinatable {
     }
 
     func start() -> UIViewController {
-        let loginViewCoordinator = LoginCoordinator(factory: factory, moduleType: .login)
+        let loginViewCoordinator = LoginCoordinator(moduleType: .login, factory: factory)
         let feedViewCoordinator = FeedCoordinator(factory: factory, moduleType: .feed)
         let tabBarController = AppTabBarController(viewControllers:
                                                     [loginViewCoordinator.start(),

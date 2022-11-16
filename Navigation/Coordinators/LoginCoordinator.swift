@@ -8,30 +8,32 @@
 import UIKit
 
 class LoginCoordinator: ModuleCoordinatable {
-   
-    private(set) var coordinators: [Coordinatable] = []
-    var module: Module?
     
+    let moduleType: Module.ModuleType
+
     private let factory: AppFactory
-    
-    private(set) var moduleType: Module.ModuleType
-    
-    init(factory: AppFactory, moduleType: Module.ModuleType) {
-        self.factory = factory
+
+    private(set) var coordinators: [Coordinatable] = []
+    private(set) var module: Module?
+
+    init(moduleType: Module.ModuleType, factory: AppFactory) {
         self.moduleType = moduleType
+        self.factory = factory
     }
     
     func start() -> UIViewController {
-        let module = factory.makeModule(ofType: moduleType)
+        let module = factory.makeModule(ofType: .login)
         let viewController = module.view
         viewController.tabBarItem = moduleType.tabBarItem
+        (module.viewModel as? LoginViewModel)?.coordinator = self
+        self.module = module
         return viewController
     }
-    
-    func pushProfileView(user: User) {
-        let profileVC = ProfileViewController(user: user)
-        (module?.view as? UINavigationController)?.pushViewController(profileVC, animated: true)
-        
+
+    func pushProfileViewController(user: User) {
+        let viewControllerToPush = ProfileViewController(user: user)
+        (module?.view as? UINavigationController)?.pushViewController(viewControllerToPush, animated: true)
+        print("🍑")
     }
     
     

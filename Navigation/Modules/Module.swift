@@ -7,12 +7,17 @@
 
 import UIKit
 
+
+protocol ViewModelProtocol: AnyObject {}
+
 struct Module {
     enum ModuleType {
         case login
         case feed
+        
     }
     let moduleType: ModuleType
+    let viewModel: ViewModelProtocol
     let view: UIViewController
     
 }

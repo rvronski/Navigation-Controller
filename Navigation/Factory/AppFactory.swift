@@ -12,11 +12,13 @@ class AppFactory {
     func makeModule(ofType moduleType: Module.ModuleType) -> Module {
         switch moduleType {
         case .login:
-            let view = UINavigationController(rootViewController: LoginViewController())
-            return Module(moduleType: moduleType, view: view)
+            let viewModel = LoginViewModel()
+            let view = UINavigationController(rootViewController: LoginViewController(viewModel: viewModel))
+            return Module(moduleType: moduleType, viewModel: viewModel, view: view)
         case .feed:
+            let viewModel = FeedViewModel()
             let view = UINavigationController(rootViewController: FeedViewController())
-            return Module(moduleType: moduleType, view: view)
+            return Module(moduleType: moduleType, viewModel: viewModel, view: view)
         }
     }
 }

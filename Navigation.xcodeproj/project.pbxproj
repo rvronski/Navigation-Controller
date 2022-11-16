@@ -42,6 +42,7 @@
 		45A1FDEF291BD1C4000F3320 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A1FDEE291BD1C4000F3320 /* CustomButton.swift */; };
 		45C7A21F29059031008C08CD /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C7A21E29059031008C08CD /* TestUserService.swift */; };
 		45CF81C628A2597A006F6960 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF81C528A2597A006F6960 /* PostTableViewCell.swift */; };
+		45EF991C2922F3C700AC3AF6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF991B2922F3C700AC3AF6 /* LoginViewModel.swift */; };
 		45FA848C28F8CCF200F71E79 /* StorageService.docc in Sources */ = {isa = PBXBuildFile; fileRef = 45FA848B28F8CCF200F71E79 /* StorageService.docc */; };
 		45FA849228F8CCF300F71E79 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45FA848828F8CCF200F71E79 /* StorageService.framework */; };
 		45FA849928F8CCF300F71E79 /* StorageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA849828F8CCF300F71E79 /* StorageServiceTests.swift */; };
@@ -126,6 +127,7 @@
 		45A1FDEE291BD1C4000F3320 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		45C7A21E29059031008C08CD /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
 		45CF81C528A2597A006F6960 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		45EF991B2922F3C700AC3AF6 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		45FA848828F8CCF200F71E79 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FA848A28F8CCF200F71E79 /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
 		45FA848B28F8CCF200F71E79 /* StorageService.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = StorageService.docc; sourceTree = "<group>"; };
@@ -184,6 +186,8 @@
 		451351F6291EF1DE007C7BC5 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				451351F8291EF2BC007C7BC5 /* Module.swift */,
+				45EF991A2922F38F00AC3AF6 /* Login */,
 				451351F7291EF212007C7BC5 /* Feed */,
 				451FE957288C5AD80024A924 /* Profile */,
 			);
@@ -263,11 +267,18 @@
 				45A1FDEE291BD1C4000F3320 /* CustomButton.swift */,
 				458F2655291188B60098C7EF /* ImageManager.swift */,
 				455CCAC428AD81D7005590E2 /* PhotosCollectionViewCell.swift */,
-				45832A3E289971D7005C65C2 /* LoginViewController.swift */,
 				455C90392907381000A608C8 /* Checker.swift */,
-				451351F8291EF2BC007C7BC5 /* Module.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		45EF991A2922F38F00AC3AF6 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				45832A3E289971D7005C65C2 /* LoginViewController.swift */,
+				45EF991B2922F3C700AC3AF6 /* LoginViewModel.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		45FA848928F8CCF200F71E79 /* StorageService */ = {
@@ -447,6 +458,7 @@
 				451351FC291F0052007C7BC5 /* TabBarController.swift in Sources */,
 				457AA3A928AC415400BFB8A9 /* PhotosViewController.swift in Sources */,
 				45CF81C628A2597A006F6960 /* PostTableViewCell.swift in Sources */,
+				45EF991C2922F3C700AC3AF6 /* LoginViewModel.swift in Sources */,
 				451351F2291EEC64007C7BC5 /* Coordinatable.swift in Sources */,
 				451FE93A2880BA240024A924 /* AppDelegate.swift in Sources */,
 				451351F0291EEC0A007C7BC5 /* AppCoordinator.swift in Sources */,
