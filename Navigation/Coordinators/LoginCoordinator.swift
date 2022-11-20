@@ -20,7 +20,7 @@ class LoginCoordinator: ModuleCoordinatable {
         self.moduleType = moduleType
         self.factory = factory
     }
-    
+   
     func start() -> UIViewController {
         let module = factory.makeModule(ofType: .login)
         let viewController = module.view
@@ -31,7 +31,7 @@ class LoginCoordinator: ModuleCoordinatable {
     }
 
     func pushProfileViewController(user: User) {
-        let viewControllerToPush = ProfileViewController(user: user)
+        let viewControllerToPush = ProfileViewController(viewModel: ProfileViewModel(), user: user)
         (module?.view as? UINavigationController)?.pushViewController(viewControllerToPush, animated: true)
         print("🍑")
     }

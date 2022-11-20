@@ -15,7 +15,6 @@ class CustomButton: UIButton {
         layer.cornerRadius = 10
         layer.borderWidth = 0.5
         layer.borderColor = UIColor.gray.cgColor
-        setTitle("Push", for: .normal)
         backgroundColor = background
         setTitleColor(textColor, for: .normal)
         translatesAutoresizingMaskIntoConstraints = false

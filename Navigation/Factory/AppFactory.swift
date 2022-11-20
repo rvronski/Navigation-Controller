@@ -9,6 +9,7 @@ import UIKit
 
 class AppFactory {
     
+   
     func makeModule(ofType moduleType: Module.ModuleType) -> Module {
         switch moduleType {
         case .login:
@@ -18,6 +19,11 @@ class AppFactory {
         case .feed:
             let viewModel = FeedViewModel()
             let view = UINavigationController(rootViewController: FeedViewController())
+            return Module(moduleType: moduleType, viewModel: viewModel, view: view)
+        case .profile:
+            let viewModel = ProfileViewModel()
+            let user = User(login: "", name: "", status: "", avatar: UIImage())
+            let view = UINavigationController(rootViewController: ProfileViewController(viewModel: viewModel, user: user))
             return Module(moduleType: moduleType, viewModel: viewModel, view: view)
         }
     }

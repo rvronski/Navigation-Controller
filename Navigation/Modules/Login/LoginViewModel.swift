@@ -16,7 +16,7 @@ class LoginViewModel: LoginViewModelProtocol {
         case tapLoginButton(User)
     }
     
-    weak var coordinator: LoginCoordinator?
+    var coordinator: LoginCoordinator?
     
     
     

@@ -19,7 +19,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let factory = AppFactory()
         let appCoordinator = AppCoordinator(factory: factory)
-        
         self.appcoordinator = appCoordinator
         
         self.window?.rootViewController = appCoordinator.start()

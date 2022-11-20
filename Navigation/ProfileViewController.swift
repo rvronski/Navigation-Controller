@@ -9,52 +9,41 @@ import UIKit
 import StorageService
 
 class ProfileViewController: UIViewController {
+    private let viewModel: ProfileViewModelProtocol
+    private let user: User
     
-private let user: User
-
-    init(user: User){
+    init(viewModel: ProfileViewModelProtocol, user: User){
+        self.viewModel = viewModel
         self.user = user
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    private lazy var avatarView: AvatarView = {
+    
+    lazy var avatarView: AvatarView = {
         let avatarView = AvatarView()
         avatarView.translatesAutoresizingMaskIntoConstraints = false
         avatarView.delegate = self
         return avatarView
     }()
     
-    
-    private lazy var profileHeader: ProfileHeaderView = {
-        let profileHeader = ProfileHeaderView()
-        profileHeader.delegate = self
-        profileHeader.translatesAutoresizingMaskIntoConstraints = false
-        profileHeader.avatarImage.image = user.avatar
-        profileHeader.nameLabel.text = user.name
-        profileHeader.disctiptionLabel.text = user.status
+    private lazy var profileView: ProfileView = {
+        let profileView = ProfileView()
+        profileView.avatarImage.image = user.avatar
+        profileView.nameLabel.text = user.name
+        profileView.disctiptionLabel.text = user.status
+        profileView.delegate = self
 
-        return profileHeader
+        return profileView
     }()
     
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 50
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
-        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosCell")
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
-        
-        
-        return tableView
-    }()
+    override func loadView() {
+        super.loadView()
+        view = profileView
+    }
+    
     
     
     override func viewDidLoad() {
@@ -62,7 +51,9 @@ private let user: User
         self.setupView()
         self.setupGesture()
         self.tabBarController?.tabBar.isHidden = false
-    
+        
+        profileView.configureTableView(dataSource: self, delegate: self)
+        profileView.delegate = self
         
     }
     
@@ -79,9 +70,7 @@ private let user: User
     private func setupView(){
 
         self.view.backgroundColor = .systemBackground
-        self.view.addSubview(tableView)
         self.view.addSubview(avatarView)
-        self.view.addSubview(profileHeader)
         self.view.bringSubviewToFront(avatarView)
         
         NSLayoutConstraint.activate([
@@ -93,17 +82,7 @@ private let user: User
             self.avatarView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
             self.avatarView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             self.avatarView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            
-            self.profileHeader.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            self.profileHeader.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            self.profileHeader.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            self.profileHeader.heightAnchor.constraint(equalToConstant: 220),
-            
-            self.tableView.topAnchor.constraint(equalTo: self.profileHeader.bottomAnchor),
-            self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            self.tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-            
+          
         ] )
     }
     private var avatarWidthConstraint: NSLayoutConstraint?
@@ -114,30 +93,31 @@ private let user: User
     
     
     func changeLayoutAvatar() {
-        let closeButton = avatarView.closeButton
-        let avatarImage = self.avatarView.avatarImageView
-        let widthScreen = UIScreen.main.bounds.width
-        let widthAvatar = avatarImage.bounds.width
-        let width = widthScreen / widthAvatar
-        
-        UIView.animateKeyframes(withDuration: 2, delay: 0, options: .calculationModeCubic) {
-            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1) { [self] in
-                self.avatarView.isHidden = false
-                self.avatarView.bringSubviewToFront(avatarImage)
-                self.avatarView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-                avatarImage.transform = self.isAvatarIncreased ? .identity : CGAffineTransform(scaleX: width, y: width)
-                avatarImage.layer.borderWidth = self.isAvatarIncreased ? 3 : 0
-                avatarImage.center = self.isAvatarIncreased ? CGPoint(x: 63.166666666666664, y: 63.166666666666664) : CGPoint(x: self.avatarView.bounds.midX, y: self.avatarView.bounds.midY)
-                avatarImage.layer.cornerRadius = self.isAvatarIncreased ? avatarImage.frame.height/2 : 0
-                closeButton.isHidden = self.isAvatarIncreased ? true : false
-            }
-            
-        } completion: { _ in
-            self.isAvatarIncreased.toggle()
-            if self.isAvatarIncreased == false {
-                self.avatarView.isHidden = true
-            }
-        }
+//        let closeButton = avatarView.closeButton
+//        let avatarImage = self.avatarView.avatarImageView
+//        let widthScreen = UIScreen.main.bounds.width
+//        let widthAvatar = avatarImage.bounds.width
+//        let width = widthScreen / widthAvatar
+//
+//        UIView.animateKeyframes(withDuration: 2, delay: 0, options: .calculationModeCubic) {
+//            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1) { [self] in
+//                self.avatarView.isHidden = false
+//                self.avatarView.bringSubviewToFront(avatarImage)
+//                self.avatarView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+//                avatarImage.transform = self.isAvatarIncreased ? .identity : CGAffineTransform(scaleX: width, y: width)
+//                avatarImage.layer.borderWidth = self.isAvatarIncreased ? 3 : 0
+//                avatarImage.center = self.isAvatarIncreased ? CGPoint(x: 63.166666666666664, y: 63.166666666666664) : CGPoint(x: self.avatarView.bounds.midX, y: self.avatarView.bounds.midY)
+//                avatarImage.layer.cornerRadius = self.isAvatarIncreased ? avatarImage.frame.height/2 : 0
+//                closeButton.isHidden = self.isAvatarIncreased ? true : false
+//            }
+//
+//        } completion: { _ in
+//            self.isAvatarIncreased.toggle()
+//            if self.isAvatarIncreased == false {
+//                self.avatarView.isHidden = true
+//            }
+//        }
+        viewModel.updateState(viewInput: .tapAvatar)
     }
     
     
@@ -189,18 +169,26 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 0 && indexPath.section == 0 {
-            let vc1 = PhotosViewController()
-            self.navigationController?.pushViewController(vc1, animated: true)
+//            let vc1 = PhotosViewController()
+//            self.navigationController?.pushViewController(vc1, animated: true)
+            self.viewModel.updateState(viewInput: .photoCellDidTap)
         }
     }
     
 }
 
-extension ProfileViewController: AvatarViewDelegate, ProfileTableViewDelegate {
+extension ProfileViewController: AvatarViewDelegate, ProfileViewDelegate {
     func changeLayout() {
         self.changeLayoutAvatar()
+       
+        self.viewModel.updateState(viewInput: .tapAvatar)
+        print("🍓🥥")
+    }
+    
+    func statusButtonDidTap() {
+        self.viewModel.updateState(viewInput: .statusButtonDidTap)
     }
 }
     
