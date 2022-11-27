@@ -164,7 +164,7 @@ class LoginViewController: UIViewController {
             self.loginDelegate? = loginInspector
             let input = loginInspector.check(log: loginTextField.text!, pass: passwordTextField.text!)
             if input == true {
-                viewModel.didTapLoginButton(viewInput: .tapLoginButton(client!))
+                viewModel.viewInputDidChange(viewInput: .tapLoginButton(client!, viewModel))
             } else if input == false {
                 tapAlert()
             }

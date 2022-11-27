@@ -14,7 +14,7 @@ struct Module {
     enum ModuleType {
         case login
         case feed
-        case profile
+       
         
     }
     let moduleType: ModuleType
@@ -30,8 +30,7 @@ extension Module.ModuleType {
             return UITabBarItem(title: "Профиль", image: UIImage(systemName: "person"), tag: 0)
         case .feed:
             return UITabBarItem(title: "Лента", image: UIImage(systemName: "chart.bar.doc.horizontal"), tag: 1)
-        case .profile:
-            return UITabBarItem()
+       
         }
     }
 }

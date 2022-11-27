@@ -8,24 +8,28 @@
 import UIKit
 
 protocol LoginViewModelProtocol: ViewModelProtocol {
-    func didTapLoginButton(viewInput: LoginViewModel.ViewInput)
+    func viewInputDidChange(viewInput: LoginViewModel.ViewInput)
 }
 
 class LoginViewModel: LoginViewModelProtocol {
     enum ViewInput {
-        case tapLoginButton(User)
+        case tapLoginButton(User,ViewModelProtocol)
+        case tapPhotoCell
     }
     
     var coordinator: LoginCoordinator?
     
     
     
-    func didTapLoginButton(viewInput: ViewInput) {
+    func viewInputDidChange(viewInput: ViewInput) {
         switch viewInput {
-        case let .tapLoginButton(user):
-            coordinator?.pushProfileViewController(user: user)
-            print("🍎")
+        case let .tapLoginButton(user, self):
+            coordinator?.pushProfileViewController(viewModel: self, user: user, pushTo: .ProfileVC(user, self))
+            print(coordinator ?? "nil")
             
+        case .tapPhotoCell:
+            coordinator?.pushProfileViewController(viewModel: self, user: nil, pushTo: .PhotoVC)
+            print(coordinator ?? "nil")
         }
     }
 }

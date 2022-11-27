@@ -9,7 +9,6 @@ import UIKit
 
 protocol ProfileViewDelegate: AnyObject {
     func changeLayout()
-    func statusButtonDidTap()
 }
 
 final class ProfileView: UIView {
@@ -105,18 +104,18 @@ final class ProfileView: UIView {
     weak var delegate: ProfileViewDelegate?
     var statusText: String = " "
     
-    @objc func statusTextChanged(_ textField: UITextField){
+    @objc func statusTextChanged(_ textField: UITextField) {
         
         statusText = textField.text ?? "No text"
         
     }
-    @objc func buttonPressed(){
+    @objc func buttonPressed() {
         
-//        disctiptionLabel.text = statusText
-//        statusTextField.resignFirstResponder()
-//        statusTextField.placeholder = ""
-//        statusTextField.text = ""
-        self.delegate?.statusButtonDidTap()
+        disctiptionLabel.text = statusText
+        statusTextField.resignFirstResponder()
+        statusTextField.placeholder = ""
+        statusTextField.text = ""
+        
     }
     
     override init(frame: CGRect) {

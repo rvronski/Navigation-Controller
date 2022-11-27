@@ -9,10 +9,10 @@ import UIKit
 import StorageService
 
 class ProfileViewController: UIViewController {
-    private let viewModel: ProfileViewModelProtocol
+    private let viewModel: LoginViewModelProtocol
     private let user: User
     
-    init(viewModel: ProfileViewModelProtocol, user: User){
+    init(viewModel: LoginViewModelProtocol, user: User) {
         self.viewModel = viewModel
         self.user = user
         super.init(nibName: nil, bundle: nil)
@@ -29,7 +29,7 @@ class ProfileViewController: UIViewController {
         return avatarView
     }()
     
-    private lazy var profileView: ProfileView = {
+     lazy var profileView: ProfileView = {
         let profileView = ProfileView()
         profileView.avatarImage.image = user.avatar
         profileView.nameLabel.text = user.name
@@ -93,31 +93,30 @@ class ProfileViewController: UIViewController {
     
     
     func changeLayoutAvatar() {
-//        let closeButton = avatarView.closeButton
-//        let avatarImage = self.avatarView.avatarImageView
-//        let widthScreen = UIScreen.main.bounds.width
-//        let widthAvatar = avatarImage.bounds.width
-//        let width = widthScreen / widthAvatar
-//
-//        UIView.animateKeyframes(withDuration: 2, delay: 0, options: .calculationModeCubic) {
-//            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1) { [self] in
-//                self.avatarView.isHidden = false
-//                self.avatarView.bringSubviewToFront(avatarImage)
-//                self.avatarView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-//                avatarImage.transform = self.isAvatarIncreased ? .identity : CGAffineTransform(scaleX: width, y: width)
-//                avatarImage.layer.borderWidth = self.isAvatarIncreased ? 3 : 0
-//                avatarImage.center = self.isAvatarIncreased ? CGPoint(x: 63.166666666666664, y: 63.166666666666664) : CGPoint(x: self.avatarView.bounds.midX, y: self.avatarView.bounds.midY)
-//                avatarImage.layer.cornerRadius = self.isAvatarIncreased ? avatarImage.frame.height/2 : 0
-//                closeButton.isHidden = self.isAvatarIncreased ? true : false
-//            }
-//
-//        } completion: { _ in
-//            self.isAvatarIncreased.toggle()
-//            if self.isAvatarIncreased == false {
-//                self.avatarView.isHidden = true
-//            }
-//        }
-        viewModel.updateState(viewInput: .tapAvatar)
+        let closeButton = avatarView.closeButton
+        let avatarImage = self.avatarView.avatarImageView
+        let widthScreen = UIScreen.main.bounds.width
+        let widthAvatar = avatarImage.bounds.width
+        let width = widthScreen / widthAvatar
+
+        UIView.animateKeyframes(withDuration: 2, delay: 0, options: .calculationModeCubic) {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1) { [self] in
+                self.avatarView.isHidden = false
+                self.avatarView.bringSubviewToFront(avatarImage)
+                self.avatarView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+                avatarImage.transform = self.isAvatarIncreased ? .identity : CGAffineTransform(scaleX: width, y: width)
+                avatarImage.layer.borderWidth = self.isAvatarIncreased ? 3 : 0
+                avatarImage.center = self.isAvatarIncreased ? CGPoint(x: 63.166666666666664, y: 63.166666666666664) : CGPoint(x: self.avatarView.bounds.midX, y: self.avatarView.bounds.midY)
+                avatarImage.layer.cornerRadius = self.isAvatarIncreased ? avatarImage.frame.height/2 : 0
+                closeButton.isHidden = self.isAvatarIncreased ? true : false
+            }
+
+        } completion: { _ in
+            self.isAvatarIncreased.toggle()
+            if self.isAvatarIncreased == false {
+                self.avatarView.isHidden = true
+            }
+        }
     }
     
     
@@ -173,7 +172,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == 0 && indexPath.section == 0 {
 //            let vc1 = PhotosViewController()
 //            self.navigationController?.pushViewController(vc1, animated: true)
-            self.viewModel.updateState(viewInput: .photoCellDidTap)
+            self.viewModel.viewInputDidChange(viewInput: .tapPhotoCell)
         }
     }
     
@@ -182,15 +181,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 extension ProfileViewController: AvatarViewDelegate, ProfileViewDelegate {
     func changeLayout() {
         self.changeLayoutAvatar()
-       
-        self.viewModel.updateState(viewInput: .tapAvatar)
-        print("🍓🥥")
-    }
-    
-    func statusButtonDidTap() {
-        self.viewModel.updateState(viewInput: .statusButtonDidTap)
     }
 }
+
     
 
 
