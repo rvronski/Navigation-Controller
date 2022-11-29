@@ -8,6 +8,18 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    
+    private let viewModel: LoginViewModelProtocol
+    
+    init(viewModel: LoginViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -140,7 +152,7 @@ class LoginViewController: UIViewController {
     @objc func didTapButton() {
 #if DEBUG
         let service = TestUserService()
-        
+
 #else
         let service = CurrentUserService()
 #endif
@@ -148,14 +160,11 @@ class LoginViewController: UIViewController {
         if client == nil {
             tapAlert()
         } else {
-            let vc = ProfileViewController(user: client!)
-//            let loginFactory = MyLoginFactory().makeLoginInspector()
-//            self.loginDelegate = loginFactory
-//            let input = SceneDelegate().createLoginInspector().check(log: loginTextField.text!, pass: passwordTextField.text!)
-            let input = self.loginDelegate?.check(log: loginTextField.text!, pass: passwordTextField.text!)
+            let loginInspector = LoginInspector()
+            self.loginDelegate? = loginInspector
+            let input = loginInspector.check(log: loginTextField.text!, pass: passwordTextField.text!)
             if input == true {
-                print(input!)
-                self.navigationController?.pushViewController(vc, animated: true)
+                viewModel.viewInputDidChange(viewInput: .tapLoginButton(client!, viewModel))
             } else if input == false {
                 tapAlert()
             }

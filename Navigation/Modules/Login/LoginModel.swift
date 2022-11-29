@@ -11,25 +11,12 @@ protocol LoginViewControllerDelegate {
     func check(log: String, pass: String) -> Bool
 }
 
-
-
-public final class Checker {
+public final class LoginModel {
     
-    public static var shared: Checker = .init()
+    public static var shared: LoginModel = .init()
     
     private let login = "rvronski"
     private let password = "qwerty"
-    
-//    func check(log: String, pass: String) -> Bool {
-//        if login == log  {
-//            if password == pass {
-//                return true
-//            } else {
-//                return false
-//            }
-//        }
-//        return false
-//    }
     
     func check(log: String, pass: String) -> Bool {
         login == log  && password == pass ? true : false
@@ -40,8 +27,25 @@ public final class Checker {
 struct LoginInspector: LoginViewControllerDelegate {
     
     func check(log: String, pass: String) -> Bool {
-        Checker.shared.check(log: log, pass: pass)
-    
+        LoginModel.shared.check(log: log, pass: pass)
+        
     }
 }
 
+class User {
+    let login: String
+    let name: String
+    let status: String
+    let avatar: UIImage
+    
+    init(login: String, name: String, status: String, avatar: UIImage){
+        self.login = login
+        self.name = name
+        self.status = status
+        self.avatar = avatar
+    }
+}
+
+protocol UserService {
+    func input(login: String) -> User?
+}

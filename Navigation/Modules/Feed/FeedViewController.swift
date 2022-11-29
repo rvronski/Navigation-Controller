@@ -20,7 +20,7 @@ class FeedViewController: UIViewController {
         stackViewConstraints()
         setupGesture()
         button.tapButton = { [weak self] in
-            let result = FeedModel().check(word: (self?.textField.text)!)
+            let result = FeedViewModel().check(word: (self?.textField.text)!)
             if result == true {
                 self?.checkLabel.backgroundColor = .green
             } else {

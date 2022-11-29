@@ -10,31 +10,18 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    
+    var appcoordinator: AppCoordinator?
    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         self.window = UIWindow(windowScene: windowScene)
-       
-        let secondNavController = UINavigationController(rootViewController: FeedViewController())
-        let factory = MyLoginFactory()
-        let loginInspector = factory.makeLoginInspector()
-        let loginVC = LoginViewController()
-        let navController = UINavigationController(rootViewController: loginVC )
-        loginVC.loginDelegate = loginInspector
-        let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [
-            navController, secondNavController
-        ]
-        tabBarController.viewControllers?.enumerated().forEach {
-            $1.tabBarItem.title = $0 == 0 ? "Профиль" : "Лента"
-            $1.tabBarItem.image = $0 == 0
-            ? UIImage(systemName: "person")
-            : UIImage(systemName: "chart.bar.doc.horizontal")
-        }
         
-        self.window?.rootViewController = tabBarController
+        let factory = AppFactory()
+        let appCoordinator = AppCoordinator(factory: factory)
+        self.appcoordinator = appCoordinator
+        
+        self.window?.rootViewController = appCoordinator.start()
         self.window?.makeKeyAndVisible()
         
     }

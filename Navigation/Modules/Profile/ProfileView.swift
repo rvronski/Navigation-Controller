@@ -2,18 +2,32 @@
 //  ProfileView.swift
 //  Navigation
 //
-//  Created by ROMAN VRONSKY on 23.07.2022.
+//  Created by ROMAN VRONSKY on 17.11.2022.
 //
 
 import UIKit
 
-protocol ProfileTableViewDelegate: AnyObject {
-    func changeLayout() 
+protocol ProfileViewDelegate: AnyObject {
+    func changeLayout()
 }
 
-class ProfileHeaderView: UIView {
-   
-   
+final class ProfileView: UIView {
+    
+    private lazy var headerView: UIView = {
+       let headerView = UIView()
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        headerView.backgroundColor = .systemGray5
+        return headerView
+    }()
+    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 50
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+        return tableView
+    }()
     
     
     lazy var avatarImage: UIImageView = {
@@ -86,20 +100,22 @@ class ProfileHeaderView: UIView {
         status.translatesAutoresizingMaskIntoConstraints = false
         return status
     }()
-    weak var delegate: ProfileTableViewDelegate?
-    private var statusText: String = " "
     
-    @objc func statusTextChanged(_ textField: UITextField){
+    weak var delegate: ProfileViewDelegate?
+    var statusText: String = " "
+    
+    @objc func statusTextChanged(_ textField: UITextField) {
         
         statusText = textField.text ?? "No text"
         
     }
-    @objc func buttonPressed(){
+    @objc func buttonPressed() {
         
         disctiptionLabel.text = statusText
         statusTextField.resignFirstResponder()
         statusTextField.placeholder = ""
         statusTextField.text = ""
+        
     }
     
     override init(frame: CGRect) {
@@ -118,19 +134,27 @@ class ProfileHeaderView: UIView {
         self.avatarImage.layer.cornerRadius = self.avatarImage.frame.height/2
     }
   
+    private func headerViewConstraints() -> [NSLayoutConstraint] {
+       let topConstraint = self.headerView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor)
+        let leftConstraint = self.headerView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor)
+        let rightConstraint = self.headerView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor)
+        let heightConsraint = self.headerView.heightAnchor.constraint(equalToConstant: 220)
+        
+        return [topConstraint, leftConstraint, rightConstraint, heightConsraint]
+    }
     
      func avatarViewConstraint() -> [NSLayoutConstraint] {
-        let topConstraint = self.avatarImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 16)
-        let leadingConstraint = self.avatarImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
-        let widthConstraint = self.avatarImage.widthAnchor.constraint(lessThanOrEqualTo: self.widthAnchor, multiplier: 0.2415)
+         let topConstraint = self.avatarImage.topAnchor.constraint(equalTo: self.headerView.topAnchor, constant: 16)
+         let leadingConstraint = self.avatarImage.leadingAnchor.constraint(equalTo: self.headerView.leadingAnchor, constant: 16)
+         let widthConstraint = self.avatarImage.widthAnchor.constraint(lessThanOrEqualTo: self.headerView.widthAnchor, multiplier: 0.2415)
         let heightAnchor = self.avatarImage.heightAnchor.constraint(equalTo: self.avatarImage.widthAnchor)
 
         return [topConstraint,leadingConstraint, widthConstraint, heightAnchor ]
     }
     
     private func stackViewConstraint() -> [NSLayoutConstraint] {
-        let topConstraint = self.stackView.topAnchor.constraint(equalTo: self.topAnchor, constant:27)
-        let widthConstraint = self.stackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.57)
+        let topConstraint = self.stackView.topAnchor.constraint(equalTo: self.headerView.topAnchor, constant:27)
+        let widthConstraint = self.stackView.widthAnchor.constraint(equalTo: self.headerView.widthAnchor, multiplier: 0.57)
         let leadingConstraint = self.stackView.leadingAnchor.constraint(equalTo: self.avatarImage.trailingAnchor, constant: 20)
         return [topConstraint, widthConstraint, leadingConstraint]
     }
@@ -139,37 +163,58 @@ class ProfileHeaderView: UIView {
         let topConstraint = self.statusTextField.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 16)
         let leadingConstraint = self.statusTextField.leadingAnchor.constraint(equalTo: self.stackView.leadingAnchor)
         let heightConstraint = self.statusTextField.heightAnchor.constraint(equalToConstant: 40)
-        let widthConstraint = self.statusTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.57)
+        let widthConstraint = self.statusTextField.widthAnchor.constraint(equalTo: self.headerView.widthAnchor, multiplier: 0.57)
         return [topConstraint, leadingConstraint, heightConstraint, widthConstraint]
     }
     private func buttonConstraints() -> [NSLayoutConstraint] {
         let topConstraint = self.setStatusButton.topAnchor.constraint(greaterThanOrEqualTo: self.statusTextField.bottomAnchor, constant: 16)
-        let leadingConstraint = self.setStatusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
-        let centerConstraint = self.setStatusButton.centerXAnchor.constraint(equalTo: self.centerXAnchor)
-        let bottomConstraint = self.setStatusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5)
+        let leadingConstraint = self.setStatusButton.leadingAnchor.constraint(equalTo: self.headerView.leadingAnchor, constant: 16)
+        let centerConstraint = self.setStatusButton.centerXAnchor.constraint(equalTo: self.headerView.centerXAnchor)
+        let bottomConstraint = self.setStatusButton.bottomAnchor.constraint(equalTo: self.headerView.bottomAnchor, constant: -5)
         let heightConstraint = self.setStatusButton.heightAnchor.constraint(equalToConstant: 50)
         return [topConstraint, leadingConstraint, heightConstraint, bottomConstraint, centerConstraint ]
     }
 
+    private func tableViewConstaints() -> [NSLayoutConstraint] {
+        let topConstraint = self.tableView.topAnchor.constraint(equalTo: self.headerView.bottomAnchor)
+        let leftConsraint = self.tableView.leftAnchor.constraint(equalTo: self.leftAnchor)
+        let rightConsraint = self.tableView.rightAnchor.constraint(equalTo: self.rightAnchor)
+        let bottomConstraint = self.tableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
+        
+        return [topConstraint, leftConsraint, rightConsraint, bottomConstraint ]
+    }
+    
     private func setupView() {
-        self.backgroundColor = .systemGray5
-        self.addSubview(self.avatarImage)
-        self.addSubview(self.stackView)
+        self.addSubview(self.headerView)
+        self.addSubview(self.tableView)
+        self.headerView.addSubview(self.avatarImage)
+        self.headerView.addSubview(self.stackView)
+        self.headerView.addSubview(self.setStatusButton)
+        self.headerView.addSubview(statusTextField)
         self.stackView.addArrangedSubview(self.nameLabel)
         self.stackView.addArrangedSubview(self.disctiptionLabel)
-        self.addSubview(self.setStatusButton)
-        self.addSubview(statusTextField)
-        self.bringSubviewToFront(self.avatarImage)
         
         
+        let hederViewConsraints = self.headerViewConstraints()
+        let tableViewConstaints = self.tableViewConstaints()
         let avatarViewConstraints = self.avatarViewConstraint()
         let stackViewConstraints = self.stackViewConstraint()
         let statusTextFieldConstraints = self.statusTextFieldConstraints()
         let buttonConstraints = self.buttonConstraints()
    
    
-        NSLayoutConstraint.activate(avatarViewConstraints + stackViewConstraints + statusTextFieldConstraints + buttonConstraints )
+        NSLayoutConstraint.activate(hederViewConsraints + tableViewConstaints + avatarViewConstraints + stackViewConstraints + statusTextFieldConstraints + buttonConstraints )
     }
+    
+    func configureTableView(dataSource: UITableViewDataSource,
+                                 delegate: UITableViewDelegate) {
+        tableView.dataSource = dataSource
+        tableView.delegate = delegate
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
+    }
+    
     private func gestureAvatar() {
         let gestureAvatar = UITapGestureRecognizer(target: self, action: #selector(tapAvatar))
         self.avatarImage.addGestureRecognizer(gestureAvatar)
@@ -188,4 +233,5 @@ class ProfileHeaderView: UIView {
     
     
 }
+
 

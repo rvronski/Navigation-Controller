@@ -7,7 +7,11 @@
 
 import Foundation
 
-class FeedModel {
+protocol FeedViewModelProtocol: ViewModelProtocol {
+    func check(word: String) -> Bool
+}
+
+class FeedViewModel: FeedViewModelProtocol {
     
     var secretWord = "пароль"
     

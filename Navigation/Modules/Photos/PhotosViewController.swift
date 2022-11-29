@@ -55,7 +55,7 @@ class PhotosViewController: UIViewController {
         
         facade.removeSubscription(for: self)
         facade.rechargeImageLibrary()
-        print("🍅 отписка")
+        
     }
     private func setupNavigationBar() {
         self.navigationItem.title = "Photo Gallery"
