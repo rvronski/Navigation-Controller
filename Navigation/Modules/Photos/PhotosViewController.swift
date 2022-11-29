@@ -9,11 +9,35 @@ import UIKit
 import iOSIntPackage
 class PhotosViewController: UIViewController {
     
-    let facade = ImagePublisherFacade()
-    private func subscribe() {
-        facade.subscribe(self)
+//    let facade = ImagePublisherFacade()
+//    private func subscribe() {
+//        facade.subscribe(self)
+//
+//        facade.addImagesWithTimer(time: 0.5, repeat: 20, userImages: newArray)
+//    }
+    
+    func filterArrayPhoto() {
+        photos.forEach { foto in self.filterPhoto.append(UIImage(named: foto.imageName)!)
+        }
+        let imageProcessor = ImageProcessor()
+        imageProcessor.processImagesOnThread(sourceImages: filterPhoto, filter: .process, qos: .default) { [weak self] image in self?.imageArray = image.map({ image in UIImage(cgImage: image!)})
+            DispatchQueue.main.async {
+                self?.photosCollectionView.reloadData()
+            }
+
+        }
         
-        facade.addImagesWithTimer(time: 0.5, repeat: 20, userImages: newArray)
+    }
+    
+    func timeInterval() {
+        let start = DispatchTime.now()
+        let _: () = filterArrayPhoto()
+        let end = DispatchTime.now()
+        
+        let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
+        let timeInterval = Double(nanoTime) / 1000000
+        print("Время выполнения функции: \(timeInterval)")
+        
     }
     
     private enum Constants {
@@ -43,7 +67,12 @@ class PhotosViewController: UIViewController {
         print("🍎 view did load")
         self.setupView()
         self.setupNavigationBar()
-        self.subscribe()
+//        self.filterArrayPhoto()
+        self.timeInterval()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.photosCollectionView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,15 +82,16 @@ class PhotosViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        facade.removeSubscription(for: self)
-        facade.rechargeImageLibrary()
+//        facade.removeSubscription(for: self)
+//        facade.rechargeImageLibrary()
         
     }
     private func setupNavigationBar() {
         self.navigationItem.title = "Photo Gallery"
     }
      var photos:[Photos] = [ photo1, photo2, photo3, photo4, photo5, photo6, photo7, photo8, photo9, photo10, photo11, photo12, photo13, photo14, photo15, photo16, photo17, photo18, photo19, photo20]
-   
+    var filterPhoto = [UIImage]()
+    var imageArray = [UIImage]()
     private func setupView() {
         self.view.addSubview(photosCollectionView)
         self.view.backgroundColor = .systemBackground
@@ -81,7 +111,12 @@ class PhotosViewController: UIViewController {
 }
 extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        filterFoto.count
+////        filterFoto.count
+////        filterImages.count
+//        var filterImages = self.filterImage(image: photos)
+//        return filterImages.count
+//        photos.count
+        imageArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -90,7 +125,9 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
             return cell
         }
         print("🍋 setup cell")
-        cell.setup(with: filterFoto[indexPath.row])
+//        var filterImages = self.filterImage(image: photos)
+        cell.setup(with: imageArray[indexPath.row])
+//        self.photosCollectionView.reloadData()
         return cell
     }
     
@@ -108,14 +145,16 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
     
     
 }
-extension PhotosViewController: ImageLibrarySubscriber {
-    
-    func receive(images: [UIImage]) {
-        filterFoto = images
-        self.photosCollectionView.reloadData()
-        print("🍉")
-    }
+//extension PhotosViewController: ImageLibrarySubscriber {
+//
+//    func receive(images: [UIImage]) {
+//        filterFoto = images
+//        self.photosCollectionView.reloadData()
+//        print("🍉")
+//    }
    
     
-}
-var filterFoto: [UIImage] = []
+
+//var process = PhotosViewController()
+//var filterImages = process.filterImage(image: process.photos)
+

@@ -47,7 +47,6 @@ class LoginCoordinator: ModuleCoordinatable {
             print("🍑")
         case .PhotoVC:
             let vc = PhotosViewController()
-            let viewModel = LoginViewModel()
 //            viewModel.coordinator  = self
             (module!.view as? UINavigationController)?.pushViewController(vc, animated: true)
         }
