@@ -264,7 +264,6 @@
 				45C7A21E29059031008C08CD /* TestUserService.swift */,
 				458CD4002901FFB10059BA45 /* CurrentUserService.swift */,
 				45A1FDEE291BD1C4000F3320 /* CustomButton.swift */,
-				458F2655291188B60098C7EF /* ImageManager.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -283,8 +282,9 @@
 			isa = PBXGroup;
 			children = (
 				457AA3A828AC415400BFB8A9 /* PhotosViewController.swift */,
-				457AA3A628AC3CB600BFB8A9 /* Photos.swift */,
 				455CCAC428AD81D7005590E2 /* PhotosCollectionViewCell.swift */,
+				457AA3A628AC3CB600BFB8A9 /* Photos.swift */,
+				458F2655291188B60098C7EF /* ImageManager.swift */,
 			);
 			path = Photos;
 			sourceTree = "<group>";
@@ -853,8 +853,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/TrueMax/iOSIntPackage.git";
 			requirement = {
-				branch = imagepublisher;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
