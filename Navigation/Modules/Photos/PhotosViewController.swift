@@ -20,25 +20,40 @@ class PhotosViewController: UIViewController {
         photos.forEach { foto in self.filterPhoto.append(UIImage(named: foto.imageName)!)
         }
         let imageProcessor = ImageProcessor()
-        imageProcessor.processImagesOnThread(sourceImages: filterPhoto, filter: .process, qos: .default) { [weak self] image in self?.imageArray = image.map({ image in UIImage(cgImage: image!)})
+        let start = DispatchTime.now()
+        imageProcessor.processImagesOnThread(sourceImages: self.filterPhoto, filter: .process, qos: .userInteractive) { [weak self] image in
             DispatchQueue.main.async {
+                self?.imageArray = image.compactMap { foto in
+                    if let foto = foto {
+                        return UIImage(cgImage: foto)
+                    } else {
+                        return nil
+                    }
+                }
                 self?.photosCollectionView.reloadData()
+                
             }
-
+            let end = DispatchTime.now()
+            
+            
+            let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
+            let timeInterval = Double(nanoTime) / 1_000_000_000
+            print("Время выполнения функции: \(timeInterval)")
+            
         }
-        
     }
     
-    func timeInterval() {
-        let start = DispatchTime.now()
-        let _: () = filterArrayPhoto()
-        let end = DispatchTime.now()
-        
-        let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
-        let timeInterval = Double(nanoTime) / 1000000
-        print("Время выполнения функции: \(timeInterval)")
-        
-    }
+    
+//    func timeInterval() {
+//        let start = DispatchTime.now()
+//        let _: () = filterArrayPhoto()
+//        let end = DispatchTime.now()
+//
+//        let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
+//        let timeInterval = Double(nanoTime) / 1000000000
+//        print("Время выполнения функции: \(timeInterval)")
+//
+//    }
     
     private enum Constants {
         static let numberOfItemsInLine: CGFloat = 3
@@ -67,8 +82,8 @@ class PhotosViewController: UIViewController {
         print("🍎 view did load")
         self.setupView()
         self.setupNavigationBar()
-//        self.filterArrayPhoto()
-        self.timeInterval()
+        self.filterArrayPhoto()
+//        self.timeInterval()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

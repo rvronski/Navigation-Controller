@@ -122,8 +122,10 @@ class ProfileViewController: UIViewController {
     
     private func setupGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        self.view.addGestureRecognizer(tapGesture)
+                tapGesture.cancelsTouchesInView = false
+                self.view.addGestureRecognizer(tapGesture)
     }
+    
     @objc private func hideKeyboard() {
         self.view.endEditing(true)
         
