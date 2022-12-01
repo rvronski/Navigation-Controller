@@ -20,24 +20,27 @@ class PhotosViewController: UIViewController {
         photos.forEach { foto in self.filterPhoto.append(UIImage(named: foto.imageName)!)
         }
         let imageProcessor = ImageProcessor()
-        imageProcessor.processImagesOnThread(sourceImages: filterPhoto, filter: .process, qos: .default) { [weak self] image in self?.imageArray = image.map({ image in UIImage(cgImage: image!)})
-            DispatchQueue.main.async {
-                self?.photosCollectionView.reloadData()
-            }
-
-        }
-        
-    }
-    
-    func timeInterval() {
         let start = DispatchTime.now()
-        let _: () = filterArrayPhoto()
-        let end = DispatchTime.now()
-        
-        let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
-        let timeInterval = Double(nanoTime) / 1000000
-        print("Время выполнения функции: \(timeInterval)")
-        
+        imageProcessor.processImagesOnThread(sourceImages: self.filterPhoto, filter: .process, qos: .userInteractive) { [weak self] image in
+            DispatchQueue.main.async {
+                self?.imageArray = image.compactMap { foto in
+                    if let foto = foto {
+                        return UIImage(cgImage: foto)
+                    } else {
+                        return nil
+                    }
+                }
+                self?.photosCollectionView.reloadData()
+                
+            }
+            let end = DispatchTime.now()
+            
+            
+            let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
+            let timeInterval = Double(nanoTime) / 1_000_000_000
+            print("Время выполнения функции: \(timeInterval)")
+            
+        }
     }
     
     private enum Constants {
@@ -67,8 +70,8 @@ class PhotosViewController: UIViewController {
         print("🍎 view did load")
         self.setupView()
         self.setupNavigationBar()
-//        self.filterArrayPhoto()
-        self.timeInterval()
+        self.filterArrayPhoto()
+//        self.timeInterval()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -111,11 +114,6 @@ class PhotosViewController: UIViewController {
 }
 extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-////        filterFoto.count
-////        filterImages.count
-//        var filterImages = self.filterImage(image: photos)
-//        return filterImages.count
-//        photos.count
         imageArray.count
     }
     
@@ -125,9 +123,8 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
             return cell
         }
         print("🍋 setup cell")
-//        var filterImages = self.filterImage(image: photos)
+        
         cell.setup(with: imageArray[indexPath.row])
-//        self.photosCollectionView.reloadData()
         return cell
     }
     
@@ -153,8 +150,4 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
 //        print("🍉")
 //    }
    
-    
-
-//var process = PhotosViewController()
-//var filterImages = process.filterImage(image: process.photos)
 
