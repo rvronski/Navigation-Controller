@@ -43,18 +43,6 @@ class PhotosViewController: UIViewController {
         }
     }
     
-    
-//    func timeInterval() {
-//        let start = DispatchTime.now()
-//        let _: () = filterArrayPhoto()
-//        let end = DispatchTime.now()
-//
-//        let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
-//        let timeInterval = Double(nanoTime) / 1000000000
-//        print("Время выполнения функции: \(timeInterval)")
-//
-//    }
-    
     private enum Constants {
         static let numberOfItemsInLine: CGFloat = 3
     }
@@ -126,11 +114,6 @@ class PhotosViewController: UIViewController {
 }
 extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-////        filterFoto.count
-////        filterImages.count
-//        var filterImages = self.filterImage(image: photos)
-//        return filterImages.count
-//        photos.count
         imageArray.count
     }
     
@@ -140,9 +123,8 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
             return cell
         }
         print("🍋 setup cell")
-//        var filterImages = self.filterImage(image: photos)
+        
         cell.setup(with: imageArray[indexPath.row])
-//        self.photosCollectionView.reloadData()
         return cell
     }
     
@@ -168,8 +150,4 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
 //        print("🍉")
 //    }
    
-    
-
-//var process = PhotosViewController()
-//var filterImages = process.filterImage(image: process.photos)
 
