@@ -36,10 +36,10 @@ class LoginViewController: UIViewController {
         passwordTextField.layer.borderColor = UIColor.lightGray.cgColor
         passwordTextField.layer.borderWidth = 0.5
         passwordTextField.textColor = .black
-        passwordTextField.text = ""
+        passwordTextField.text = "qwerty"
         passwordTextField.font = UIFont(name: "sysemFont", size: 16)
         passwordTextField.autocapitalizationType = .none
-        passwordTextField.isSecureTextEntry = false
+        passwordTextField.isSecureTextEntry = true
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
         passwordTextField.leftView = paddingView
         passwordTextField.leftViewMode = .always
@@ -249,13 +249,13 @@ class LoginViewController: UIViewController {
         let group = DispatchGroup()
         group.enter()
         DispatchQueue.global().async {
-            let password = self.brutForce.randomString(length: 4)
+           let password = LoginModel.shared.randomString(length: 4)
             newPassword = self.brutForce.bruteForce(passwordToUnlock: password)
-            LoginModel.shared.password = password
             group.leave()
         }
         group.notify(queue: .main) {
             self.passwordTextField.text = newPassword
+            self.passwordTextField.isSecureTextEntry = false
             self.activityIndicator.stopAnimating()
             self.activityIndicator.isHidden = true
         }

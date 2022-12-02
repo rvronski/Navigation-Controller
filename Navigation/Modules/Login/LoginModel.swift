@@ -14,10 +14,16 @@ protocol LoginViewControllerDelegate {
 public final class LoginModel {
     
     public static var shared: LoginModel = .init()
-    
-   
+    private var newPassword = " "
+    func randomString(length: Int) -> String  {
+      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        newPassword = String((0..<length).map{ _ in letters.randomElement()! })
+        password = newPassword
+        return newPassword
+    }
+        
     private let login = "rvronski"
-    var password = "w"
+    private var password = "qwerty"
     
     func check(log: String, pass: String) -> Bool {
         login == log  && password == pass ? true : false
