@@ -14,9 +14,10 @@ protocol LoginViewControllerDelegate {
 public final class LoginModel {
     
     public static var shared: LoginModel = .init()
-
+    
+   
     private let login = "rvronski"
-     var password = " "
+    var password = "w"
     
     func check(log: String, pass: String) -> Bool {
         login == log  && password == pass ? true : false
