@@ -244,6 +244,7 @@ class LoginViewController: UIViewController {
     
     @objc private func brutForceButtonDidTap() {
         var newPassword = ""
+        self.passwordTextField.text = ""
         self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
         let group = DispatchGroup()
