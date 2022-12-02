@@ -7,7 +7,10 @@
 
 import UIKit
 
+
 class LoginViewController: UIViewController {
+    
+    private let brutForce = BrutForce()
     
     private let viewModel: LoginViewModelProtocol
     
@@ -33,10 +36,10 @@ class LoginViewController: UIViewController {
         passwordTextField.layer.borderColor = UIColor.lightGray.cgColor
         passwordTextField.layer.borderWidth = 0.5
         passwordTextField.textColor = .black
-        passwordTextField.text = "qwerty"
+        passwordTextField.text = ""
         passwordTextField.font = UIFont(name: "sysemFont", size: 16)
         passwordTextField.autocapitalizationType = .none
-        passwordTextField.isSecureTextEntry = true
+        passwordTextField.isSecureTextEntry = false
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
         passwordTextField.leftView = paddingView
         passwordTextField.leftViewMode = .always
@@ -57,6 +60,15 @@ class LoginViewController: UIViewController {
         loginTextfield.leftView = paddingView
         loginTextfield.leftViewMode = .always
         return loginTextfield
+    }()
+    
+    private lazy var brutForceButton: UIButton = {
+        let brutForceButton = UIButton()
+        brutForceButton.translatesAutoresizingMaskIntoConstraints = false
+        brutForceButton.setTitle("Подобрать пароль", for: .normal)
+        brutForceButton.setTitleColor(.systemBlue, for: .normal)
+        brutForceButton.addTarget(self, action: #selector(brutForceButtonDidTap), for: .touchUpInside)
+        return brutForceButton
     }()
     
     private lazy var stackView: UIStackView = {
@@ -102,6 +114,7 @@ class LoginViewController: UIViewController {
         self.view.addSubview(scrollView)
         self.view.backgroundColor = .white
         self.scrollView.addSubview(self.stackView)
+        self.scrollView.addSubview(self.brutForceButton)
         self.stackView.addArrangedSubview(loginTextField)
         self.stackView.addArrangedSubview(passwordTextField)
         self.scrollView.addSubview(self.button)
@@ -126,7 +139,12 @@ class LoginViewController: UIViewController {
             self.button.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 16),
             self.button.leftAnchor.constraint(equalTo: self.stackView.leftAnchor),
             self.button.rightAnchor.constraint(equalTo: self.stackView.rightAnchor),
-            self.button.heightAnchor.constraint(equalToConstant: 50)
+            self.button.heightAnchor.constraint(equalToConstant: 50),
+            
+            self.brutForceButton.topAnchor.constraint(equalTo: self.button.bottomAnchor, constant: 16),
+            self.brutForceButton.leftAnchor.constraint(equalTo: self.button.leftAnchor),
+            self.brutForceButton.rightAnchor.constraint(equalTo: self.button.rightAnchor),
+            self.brutForceButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
    var loginDelegate: LoginViewControllerDelegate?
@@ -205,6 +223,14 @@ class LoginViewController: UIViewController {
     private func setupGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func brutForceButtonDidTap() {
+//
+        let password = brutForce.randomString(length: 4)
+        self.passwordTextField.text = brutForce.bruteForce(passwordToUnlock: password)
+        LoginModel.shared.password = password
+        
     }
     
 }
