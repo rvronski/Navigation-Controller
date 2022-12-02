@@ -7,7 +7,10 @@
 
 import UIKit
 
+
 class LoginViewController: UIViewController {
+    
+    private let brutForce = BrutForce()
     
     private let viewModel: LoginViewModelProtocol
     
@@ -59,6 +62,23 @@ class LoginViewController: UIViewController {
         return loginTextfield
     }()
     
+    private lazy var brutForceButton: UIButton = {
+        let brutForceButton = UIButton()
+        brutForceButton.translatesAutoresizingMaskIntoConstraints = false
+        brutForceButton.setTitle("Подобрать пароль", for: .normal)
+        brutForceButton.setTitleColor(.systemBlue, for: .normal)
+        brutForceButton.addTarget(self, action: #selector(brutForceButtonDidTap), for: .touchUpInside)
+        return brutForceButton
+    }()
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.color = .darkGray
+//        activityIndicator.isHidden = true
+        return activityIndicator
+    }()
+    
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 0
@@ -102,10 +122,14 @@ class LoginViewController: UIViewController {
         self.view.addSubview(scrollView)
         self.view.backgroundColor = .white
         self.scrollView.addSubview(self.stackView)
+        self.scrollView.addSubview(self.brutForceButton)
         self.stackView.addArrangedSubview(loginTextField)
+        self.stackView.addArrangedSubview(activityIndicator)
         self.stackView.addArrangedSubview(passwordTextField)
         self.scrollView.addSubview(self.button)
         self.scrollView.addSubview(self.logoImage)
+        self.passwordTextField.bringSubviewToFront(activityIndicator)
+       
         
         NSLayoutConstraint.activate([
             self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
@@ -126,7 +150,18 @@ class LoginViewController: UIViewController {
             self.button.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 16),
             self.button.leftAnchor.constraint(equalTo: self.stackView.leftAnchor),
             self.button.rightAnchor.constraint(equalTo: self.stackView.rightAnchor),
-            self.button.heightAnchor.constraint(equalToConstant: 50)
+            self.button.heightAnchor.constraint(equalToConstant: 50),
+            
+            self.brutForceButton.topAnchor.constraint(equalTo: self.button.bottomAnchor, constant: 16),
+            self.brutForceButton.leftAnchor.constraint(equalTo: self.button.leftAnchor),
+            self.brutForceButton.rightAnchor.constraint(equalTo: self.button.rightAnchor),
+            self.brutForceButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            self.activityIndicator.centerYAnchor.constraint(equalTo: self.passwordTextField.centerYAnchor),
+            self.activityIndicator.centerXAnchor.constraint(equalTo: self.passwordTextField.centerXAnchor),
+//            self.activityIndicator.bottomAnchor.constraint(equalTo: self.passwordTextField.bottomAnchor, constant: -2),
+//            self.activityIndicator.topAnchor.constraint(equalTo: self.passwordTextField.topAnchor, constant: 2),
+            
         ])
     }
    var loginDelegate: LoginViewControllerDelegate?
@@ -207,5 +242,24 @@ class LoginViewController: UIViewController {
         self.view.addGestureRecognizer(tapGesture)
     }
     
+    @objc private func brutForceButtonDidTap() {
+        var newPassword = ""
+        self.passwordTextField.text = ""
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
+        let group = DispatchGroup()
+        group.enter()
+        DispatchQueue.global().async {
+           let password = LoginModel.shared.randomString(length: 4)
+            newPassword = self.brutForce.bruteForce(passwordToUnlock: password)
+            group.leave()
+        }
+        group.notify(queue: .main) {
+            self.passwordTextField.text = newPassword
+            self.passwordTextField.isSecureTextEntry = false
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.isHidden = true
+        }
+    }
 }
 
