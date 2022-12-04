@@ -14,7 +14,7 @@ protocol ProfileViewDelegate: AnyObject {
 final class ProfileView: UIView {
     
     private lazy var headerView: UIView = {
-       let headerView = UIView()
+        let headerView = UIView()
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.backgroundColor = .systemGray5
         return headerView
@@ -43,7 +43,7 @@ final class ProfileView: UIView {
         return imageView
     }()
     
-     lazy var nameLabel: UILabel = {
+    lazy var nameLabel: UILabel = {
         let nameLabel = UILabel(frame: CGRect(x: 152, y: 27, width: 100, height: 21.5))
         nameLabel.font = UIFont(name: "bold", size: 18)
         nameLabel.textColor = .black
@@ -51,7 +51,7 @@ final class ProfileView: UIView {
         return nameLabel
     }()
     
-     lazy var disctiptionLabel: UILabel = {
+    lazy var disctiptionLabel: UILabel = {
         let discriptionLabel = UILabel(frame: CGRect(x: 152 , y: 58.5, width: 100, height: 21.5))
         discriptionLabel.font = UIFont(name: "regular", size: 14)
         discriptionLabel.textColor = .gray
@@ -59,7 +59,7 @@ final class ProfileView: UIView {
         return discriptionLabel
     }()
     
-     lazy var stackView: UIStackView = {
+    lazy var stackView: UIStackView = {
         let stackView = UIStackView(frame: CGRect(x: 152, y: 27, width: 100, height: 73))
         stackView.distribution = .fillEqually
         stackView.spacing = 20
@@ -68,8 +68,8 @@ final class ProfileView: UIView {
         return stackView
     }()
     
-
-     lazy var setStatusButton: UIButton = {
+    
+    lazy var setStatusButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 16, y: 166, width: 100, height: 50))
         button.layer.cornerRadius = 10
         button.backgroundColor = .systemBlue
@@ -79,12 +79,12 @@ final class ProfileView: UIView {
         button.layer.shadowRadius = 4
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
-        button.addTarget(self, action: #selector(self.buttonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-     lazy var statusTextField: UITextField = {
+    lazy var statusTextField: UITextField = {
         let status = UITextField(frame: CGRect(x: 152, y: 110, width: 100, height: 40))
         status.textColor = .black
         status.layer.cornerRadius = 12
@@ -94,9 +94,9 @@ final class ProfileView: UIView {
         status.backgroundColor = .white
         status.addTarget(self, action: #selector(self.statusTextChanged), for: .editingChanged)
         status.textAlignment = .center
-        status.placeholder = "Статус"
+        status.placeholder = " "
         status.clearsOnBeginEditing = true
-//        status.becomeFirstResponder()
+        //        status.becomeFirstResponder()
         status.translatesAutoresizingMaskIntoConstraints = false
         return status
     }()
@@ -124,6 +124,10 @@ final class ProfileView: UIView {
         self.setupView()
         self.setupGesture()
         self.gestureAvatar()
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { [weak self] timer  in
+            self?.flashStatusTextField()
+            timer.invalidate()
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -133,9 +137,9 @@ final class ProfileView: UIView {
         super.layoutSubviews()
         self.avatarImage.layer.cornerRadius = self.avatarImage.frame.height/2
     }
-  
+    
     private func headerViewConstraints() -> [NSLayoutConstraint] {
-       let topConstraint = self.headerView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor)
+        let topConstraint = self.headerView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor)
         let leftConstraint = self.headerView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor)
         let rightConstraint = self.headerView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor)
         let heightConsraint = self.headerView.heightAnchor.constraint(equalToConstant: 220)
@@ -143,12 +147,12 @@ final class ProfileView: UIView {
         return [topConstraint, leftConstraint, rightConstraint, heightConsraint]
     }
     
-     func avatarViewConstraint() -> [NSLayoutConstraint] {
-         let topConstraint = self.avatarImage.topAnchor.constraint(equalTo: self.headerView.topAnchor, constant: 16)
-         let leadingConstraint = self.avatarImage.leadingAnchor.constraint(equalTo: self.headerView.leadingAnchor, constant: 16)
-         let widthConstraint = self.avatarImage.widthAnchor.constraint(lessThanOrEqualTo: self.headerView.widthAnchor, multiplier: 0.2415)
+    func avatarViewConstraint() -> [NSLayoutConstraint] {
+        let topConstraint = self.avatarImage.topAnchor.constraint(equalTo: self.headerView.topAnchor, constant: 16)
+        let leadingConstraint = self.avatarImage.leadingAnchor.constraint(equalTo: self.headerView.leadingAnchor, constant: 16)
+        let widthConstraint = self.avatarImage.widthAnchor.constraint(lessThanOrEqualTo: self.headerView.widthAnchor, multiplier: 0.2415)
         let heightAnchor = self.avatarImage.heightAnchor.constraint(equalTo: self.avatarImage.widthAnchor)
-
+        
         return [topConstraint,leadingConstraint, widthConstraint, heightAnchor ]
     }
     
@@ -158,7 +162,7 @@ final class ProfileView: UIView {
         let leadingConstraint = self.stackView.leadingAnchor.constraint(equalTo: self.avatarImage.trailingAnchor, constant: 20)
         return [topConstraint, widthConstraint, leadingConstraint]
     }
-
+    
     private func statusTextFieldConstraints() -> [NSLayoutConstraint] {
         let topConstraint = self.statusTextField.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 16)
         let leadingConstraint = self.statusTextField.leadingAnchor.constraint(equalTo: self.stackView.leadingAnchor)
@@ -174,7 +178,7 @@ final class ProfileView: UIView {
         let heightConstraint = self.setStatusButton.heightAnchor.constraint(equalToConstant: 50)
         return [topConstraint, leadingConstraint, heightConstraint, bottomConstraint, centerConstraint ]
     }
-
+    
     private func tableViewConstaints() -> [NSLayoutConstraint] {
         let topConstraint = self.tableView.topAnchor.constraint(equalTo: self.headerView.bottomAnchor)
         let leftConsraint = self.tableView.leftAnchor.constraint(equalTo: self.leftAnchor)
@@ -201,13 +205,13 @@ final class ProfileView: UIView {
         let stackViewConstraints = self.stackViewConstraint()
         let statusTextFieldConstraints = self.statusTextFieldConstraints()
         let buttonConstraints = self.buttonConstraints()
-   
-   
+        
+        
         NSLayoutConstraint.activate(hederViewConsraints + tableViewConstaints + avatarViewConstraints + stackViewConstraints + statusTextFieldConstraints + buttonConstraints )
     }
     
     func configureTableView(dataSource: UITableViewDataSource,
-                                 delegate: UITableViewDelegate) {
+                            delegate: UITableViewDelegate) {
         tableView.dataSource = dataSource
         tableView.delegate = delegate
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
@@ -231,7 +235,35 @@ final class ProfileView: UIView {
         
     }
     
+     private func flashStatusTextField() {
+        self.statusTextField.layer.borderWidth = 2
+        self.statusTextField.layer.borderColor = UIColor.systemPink.cgColor
+        greetingStatus()
+    }
     
+     private func greetingStatus() {
+        let greeting = ["Н","а","п","и","ш","и","т","е"," ","с","т","а","т","у","с"]
+        var count = 0
+        let times = 15
+        Timer.scheduledTimer(
+            withTimeInterval: 0.1,
+            repeats: true
+        ) { [weak self] timer in
+            
+            for (i,v) in greeting.enumerated() {
+                if i == count {
+                    self!.statusTextField.placeholder?.append(v)
+                }
+            }
+                count += 1
+                if count == times {
+                    timer.invalidate()
+                    self?.statusTextField.layer.borderWidth = 1
+                    self?.statusTextField.layer.borderColor = UIColor.black.cgColor
+                }
+        }
+    }
 }
+
 
 
