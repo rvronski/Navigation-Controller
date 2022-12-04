@@ -241,28 +241,49 @@ final class ProfileView: UIView {
         greetingStatus()
     }
     
-     private func greetingStatus() {
-        let greeting = ["Н","а","п","и","ш","и","т","е"," ","с","т","а","т","у","с"]
-        var count = 0
-        let times = 15
-        Timer.scheduledTimer(
-            withTimeInterval: 0.1,
-            repeats: true
-        ) { [weak self] timer in
-            
-            for (i,v) in greeting.enumerated() {
-                if i == count {
-                    self!.statusTextField.placeholder?.append(v)
-                }
-            }
-                count += 1
-                if count == times {
-                    timer.invalidate()
-                    self?.statusTextField.layer.borderWidth = 1
-                    self?.statusTextField.layer.borderColor = UIColor.black.cgColor
-                }
+//     private func greetingStatus() {
+//        let greeting = ["Н","а","п","и","ш","и","т","е"," ","с","т","а","т","у","с"]
+//        var count = 0
+//        let times = 15
+//        Timer.scheduledTimer(
+//            withTimeInterval: 0.1,
+//            repeats: true
+//        ) { [weak self] timer in
+//
+//            for (i,v) in greeting.enumerated() {
+//                if i == count {
+//                    self!.statusTextField.placeholder?.append(v)
+//                }
+//            }
+//                count += 1
+//                if count == times {
+//                    timer.invalidate()
+//                    self?.statusTextField.layer.borderWidth = 1
+//                    self?.statusTextField.layer.borderColor = UIColor.black.cgColor
+//                }
+//        }
+//    }
+    private func greetingStatus() {
+             let greeting = "Напишите статус"
+             var count = 0
+             var ind = greeting.startIndex
+             let times = greeting.count
+             Timer.scheduledTimer(
+                withTimeInterval: 0.1,
+                repeats: true
+             ) { [weak self] timer in
+                 if count == times {
+                     timer.invalidate()
+                     self?.statusTextField.layer.borderWidth = 1
+                     self?.statusTextField.layer.borderColor = UIColor.black.cgColor
+                 } else {
+                     let char = greeting[ind]
+                     ind = greeting.index(after: ind)
+                     self?.statusTextField.placeholder?.append(char)
+                 }
+                 count += 1
+             }
         }
-    }
 }
 
 
