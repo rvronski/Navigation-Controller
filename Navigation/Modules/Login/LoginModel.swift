@@ -8,7 +8,7 @@
 import UIKit
 
 protocol LoginViewControllerDelegate {
-    func check(log: String, pass: String) -> Bool
+    func check(log: String, pass: String) throws -> Bool
 }
 
 public final class LoginModel {
@@ -16,25 +16,25 @@ public final class LoginModel {
     public static var shared: LoginModel = .init()
     private var newPassword = " "
     func randomString(length: Int) -> String  {
-      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         newPassword = String((0..<length).map{ _ in letters.randomElement()! })
         password = newPassword
         return newPassword
     }
-        
+    
     private let login = "rvronski"
     private var password = "qwerty"
     
     func check(log: String, pass: String) -> Bool {
-        login == log  && password == pass ? true : false
+        login == log && password == pass ? true : false
+        
     }
 }
-
-
 struct LoginInspector: LoginViewControllerDelegate {
     
-    func check(log: String, pass: String) -> Bool {
-        LoginModel.shared.check(log: log, pass: pass)
+    func check(log: String, pass: String) throws -> Bool {
+        guard LoginModel.shared.check(log: log, pass: pass) == true else { throw LoginViewController.LoginErrors.noLogin }
+        return true
         
     }
 }
@@ -53,6 +53,7 @@ class User {
     }
 }
 
+
 protocol UserService {
-    func input(login: String) -> User?
+    func input(login: String) throws -> User
 }

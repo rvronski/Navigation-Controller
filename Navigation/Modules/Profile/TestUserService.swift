@@ -11,8 +11,9 @@ class TestUserService: UserService {
     
     let testUser = User(login: "test", name: "Иван Иванов", status: "Hello world!", avatar: UIImage(named: "ava-vk-animal-91")!)
     
-    func input(login: String) -> User? {
+    func input(login: String) throws -> User {
         
-        testUser.login == login ? testUser : nil
+        guard testUser.login == login else { throw LoginViewController.LoginErrors.noLogin }
+        return testUser
     }
 }

@@ -11,9 +11,10 @@ class CurrentUserService: UserService {
     
     var user = User(login: "rvronski", name: "Роман Вронский", status: " ", avatar: UIImage(named: "IMG_1824")!)
     
-    func input(login: String) -> User? {
+    func input(login: String) throws -> User {
         
-        user.login == login ? user : nil
+        guard user.login == login else { throw LoginViewController.LoginErrors.noLogin }
+        return user
     }
     
 }
