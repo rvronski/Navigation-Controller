@@ -202,7 +202,7 @@ class LoginViewController: UIViewController {
             let client = try service.input(login: loginTextField.text!)
             let loginInspector = LoginInspector()
             self.loginDelegate? = loginInspector
-            
+            guard passwordTextField.text != " " else { preconditionFailure("Пароль недействительный") }
             let input = try loginInspector.check(log: loginTextField.text!, pass: passwordTextField.text!)
             if input == true {
                 viewModel.viewInputDidChange(viewInput: .tapLoginButton( client, viewModel))
