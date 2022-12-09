@@ -8,14 +8,18 @@
 import Foundation
 
 protocol FeedViewModelProtocol: ViewModelProtocol {
-    func check(word: String) -> Bool
+    func check(word: String, completiton: (Result <Bool, Error>) -> Void)
 }
 
 class FeedViewModel: FeedViewModelProtocol {
     
-    var secretWord = "пароль"
+    var secretWord = "Пароль"
     
-    func check(word: String) -> Bool {
-        word == secretWord ? true : false 
+    func check(word: String, completiton: (Result <Bool, Error>) -> Void)  {
+        if word == secretWord {
+            completiton(.success(true))
+        } else {
+            completiton(.failure(FeedViewController.FeedErrors.wordIsWrong))
+        }
     }
 }

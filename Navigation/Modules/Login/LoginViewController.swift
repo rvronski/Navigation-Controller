@@ -10,6 +10,11 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    enum LoginErrors: Error {
+        case noLogin
+        
+    }
+    
     private let brutForce = BrutForce()
     
     private let viewModel: LoginViewModelProtocol
@@ -59,6 +64,7 @@ class LoginViewController: UIViewController {
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
         loginTextfield.leftView = paddingView
         loginTextfield.leftViewMode = .always
+        loginTextfield.becomeFirstResponder()
         return loginTextfield
     }()
     
@@ -184,27 +190,35 @@ class LoginViewController: UIViewController {
         self.loginTextField.becomeFirstResponder()
     }
     
-    @objc func didTapButton() {
+    @objc func didTapButton()  {
 #if DEBUG
         let service = TestUserService()
-
+        
 #else
         let service = CurrentUserService()
 #endif
-        let client = service.input(login: loginTextField.text!)
-        if client == nil {
-            tapAlert()
-        } else {
+        
+        do {
+            let client = try service.input(login: loginTextField.text!)
             let loginInspector = LoginInspector()
             self.loginDelegate? = loginInspector
-            let input = loginInspector.check(log: loginTextField.text!, pass: passwordTextField.text!)
+            guard passwordTextField.text != " " else { preconditionFailure("Пароль недействительный") }
+            let input = try loginInspector.check(log: loginTextField.text!, pass: passwordTextField.text!)
             if input == true {
-                viewModel.viewInputDidChange(viewInput: .tapLoginButton(client!, viewModel))
-            } else if input == false {
-                tapAlert()
-            }
+                viewModel.viewInputDidChange(viewInput: .tapLoginButton( client, viewModel))
+            } 
+        } catch {
+            tapAlert()
         }
+        
     }
+    
+    
+    
+    
+        
+    
+    
     func tapAlert()  {
         let alertControler = UIAlertController(title: "Неверный логин или пароль", message: "Введите логин и пароль еще раз", preferredStyle: .alert)
        let firstAction = UIAlertAction(title: "Ok", style: .default){ _ in
@@ -261,5 +275,12 @@ class LoginViewController: UIViewController {
             self.activityIndicator.isHidden = true
         }
     }
+//    private func handleErrors(_ error: LoginErrors) {
+//        switch error {
+//        case .noLogin:
+//            self.tapAlert()
+//        }
+//
+//    }
 }
 

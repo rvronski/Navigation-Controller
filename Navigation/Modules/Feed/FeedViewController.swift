@@ -8,7 +8,9 @@
 import UIKit
 
 class FeedViewController: UIViewController {
-   
+    enum FeedErrors: Error {
+        case wordIsWrong
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,14 +22,25 @@ class FeedViewController: UIViewController {
         stackViewConstraints()
         setupGesture()
         button.tapButton = { [weak self] in
-            let result = FeedViewModel().check(word: (self?.textField.text)!)
-            if result == true {
-                self?.checkLabel.backgroundColor = .green
-            } else {
-                self?.checkLabel.backgroundColor = .red
+           FeedViewModel().check(word: (self?.textField.text)!) { result in
+                switch result {
+                case .success:
+                    self?.checkLabel.backgroundColor = .green
+                case .failure:
+                    self?.checkLabel.backgroundColor = .red
+                    self?.wrongWordAlert()
+                }
             }
         }
+    }
         
+    private func wrongWordAlert() {
+        let alertController = UIAlertController(title: "Введено неверное слово ", message: "Введите слово ещё раз", preferredStyle: .alert)
+        let firstAction = UIAlertAction(title: "OK", style: .default) { _ in
+            self.textField.becomeFirstResponder()
+        }
+        alertController.addAction(firstAction)
+        self.present(alertController, animated: true)
     }
     private lazy var button = CustomButton(buttonText: "Push", textColor: .white, background: .systemBlue, frame: .zero)
     
