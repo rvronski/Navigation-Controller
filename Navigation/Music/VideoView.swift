@@ -14,7 +14,7 @@ class VideoView: UIView {
         wv.translatesAutoresizingMaskIntoConstraints = false
         return wv
     }()
-    var videoArray = ["3Xv1mJvwXok","dQw4w9WgXcQ","RmHqOSrkZnk","5tpQEsJ0iVg","XqZsoesa55w", "3kiPK9hdCK4"]
+    var videoArray = ["3Xv1mJvwXok","pCVXSle3e74","RmHqOSrkZnk","5tpQEsJ0iVg","I4GLs3RXKnM", "3kiPK9hdCK4"]
     private lazy var closeButton: UIButton = {
         let closeButton = UIButton()
         closeButton.translatesAutoresizingMaskIntoConstraints = false
@@ -26,9 +26,6 @@ class VideoView: UIView {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-//        tableView.rowHeight = UITableView.automaticDimension
-//        tableView.estimatedRowHeight = 50
-//        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(VideoTableViewCell.self, forCellReuseIdentifier: "VideoCell")
@@ -54,7 +51,7 @@ class VideoView: UIView {
         self.addSubview(self.closeButton)
         self.addSubview(self.tableView)
         self.addSubview(self.wv)
-        self.backgroundColor = .black.withAlphaComponent(0.5)
+        self.backgroundColor = .black
         
         NSLayoutConstraint.activate([
             self.wv.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 35),
@@ -62,7 +59,7 @@ class VideoView: UIView {
             self.wv.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor),
             self.wv.heightAnchor.constraint(equalToConstant: 300),
             
-            self.tableView.topAnchor.constraint(equalTo: self.wv.bottomAnchor, constant: 16),
+            self.tableView.topAnchor.constraint(equalTo: self.wv.bottomAnchor),
             self.tableView.leftAnchor.constraint(equalTo: self.leftAnchor),
             self.tableView.rightAnchor.constraint(equalTo: self.rightAnchor),
             self.tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
@@ -84,10 +81,10 @@ class VideoView: UIView {
 //        let URL = "<iframe width=\"\(width)\" height=\"\(height)\" src=\"https://www.youtube.com/embed/\(videoID)\" frameborder=\"0\" allowfullscreen></iframe>"
         
         let toLoadInWebView = "<body style=\"margin:0px;padding:0px;overflow:hidden\">"
-         + " <iframe  style=\"overflow: hidden; overflow-x: hidden; overflow-y:hidden; height: 0;" + " max-height: 100%; max-width: 100%; min-height: 100%; min-width: 100%; width: 0;scrolling:no;position:absolute;top:0px;left:0px;right:0px;bottom:0px\" " + "src=\"https://www.youtube.com/embed/\(videoID)\"></iframe>" + "</body>"
+                + " <iframe  style=\"overflow: hidden; overflow-x: hidden; overflow-y:hidden; height: 0;" + " max-height: 100%; max-width: 100%; min-height: 100%; min-width: 100%; width: 0;scrolling:no;position:absolute;top:0px;left:0px;right:0px;bottom:0px\" " + "src=\"https://www.youtube.com/embed/\(videoID)\"></iframe>" + "</body>" 
 
          wv.loadHTMLString(toLoadInWebView, baseURL: nil)
-//                         wv.loadHTMLString(URL, baseURL: nil)!
+                         
         }
    
     }
