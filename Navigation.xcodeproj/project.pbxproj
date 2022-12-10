@@ -22,6 +22,19 @@
 		451FE9502880CB8A0024A924 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451FE94F2880CB8A0024A924 /* PostViewController.swift */; };
 		451FE95228834D240024A924 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451FE95128834D240024A924 /* ProfileViewController.swift */; };
 		451FE9542886F4690024A924 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451FE9532886F4690024A924 /* InfoViewController.swift */; };
+		453F93EA2944863C00A374DA /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453F93E92944863C00A374DA /* MusicViewController.swift */; };
+		453F93EC294486B000A374DA /* MusicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453F93EB294486B000A374DA /* MusicViewModel.swift */; };
+		453F93EE2944881700A374DA /* Queen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 453F93ED2944881700A374DA /* Queen.mp3 */; };
+		453F93F02944882600A374DA /* Just The Two Of Us.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 453F93EF2944882600A374DA /* Just The Two Of Us.mp3 */; };
+		453F93F22944883000A374DA /* 09 We Like Songs.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 453F93F12944883000A374DA /* 09 We Like Songs.mp3 */; };
+		453F93F42944883B00A374DA /* Chet Faker  - No Diggity Live Sessions.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 453F93F32944883B00A374DA /* Chet Faker  - No Diggity Live Sessions.mp3 */; };
+		453F93F62944884600A374DA /* All I Do (Todd Terje Edit).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 453F93F52944884600A374DA /* All I Do (Todd Terje Edit).mp3 */; };
+		453F93F8294489F900A374DA /* MusicCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453F93F7294489F900A374DA /* MusicCoordinator.swift */; };
+		453F93FF29448E3F00A374DA /* IMG_8285.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 453F93FA29448E3B00A374DA /* IMG_8285.JPG */; };
+		453F940029448E3F00A374DA /* IMG_8282.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 453F93FB29448E3C00A374DA /* IMG_8282.JPG */; };
+		453F940129448E3F00A374DA /* IMG_8284.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 453F93FC29448E3D00A374DA /* IMG_8284.JPG */; };
+		453F940229448E3F00A374DA /* IMG_8283.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 453F93FD29448E3E00A374DA /* IMG_8283.JPG */; };
+		453F940329448E3F00A374DA /* IMG_8286.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 453F93FE29448E3F00A374DA /* IMG_8286.JPG */; };
 		4545DFC1291DBB9700F2BA9B /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 4545DFC0291DBB9700F2BA9B /* iOSIntPackage */; };
 		4556F8B1293987EE00EF2AA9 /* BrutForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4556F8B0293987EE00EF2AA9 /* BrutForce.swift */; };
 		455C903A2907381000A608C8 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455C90392907381000A608C8 /* LoginModel.swift */; };
@@ -109,6 +122,19 @@
 		451FE94F2880CB8A0024A924 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		451FE95128834D240024A924 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = Navigation/ProfileViewController.swift; sourceTree = SOURCE_ROOT; };
 		451FE9532886F4690024A924 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		453F93E92944863C00A374DA /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
+		453F93EB294486B000A374DA /* MusicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewModel.swift; sourceTree = "<group>"; };
+		453F93ED2944881700A374DA /* Queen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Queen.mp3; sourceTree = "<group>"; };
+		453F93EF2944882600A374DA /* Just The Two Of Us.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Just The Two Of Us.mp3"; sourceTree = "<group>"; };
+		453F93F12944883000A374DA /* 09 We Like Songs.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "09 We Like Songs.mp3"; sourceTree = "<group>"; };
+		453F93F32944883B00A374DA /* Chet Faker  - No Diggity Live Sessions.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Chet Faker  - No Diggity Live Sessions.mp3"; sourceTree = "<group>"; };
+		453F93F52944884600A374DA /* All I Do (Todd Terje Edit).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "All I Do (Todd Terje Edit).mp3"; sourceTree = "<group>"; };
+		453F93F7294489F900A374DA /* MusicCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicCoordinator.swift; sourceTree = "<group>"; };
+		453F93FA29448E3B00A374DA /* IMG_8285.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_8285.JPG; sourceTree = "<group>"; };
+		453F93FB29448E3C00A374DA /* IMG_8282.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_8282.JPG; sourceTree = "<group>"; };
+		453F93FC29448E3D00A374DA /* IMG_8284.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_8284.JPG; sourceTree = "<group>"; };
+		453F93FD29448E3E00A374DA /* IMG_8283.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_8283.JPG; sourceTree = "<group>"; };
+		453F93FE29448E3F00A374DA /* IMG_8286.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_8286.JPG; sourceTree = "<group>"; };
 		4556F8B0293987EE00EF2AA9 /* BrutForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrutForce.swift; sourceTree = "<group>"; };
 		455C90392907381000A608C8 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		455CCAC428AD81D7005590E2 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -170,6 +196,7 @@
 			children = (
 				451351EF291EEC0A007C7BC5 /* AppCoordinator.swift */,
 				451351FF291F11EC007C7BC5 /* FeedCoordinator.swift */,
+				453F93F7294489F900A374DA /* MusicCoordinator.swift */,
 				451351FD291F00F3007C7BC5 /* LoginCoordinator.swift */,
 				45EF992129270A0C00AC3AF6 /* ProfileCoordinator.swift */,
 				451351F1291EEC64007C7BC5 /* Coordinatable.swift */,
@@ -244,11 +271,13 @@
 				451FE94F2880CB8A0024A924 /* PostViewController.swift */,
 				451351FA291F0023007C7BC5 /* TabBar */,
 				451351F6291EF1DE007C7BC5 /* Modules */,
+				453F93E82944860E00A374DA /* Music */,
 				451351F3291EEDF4007C7BC5 /* Factory */,
 				451351EE291EEBD9007C7BC5 /* Coordinators */,
 				45832A42289C3B50005C65C2 /* Blue_pixel.png */,
 				451FE9422880BA270024A924 /* Assets.xcassets */,
 				45832A402899C067005C65C2 /* logo.png */,
+				453F93F929448E2200A374DA /* Albums */,
 				451FE9442880BA270024A924 /* LaunchScreen.storyboard */,
 				451FE9472880BA270024A924 /* Info.plist */,
 			);
@@ -268,6 +297,32 @@
 				45A1FDEE291BD1C4000F3320 /* CustomButton.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		453F93E82944860E00A374DA /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				453F93E92944863C00A374DA /* MusicViewController.swift */,
+				453F93EB294486B000A374DA /* MusicViewModel.swift */,
+				453F93ED2944881700A374DA /* Queen.mp3 */,
+				453F93EF2944882600A374DA /* Just The Two Of Us.mp3 */,
+				453F93F12944883000A374DA /* 09 We Like Songs.mp3 */,
+				453F93F32944883B00A374DA /* Chet Faker  - No Diggity Live Sessions.mp3 */,
+				453F93F52944884600A374DA /* All I Do (Todd Terje Edit).mp3 */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
+		453F93F929448E2200A374DA /* Albums */ = {
+			isa = PBXGroup;
+			children = (
+				453F93FB29448E3C00A374DA /* IMG_8282.JPG */,
+				453F93FD29448E3E00A374DA /* IMG_8283.JPG */,
+				453F93FC29448E3D00A374DA /* IMG_8284.JPG */,
+				453F93FA29448E3B00A374DA /* IMG_8285.JPG */,
+				453F93FE29448E3F00A374DA /* IMG_8286.JPG */,
+			);
+			path = Albums;
 			sourceTree = "<group>";
 		};
 		45EF991A2922F38F00AC3AF6 /* Login */ = {
@@ -434,9 +489,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				451FE9462880BA270024A924 /* LaunchScreen.storyboard in Resources */,
+				453F940129448E3F00A374DA /* IMG_8284.JPG in Resources */,
 				451FE9432880BA270024A924 /* Assets.xcassets in Resources */,
+				453F940229448E3F00A374DA /* IMG_8283.JPG in Resources */,
+				453F93F62944884600A374DA /* All I Do (Todd Terje Edit).mp3 in Resources */,
+				453F940329448E3F00A374DA /* IMG_8286.JPG in Resources */,
+				453F93EE2944881700A374DA /* Queen.mp3 in Resources */,
+				453F93F22944883000A374DA /* 09 We Like Songs.mp3 in Resources */,
 				45832A43289C3B50005C65C2 /* Blue_pixel.png in Resources */,
+				453F93FF29448E3F00A374DA /* IMG_8285.JPG in Resources */,
+				453F93F02944882600A374DA /* Just The Two Of Us.mp3 in Resources */,
 				45832A412899C067005C65C2 /* logo.png in Resources */,
+				453F93F42944883B00A374DA /* Chet Faker  - No Diggity Live Sessions.mp3 in Resources */,
+				453F940029448E3F00A374DA /* IMG_8282.JPG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,6 +535,7 @@
 				457AA3A928AC415400BFB8A9 /* PhotosViewController.swift in Sources */,
 				45CF81C628A2597A006F6960 /* PostTableViewCell.swift in Sources */,
 				45EF992229270A0C00AC3AF6 /* ProfileCoordinator.swift in Sources */,
+				453F93EC294486B000A374DA /* MusicViewModel.swift in Sources */,
 				45EF991C2922F3C700AC3AF6 /* LoginViewModel.swift in Sources */,
 				451351F2291EEC64007C7BC5 /* Coordinatable.swift in Sources */,
 				451FE93A2880BA240024A924 /* AppDelegate.swift in Sources */,
@@ -481,10 +547,12 @@
 				457AA3A528A9855900BFB8A9 /* PhotosTableViewCell.swift in Sources */,
 				451FE95228834D240024A924 /* ProfileViewController.swift in Sources */,
 				45EF991E292661E400AC3AF6 /* ProfileView.swift in Sources */,
+				453F93EA2944863C00A374DA /* MusicViewController.swift in Sources */,
 				458F2656291188B60098C7EF /* ImageManager.swift in Sources */,
 				459B5DD0290D5FA80046160C /* LoginFactory.swift in Sources */,
 				451FE93C2880BA240024A924 /* SceneDelegate.swift in Sources */,
 				451351F9291EF2BC007C7BC5 /* Module.swift in Sources */,
+				453F93F8294489F900A374DA /* MusicCoordinator.swift in Sources */,
 				45832A3F289971D7005C65C2 /* LoginViewController.swift in Sources */,
 				451FE9542886F4690024A924 /* InfoViewController.swift in Sources */,
 				451351F5291EEE19007C7BC5 /* AppFactory.swift in Sources */,

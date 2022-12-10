@@ -19,12 +19,14 @@ final class AppCoordinator: Coordinatable {
     func start() -> UIViewController {
         let loginViewCoordinator = LoginCoordinator(moduleType: .login, factory: factory, navigationController: UINavigationController())
         let feedViewCoordinator = FeedCoordinator(factory: factory, moduleType: .feed)
-       
+        let musicCoordinator = MusicCoordinator(factory: factory, moduleType: .music)
         let tabBarController = AppTabBarController(viewControllers:
                                                     [loginViewCoordinator.start(),
-                                                     feedViewCoordinator.start()                                            ])
+                                                     feedViewCoordinator.start(),
+                                                     musicCoordinator.start()])
         addCoordinator(coordinator: loginViewCoordinator)
         addCoordinator(coordinator: feedViewCoordinator)
+        addCoordinator(coordinator: musicCoordinator)
     
         
         return tabBarController
