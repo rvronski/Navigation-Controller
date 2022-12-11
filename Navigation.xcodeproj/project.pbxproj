@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		450CF2402944F50A0022BA08 /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450CF23F2944F50A0022BA08 /* VideoTableViewCell.swift */; };
 		451351F0291EEC0A007C7BC5 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451351EF291EEC0A007C7BC5 /* AppCoordinator.swift */; };
 		451351F2291EEC64007C7BC5 /* Coordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451351F1291EEC64007C7BC5 /* Coordinatable.swift */; };
 		451351F5291EEE19007C7BC5 /* AppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451351F4291EEE19007C7BC5 /* AppFactory.swift */; };
@@ -35,6 +36,7 @@
 		453F940129448E3F00A374DA /* IMG_8284.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 453F93FC29448E3D00A374DA /* IMG_8284.JPG */; };
 		453F940229448E3F00A374DA /* IMG_8283.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 453F93FD29448E3E00A374DA /* IMG_8283.JPG */; };
 		453F940329448E3F00A374DA /* IMG_8286.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 453F93FE29448E3F00A374DA /* IMG_8286.JPG */; };
+		453F94052944C1BE00A374DA /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453F94042944C1BE00A374DA /* VideoView.swift */; };
 		4545DFC1291DBB9700F2BA9B /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 4545DFC0291DBB9700F2BA9B /* iOSIntPackage */; };
 		4556F8B1293987EE00EF2AA9 /* BrutForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4556F8B0293987EE00EF2AA9 /* BrutForce.swift */; };
 		455C903A2907381000A608C8 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455C90392907381000A608C8 /* LoginModel.swift */; };
@@ -105,6 +107,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		450CF23F2944F50A0022BA08 /* VideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
 		451351EF291EEC0A007C7BC5 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		451351F1291EEC64007C7BC5 /* Coordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinatable.swift; sourceTree = "<group>"; };
 		451351F4291EEE19007C7BC5 /* AppFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFactory.swift; sourceTree = "<group>"; };
@@ -135,6 +138,7 @@
 		453F93FC29448E3D00A374DA /* IMG_8284.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_8284.JPG; sourceTree = "<group>"; };
 		453F93FD29448E3E00A374DA /* IMG_8283.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_8283.JPG; sourceTree = "<group>"; };
 		453F93FE29448E3F00A374DA /* IMG_8286.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_8286.JPG; sourceTree = "<group>"; };
+		453F94042944C1BE00A374DA /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		4556F8B0293987EE00EF2AA9 /* BrutForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrutForce.swift; sourceTree = "<group>"; };
 		455C90392907381000A608C8 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		455CCAC428AD81D7005590E2 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -303,6 +307,8 @@
 			isa = PBXGroup;
 			children = (
 				453F93E92944863C00A374DA /* MusicViewController.swift */,
+				453F94042944C1BE00A374DA /* VideoView.swift */,
+				450CF23F2944F50A0022BA08 /* VideoTableViewCell.swift */,
 				453F93EB294486B000A374DA /* MusicViewModel.swift */,
 				453F93ED2944881700A374DA /* Queen.mp3 */,
 				453F93EF2944882600A374DA /* Just The Two Of Us.mp3 */,
@@ -527,6 +533,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				457AA3A728AC3CB600BFB8A9 /* Photos.swift in Sources */,
+				453F94052944C1BE00A374DA /* VideoView.swift in Sources */,
 				455C903A2907381000A608C8 /* LoginModel.swift in Sources */,
 				451351FE291F00F3007C7BC5 /* LoginCoordinator.swift in Sources */,
 				455CCAC528AD81D7005590E2 /* PhotosCollectionViewCell.swift in Sources */,
@@ -542,6 +549,7 @@
 				451351F0291EEC0A007C7BC5 /* AppCoordinator.swift in Sources */,
 				451FE94E2880C5620024A924 /* FeedViewController.swift in Sources */,
 				45A1FDEF291BD1C4000F3320 /* CustomButton.swift in Sources */,
+				450CF2402944F50A0022BA08 /* VideoTableViewCell.swift in Sources */,
 				458CD4012901FFB10059BA45 /* CurrentUserService.swift in Sources */,
 				4556F8B1293987EE00EF2AA9 /* BrutForce.swift in Sources */,
 				457AA3A528A9855900BFB8A9 /* PhotosTableViewCell.swift in Sources */,

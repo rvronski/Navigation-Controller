@@ -14,6 +14,29 @@ class MusicViewController: UIViewController {
     let songs = ["Queen","Just The Two Of Us","09 We Like Songs","Chet Faker  - No Diggity Live Sessions","All I Do (Todd Terje Edit)"]
     let albums = [UIImage(named: "IMG_8282.JPG"), UIImage(named: "IMG_8283.JPG"), UIImage(named: "IMG_8284.JPG"), UIImage(named: "IMG_8285.JPG"),UIImage(named: "IMG_8286.JPG")]
     
+    private lazy var backgroundView: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "background1")
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var videoView: VideoView = {
+        let videoView = VideoView()
+        videoView.translatesAutoresizingMaskIntoConstraints = false
+        return videoView
+    }()
+    
+    private lazy var youTubeButton: UIButton = {
+        let youTubeButton = UIButton()
+        youTubeButton.setImage(UIImage(systemName: "video.bubble.left.fill"), for: .normal)
+        youTubeButton.clipsToBounds = true
+        youTubeButton.addTarget(self, action: #selector(presentVideo), for: .touchUpInside)
+        youTubeButton.translatesAutoresizingMaskIntoConstraints = false
+        return youTubeButton
+    }()
+    
     private lazy var songNameLabel: UILabel = {
         let songNameLabel = UILabel()
         songNameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -43,6 +66,7 @@ class MusicViewController: UIViewController {
     
     private lazy var playButton: UIButton = {
         let playButton = UIButton()
+        playButton.clipsToBounds = true
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         playButton.translatesAutoresizingMaskIntoConstraints = false
         playButton.addTarget(self, action: #selector(play), for: .touchUpInside)
@@ -88,8 +112,14 @@ class MusicViewController: UIViewController {
         setup()
         music()
         musicSlider.value = 0.0
+        
     }
         
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.videoView.isHidden = true
+    }
     deinit {
         timer.invalidate()
     }
@@ -170,20 +200,30 @@ class MusicViewController: UIViewController {
         }
     }
     
+    @objc func presentVideo() {
+        
+        self.videoView.isHidden = false
+        
+        
+    }
+    
     @objc func touchSlider() {
         player.currentTime = TimeInterval(musicSlider.value)
     }
     
     @objc func updateMusicSlider() {
         musicSlider.value = Float(player.currentTime)
-        var songTime = Int(player.duration) - Int(player.currentTime)
+        let songTime = Int(player.duration) - Int(player.currentTime)
         let minutes = String(songTime / 60)
         let seconds = String(songTime % 60)
         self.songTimeLabel.text = minutes + ":" + seconds
         
     }
     private func setup() {
-        self.view.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
+        
+        self.view.backgroundColor = .white
+        self.view.addSubview(self.backgroundView)
+        self.view.sendSubviewToBack(backgroundView)
         self.view.addSubview(self.playButton)
         self.view.addSubview(self.stopButton)
         self.view.addSubview(self.pauseButton)
@@ -193,8 +233,16 @@ class MusicViewController: UIViewController {
         self.view.addSubview(self.songNameLabel)
         self.view.addSubview(self.albumImageView)
         self.view.addSubview(self.songTimeLabel)
+        self.view.addSubview(self.youTubeButton)
+        self.view.addSubview(self.videoView)
         
         NSLayoutConstraint.activate([
+            
+            self.backgroundView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            self.backgroundView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.backgroundView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            self.backgroundView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            
             self.playButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor,constant: -50),
             self.playButton.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 50),
             self.playButton.widthAnchor.constraint(equalToConstant: 50),
@@ -230,7 +278,7 @@ class MusicViewController: UIViewController {
             self.songNameLabel.rightAnchor.constraint(equalTo: self.musicSlider.rightAnchor),
             self.songNameLabel.heightAnchor.constraint(equalToConstant: 50),
             
-            self.albumImageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor,constant: 50),
+            self.albumImageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor,constant: 100),
             self.albumImageView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20),
             self.albumImageView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20),
             self.albumImageView.bottomAnchor.constraint(equalTo: self.songNameLabel.topAnchor, constant: -20),
@@ -240,8 +288,84 @@ class MusicViewController: UIViewController {
             self.songTimeLabel.topAnchor.constraint(equalTo: self.musicSlider.bottomAnchor, constant: 5),
             self.songTimeLabel.widthAnchor.constraint(equalToConstant: 50),
             
+    
+            self.youTubeButton.rightAnchor.constraint(equalTo: self.view.rightAnchor,constant: -20),
+            self.youTubeButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            self.youTubeButton.widthAnchor.constraint(equalToConstant: 50),
+            self.youTubeButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            self.videoView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            self.videoView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.videoView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            self.videoView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            
+           
+            
+            
         ])
     }
 }
+/*
+self.backgroundView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+self.backgroundView.topAnchor.constraint(equalTo: self.view.topAnchor),
+self.backgroundView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+self.backgroundView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
 
+self.playButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor,constant: -50),
+self.playButton.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 50),
+self.playButton.widthAnchor.constraint(equalToConstant: 50),
+self.playButton.heightAnchor.constraint(equalToConstant: 50),
+
+self.pauseButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor,constant: -50),
+self.pauseButton.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 50),
+self.pauseButton.widthAnchor.constraint(equalToConstant: 50),
+self.pauseButton.heightAnchor.constraint(equalToConstant: 50),
+
+self.stopButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor,constant: -50),
+self.stopButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -50),
+self.stopButton.widthAnchor.constraint(equalToConstant: 50),
+self.stopButton.heightAnchor.constraint(equalToConstant: 50),
+
+
+self.musicSlider.leftAnchor.constraint(equalTo: self.view.leftAnchor,constant: 20),
+self.musicSlider.rightAnchor.constraint(equalTo: self.view.rightAnchor,constant: -20),
+self.musicSlider.bottomAnchor.constraint(equalTo: self.playButton.topAnchor, constant: -20),
+
+self.nextButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor,constant: -50),
+self.nextButton.rightAnchor.constraint(equalTo: self.stopButton.leftAnchor, constant: -50),
+self.nextButton.widthAnchor.constraint(equalToConstant: 50),
+self.nextButton.heightAnchor.constraint(equalToConstant: 50),
+
+self.backButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor,constant: -50),
+self.backButton.leftAnchor.constraint(equalTo: self.playButton.rightAnchor, constant: 50),
+self.backButton.widthAnchor.constraint(equalToConstant: 50),
+self.backButton.heightAnchor.constraint(equalToConstant: 50),
+
+self.songNameLabel.bottomAnchor.constraint(equalTo: self.musicSlider.topAnchor, constant: -20),
+self.songNameLabel.leftAnchor.constraint(equalTo: self.musicSlider.leftAnchor),
+self.songNameLabel.rightAnchor.constraint(equalTo: self.musicSlider.rightAnchor),
+self.songNameLabel.heightAnchor.constraint(equalToConstant: 50),
+
+self.albumImageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor,constant: 100),
+self.albumImageView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20),
+self.albumImageView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20),
+self.albumImageView.bottomAnchor.constraint(equalTo: self.songNameLabel.topAnchor, constant: -20),
+
+self.songTimeLabel.heightAnchor.constraint(equalToConstant: 15),
+self.songTimeLabel.rightAnchor.constraint(equalTo: self.view.rightAnchor,constant: -20),
+self.songTimeLabel.topAnchor.constraint(equalTo: self.musicSlider.bottomAnchor, constant: 5),
+self.songTimeLabel.widthAnchor.constraint(equalToConstant: 50),
+
+
+self.youTubeButton.rightAnchor.constraint(equalTo: self.view.rightAnchor,constant: -20),
+self.youTubeButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20),
+self.youTubeButton.widthAnchor.constraint(equalToConstant: 50),
+self.youTubeButton.heightAnchor.constraint(equalToConstant: 50),
+
+self.videoView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+self.videoView.topAnchor.constraint(equalTo: self.view.topAnchor),
+self.videoView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+self.videoView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+
+*/
 

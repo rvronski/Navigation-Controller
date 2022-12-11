@@ -32,7 +32,7 @@ extension Module.ModuleType {
             return UITabBarItem(title: "Лента", image: UIImage(systemName: "chart.bar.doc.horizontal"), tag: 2)
        
         case .music:
-            return UITabBarItem(title: "Музыка", image: UIImage(systemName: "music.note"), tag: 1)
+            return UITabBarItem(title: "Мультимедиа", image: UIImage(systemName: "tv.music.note"), tag: 1)
         }
     }
 }
