@@ -6,38 +6,44 @@
 //
 
 import UIKit
+import StorageService
 
 class ProfileViewController: UIViewController {
-    private lazy var avatarView: AvatarView = {
+    private let viewModel: LoginViewModelProtocol
+    private let user: User
+    
+    init(viewModel: LoginViewModelProtocol, user: User) {
+        self.viewModel = viewModel
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    lazy var avatarView: AvatarView = {
         let avatarView = AvatarView()
         avatarView.translatesAutoresizingMaskIntoConstraints = false
         avatarView.delegate = self
         return avatarView
     }()
     
-    
-    private lazy var profileHeader: ProfileHeaderView = {
-        let profileHeader = ProfileHeaderView()
-        profileHeader.delegate = self
-        profileHeader.translatesAutoresizingMaskIntoConstraints = false
-        return profileHeader
+     lazy var profileView: ProfileView = {
+        let profileView = ProfileView()
+        profileView.avatarImage.image = user.avatar
+        profileView.nameLabel.text = user.name
+        profileView.disctiptionLabel.text = user.status
+        profileView.delegate = self
+
+        return profileView
     }()
     
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 50
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
-        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosCell")
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
-        
-        
-        return tableView
-    }()
+    override func loadView() {
+        super.loadView()
+        view = profileView
+    }
+    
     
     
     override func viewDidLoad() {
@@ -46,9 +52,14 @@ class ProfileViewController: UIViewController {
         self.setupGesture()
         self.tabBarController?.tabBar.isHidden = false
         
+        profileView.configureTableView(dataSource: self, delegate: self)
+        profileView.delegate = self
+        
     }
     
     private var posts:[Post] = [post1, post2, post3]
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -57,10 +68,9 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupView(){
+
         self.view.backgroundColor = .systemBackground
-        self.view.addSubview(tableView)
         self.view.addSubview(avatarView)
-        self.view.addSubview(profileHeader)
         self.view.bringSubviewToFront(avatarView)
         
         NSLayoutConstraint.activate([
@@ -72,17 +82,7 @@ class ProfileViewController: UIViewController {
             self.avatarView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
             self.avatarView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             self.avatarView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            
-            self.profileHeader.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            self.profileHeader.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            self.profileHeader.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            self.profileHeader.heightAnchor.constraint(equalToConstant: 220),
-            
-            self.tableView.topAnchor.constraint(equalTo: self.profileHeader.bottomAnchor),
-            self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            self.tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-            
+          
         ] )
     }
     private var avatarWidthConstraint: NSLayoutConstraint?
@@ -98,7 +98,7 @@ class ProfileViewController: UIViewController {
         let widthScreen = UIScreen.main.bounds.width
         let widthAvatar = avatarImage.bounds.width
         let width = widthScreen / widthAvatar
-        
+
         UIView.animateKeyframes(withDuration: 2, delay: 0, options: .calculationModeCubic) {
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1) { [self] in
                 self.avatarView.isHidden = false
@@ -110,7 +110,7 @@ class ProfileViewController: UIViewController {
                 avatarImage.layer.cornerRadius = self.isAvatarIncreased ? avatarImage.frame.height/2 : 0
                 closeButton.isHidden = self.isAvatarIncreased ? true : false
             }
-            
+
         } completion: { _ in
             self.isAvatarIncreased.toggle()
             if self.isAvatarIncreased == false {
@@ -122,8 +122,10 @@ class ProfileViewController: UIViewController {
     
     private func setupGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        self.view.addGestureRecognizer(tapGesture)
+                tapGesture.cancelsTouchesInView = false
+                self.view.addGestureRecognizer(tapGesture)
     }
+    
     @objc private func hideKeyboard() {
         self.view.endEditing(true)
         
@@ -168,20 +170,22 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 0 && indexPath.section == 0 {
-            let vc1 = PhotosViewController()
-            self.navigationController?.pushViewController(vc1, animated: true)
+//            let vc1 = PhotosViewController()
+//            self.navigationController?.pushViewController(vc1, animated: true)
+            self.viewModel.viewInputDidChange(viewInput: .tapPhotoCell)
         }
     }
     
 }
 
-extension ProfileViewController: AvatarViewDelegate, ProfileTableViewDelegate {
+extension ProfileViewController: AvatarViewDelegate, ProfileViewDelegate {
     func changeLayout() {
         self.changeLayoutAvatar()
     }
 }
+
     
 
 
