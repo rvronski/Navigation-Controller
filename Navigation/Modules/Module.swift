@@ -15,6 +15,7 @@ struct Module {
         case login
         case feed
         case music
+        case info
         
     }
     let moduleType: ModuleType
@@ -30,9 +31,10 @@ extension Module.ModuleType {
             return UITabBarItem(title: "Профиль", image: UIImage(systemName: "person"), tag: 0)
         case .feed:
             return UITabBarItem(title: "Лента", image: UIImage(systemName: "chart.bar.doc.horizontal"), tag: 2)
-       
-        case .music:
+            case .music:
             return UITabBarItem(title: "Мультимедиа", image: UIImage(systemName: "tv.music.note"), tag: 1)
+        case .info:
+            return UITabBarItem(title: "Инфо", image: UIImage(systemName: "info"), tag: 3)
         }
     }
 }
