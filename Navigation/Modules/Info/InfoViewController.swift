@@ -9,9 +9,12 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
+    private var namesResidents: [String]? = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
+        showNames()
     }
     
     private func setupView() {
@@ -20,9 +23,21 @@ class InfoViewController: UIViewController {
         self.view.addSubview(self.infoTextLabel)
         self.view.addSubview(self.planetButton)
         self.view.addSubview(self.infoPlanetLabel)
+        self.view.addSubview(self.tableView)
         
         NSLayoutConstraint.activate([
-            self.infoTextLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            self.planetButton.topAnchor.constraint(equalTo: self.myButton.bottomAnchor, constant: 16),
+            self.planetButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            self.planetButton.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 16),
+            self.planetButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -16),
+            self.planetButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            self.myButton.topAnchor.constraint(equalTo: self.infoTextLabel.bottomAnchor, constant: 16),
+            self.myButton.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 16),
+            self.myButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -16),
+            self.myButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            self.infoTextLabel.bottomAnchor.constraint(equalTo: self.myButton.topAnchor, constant: -16),
             self.infoTextLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 16),
             self.infoTextLabel.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -16),
             self.infoTextLabel.heightAnchor.constraint(equalToConstant: 100),
@@ -32,19 +47,27 @@ class InfoViewController: UIViewController {
             self.infoPlanetLabel.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -16),
             self.infoPlanetLabel.heightAnchor.constraint(equalToConstant: 50),
             
-            self.myButton.topAnchor.constraint(equalTo: self.infoTextLabel.bottomAnchor, constant: 16),
-            self.myButton.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 16),
-            self.myButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -16),
-            self.myButton.heightAnchor.constraint(equalToConstant: 50),
+            self.tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            self.tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 16),
+            self.tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -16),
+            self.tableView.bottomAnchor.constraint(equalTo: self.infoPlanetLabel.topAnchor),
             
-            self.planetButton.topAnchor.constraint(equalTo: self.myButton.bottomAnchor, constant: 16),
-            self.planetButton.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 16),
-            self.planetButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -16),
-            self.planetButton.heightAnchor.constraint(equalToConstant: 50)
+            
+           
+            
+           
             
             
         ])
     }
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(InfoTableVIewCell, forCellReuseIdentifier: "InfoCell")
+        return tableView
+    }()
     
     private lazy var infoTextLabel: UILabel = {
         let infoLabel = UILabel()
@@ -71,7 +94,7 @@ class InfoViewController: UIViewController {
         button.backgroundColor = .link
         button.setTitle("Text", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.addTarget(self, action: #selector(self.showText), for: .touchUpInside)
+        button.addTarget(self, action: #selector(showe), for: .touchUpInside)
         return button
     }()
     private lazy var planetButton: UIButton = {
@@ -82,6 +105,19 @@ class InfoViewController: UIViewController {
         button.layer.borderColor = UIColor.white.cgColor
         button.backgroundColor = .link
         button.setTitle("Orbital Period", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(self.showPlanetOrbital), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var namesButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 10
+        button.layer.borderWidth = 2.0
+        button.layer.borderColor = UIColor.white.cgColor
+        button.backgroundColor = .link
+        button.setTitle("Names", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(self.showPlanetOrbital), for: .touchUpInside)
         return button
@@ -105,4 +141,44 @@ class InfoViewController: UIViewController {
             }
         }
     }
+    @objc func showNames() {
+        
+        loadName { [weak self] name in
+            DispatchQueue.main.async {
+                self?.namesResidents = name
+                }
+            }
+        }
+    
+    @objc func showe() {
+        self.infoTextLabel.text = namesResidents?.randomElement()
+    }
+}
+    
+
+extension InfoViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        namesResidents?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "InfoCell", for: indexPath) as? InfoTableVIewCell
+        let viewModel = In.ViewModel(name: "Video \(indexPath.row + 1)")
+        cell.setup(viewModel: viewModel)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let select: String = videoArray[indexPath.row]
+        DispatchQueue.global().async {
+            self.loadYoutube(videoID: select) { [weak self] urlText in
+                DispatchQueue.main.async {
+                    self?.wv.loadHTMLString(urlText, baseURL: nil)
+                }
+                
+            }
+        }
+        
+    }
+    
 }

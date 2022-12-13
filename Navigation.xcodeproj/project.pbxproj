@@ -42,6 +42,7 @@
 		4549A94B294798E5005558C3 /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549A94A294798E5005558C3 /* InfoViewModel.swift */; };
 		4549A94D29479941005558C3 /* InfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549A94C29479941005558C3 /* InfoCoordinator.swift */; };
 		4549A94F2947E35B005558C3 /* InfoNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549A94E2947E35B005558C3 /* InfoNetworkManager.swift */; };
+		4549A9512949411B005558C3 /* InfoTableVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549A9502949411A005558C3 /* InfoTableVIewCell.swift */; };
 		4556F8B1293987EE00EF2AA9 /* BrutForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4556F8B0293987EE00EF2AA9 /* BrutForce.swift */; };
 		455C903A2907381000A608C8 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455C90392907381000A608C8 /* LoginModel.swift */; };
 		455CCAC528AD81D7005590E2 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455CCAC428AD81D7005590E2 /* PhotosCollectionViewCell.swift */; };
@@ -147,6 +148,7 @@
 		4549A94A294798E5005558C3 /* InfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewModel.swift; sourceTree = "<group>"; };
 		4549A94C29479941005558C3 /* InfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoordinator.swift; sourceTree = "<group>"; };
 		4549A94E2947E35B005558C3 /* InfoNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoNetworkManager.swift; sourceTree = "<group>"; };
+		4549A9502949411A005558C3 /* InfoTableVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableVIewCell.swift; sourceTree = "<group>"; };
 		4556F8B0293987EE00EF2AA9 /* BrutForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrutForce.swift; sourceTree = "<group>"; };
 		455C90392907381000A608C8 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		455CCAC428AD81D7005590E2 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				451FE9532886F4690024A924 /* InfoViewController.swift */,
+				4549A9502949411A005558C3 /* InfoTableVIewCell.swift */,
 				4549A94A294798E5005558C3 /* InfoViewModel.swift */,
 				4549A94E2947E35B005558C3 /* InfoNetworkManager.swift */,
 			);
@@ -553,6 +556,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				457AA3A728AC3CB600BFB8A9 /* Photos.swift in Sources */,
+				4549A9512949411B005558C3 /* InfoTableVIewCell.swift in Sources */,
 				453F94052944C1BE00A374DA /* VideoView.swift in Sources */,
 				455C903A2907381000A608C8 /* LoginModel.swift in Sources */,
 				451351FE291F00F3007C7BC5 /* LoginCoordinator.swift in Sources */,
