@@ -13,10 +13,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+//
+//        InfoNetworkManager.request { textTitle in
+//            print(textTitle)
+//        }
+//        NetworkManager.request(for: .two)
+//        var namesArray = [String]()
+//        
         
-        
-        NetworkManager.request(for: .two)
-        
+           
         
         return true
     }
