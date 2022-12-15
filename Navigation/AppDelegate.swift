@@ -18,7 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print(textTitle)
 //        }
 //        NetworkManager.request(for: .two)
+//        var namesArray = [String]()
+//        
         
+           
         
         return true
     }

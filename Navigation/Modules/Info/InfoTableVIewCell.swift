@@ -8,18 +8,16 @@
 import UIKit
 
 class InfoTableVIewCell: UITableViewCell {
-    struct Model {
-        var name: String
-        
-    }
+   
     
     private lazy var nameLabel: UILabel = {
        let nameLabel = UILabel()
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.textColor = .black
         return nameLabel
     }()
 
-     init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupView()
     }
@@ -27,8 +25,9 @@ class InfoTableVIewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(viewModel: Model) {
-        self.nameLabel.text = viewModel.name
+    func setupInfo(text: String) {
+        self.nameLabel.text = text
+       
     }
     
     private func setupView() {
