@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Firebase
 
 class LoginViewController: UIViewController {
     
@@ -77,6 +77,15 @@ class LoginViewController: UIViewController {
         return brutForceButton
     }()
     
+    private lazy var signUpButton: UIButton = {
+        let signUpButton = UIButton()
+        signUpButton.translatesAutoresizingMaskIntoConstraints = false
+        signUpButton.setTitle("SignUp", for: .normal)
+        signUpButton.setTitleColor(.systemBlue, for: .normal)
+        signUpButton.addTarget(self, action: #selector(didPushSignUpButton), for: .touchUpInside)
+        return signUpButton
+    }()
+    
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .medium)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
@@ -129,6 +138,7 @@ class LoginViewController: UIViewController {
         self.view.backgroundColor = .white
         self.scrollView.addSubview(self.stackView)
         self.scrollView.addSubview(self.brutForceButton)
+        self.scrollView.addSubview(self.signUpButton)
         self.stackView.addArrangedSubview(loginTextField)
         self.stackView.addArrangedSubview(activityIndicator)
         self.stackView.addArrangedSubview(passwordTextField)
@@ -161,7 +171,12 @@ class LoginViewController: UIViewController {
             self.brutForceButton.topAnchor.constraint(equalTo: self.button.bottomAnchor, constant: 16),
             self.brutForceButton.leftAnchor.constraint(equalTo: self.button.leftAnchor),
             self.brutForceButton.rightAnchor.constraint(equalTo: self.button.rightAnchor),
-            self.brutForceButton.heightAnchor.constraint(equalToConstant: 50),
+            self.brutForceButton.heightAnchor.constraint(equalToConstant: 20),
+            
+            self.signUpButton.topAnchor.constraint(equalTo: self.brutForceButton.bottomAnchor, constant: 10),
+            self.signUpButton.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
+            self.signUpButton.widthAnchor.constraint(equalToConstant: 100),
+            self.signUpButton.heightAnchor.constraint(equalToConstant: 20),
             
             self.activityIndicator.centerYAnchor.constraint(equalTo: self.passwordTextField.centerYAnchor),
             self.activityIndicator.centerXAnchor.constraint(equalTo: self.passwordTextField.centerXAnchor),
@@ -174,6 +189,9 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        Auth.auth().addStateDidChangeListener { auth, user in
+          // ...
+        }
         navigationController?.setNavigationBarHidden(true, animated: false)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.didShowKeyboard(_:)),
@@ -190,34 +208,43 @@ class LoginViewController: UIViewController {
         self.loginTextField.becomeFirstResponder()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+//        Auth.auth().removeStateDidChangeListener(handle!)
+    }
+    
     @objc func didTapButton()  {
 #if DEBUG
         let service = TestUserService()
-        
+
 #else
         let service = CurrentUserService()
 #endif
+        guard let email = loginTextField.text, !email.isEmpty,
+              let password = passwordTextField.text, !email.isEmpty else {
+            tapAlert()
+            return
+        }
         
         do {
-            let client = try service.input(login: loginTextField.text!)
+            let client = try service.input(login: email)
             let loginInspector = LoginInspector()
             self.loginDelegate? = loginInspector
-            guard passwordTextField.text != " " else { preconditionFailure("Пароль недействительный") }
-            let input = try loginInspector.check(log: loginTextField.text!, pass: passwordTextField.text!)
-            if input == true {
-                viewModel.viewInputDidChange(viewInput: .tapLoginButton( client, viewModel))
-            } 
+            CheckerService().checkCredentials(email: email, password: password) {  result in
+                if result == true {
+                    self.viewModel.viewInputDidChange(viewInput: .tapLoginButton( client, self.viewModel))
+                } else {
+                    self.tapAlert()
+                }
+                
+            }
+//            let input = try loginInspector.check(log: loginTextField.text!, pass: passwordTextField.text!)
+//            if input == true {
+//                viewModel.viewInputDidChange(viewInput: .tapLoginButton( client, viewModel))
+            
         } catch {
             tapAlert()
         }
-        
     }
-    
-    
-    
-    
-        
-    
     
     func tapAlert()  {
         let alertControler = UIAlertController(title: "Неверный логин или пароль", message: "Введите логин и пароль еще раз", preferredStyle: .alert)
@@ -275,12 +302,13 @@ class LoginViewController: UIViewController {
             self.activityIndicator.isHidden = true
         }
     }
-//    private func handleErrors(_ error: LoginErrors) {
-//        switch error {
-//        case .noLogin:
-//            self.tapAlert()
-//        }
-//
-//    }
+  
+    
+    
+    
+    @objc private func didPushSignUpButton() {
+        let vcReg = RegisterViewController(viewModel: viewModel)
+        self.navigationController?.pushViewController(vcReg, animated: true)
+    }
 }
 
