@@ -9,6 +9,8 @@ import UIKit
 
 protocol LoginViewControllerDelegate {
     func check(log: String, pass: String) throws -> Bool
+    func checkCredentials(email: String, password: String ) -> Bool
+    func signUp(email: String, password: String, userName: String) -> Bool 
 }
 
 public final class LoginModel {
@@ -37,8 +39,27 @@ struct LoginInspector: LoginViewControllerDelegate {
         return true
         
     }
+    
+    func checkCredentials(email: String, password: String) -> Bool {
+        
+        CheckerService().checkCredentials(email: email, password: password) { result in
+            if result == false {
+                return
+            }
+            
+        }
+        return true
+    }
+    
+    func signUp(email: String, password: String, userName: String) -> Bool {
+        CheckerService().signUp(email: email, password: password, userName: userName) { result in
+            if result == false {
+                return
+            }
+        }
+        return true
+    }
 }
-
 class User {
     let login: String
     let name: String

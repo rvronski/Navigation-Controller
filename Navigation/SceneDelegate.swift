@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Firebase
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -22,6 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.appcoordinator = appCoordinator
         
         self.window?.rootViewController = appCoordinator.start()
+        
         self.window?.makeKeyAndVisible()
         
     }
@@ -30,6 +31,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
 
     func sceneDidDisconnect(_ scene: UIScene) {
+        
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print(error)
+        }
         
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
