@@ -8,11 +8,11 @@
 import Foundation
 import Firebase
 import FirebaseDatabase
-import UIKit
 
+//func checkCredentials(email: String, password: String,  completion: @escaping ((Bool) -> Void)) throws
 protocol CheckerServiceProtocol {
     func checkCredentials(email: String, password: String,  completion: @escaping ((Bool) -> Void))
-    func signUp(email: String, password: String, userName: String, completion: @escaping ((Int) -> Void))
+    func signUp(email: String, password: String, userName: String, completion: @escaping ((Bool) -> Void))
 }
 
 class CheckerService: CheckerServiceProtocol {
@@ -28,13 +28,14 @@ class CheckerService: CheckerServiceProtocol {
         }
     }
     
-    func signUp(email: String, password: String, userName: String, completion: @escaping ((Int) -> Void)) {
+    func signUp(email: String, password: String, userName: String, completion: @escaping ((Bool) -> Void)) {
         FirebaseAuth.Auth.auth().createUser(withEmail: email,
                                             password: password,
                                             completion: { result, error  in
             guard error == nil else {
                 print("Account creation failed")
-                completion(1)
+                print(error!)
+                completion(false)
                 return
             }
             
@@ -44,15 +45,16 @@ class CheckerService: CheckerServiceProtocol {
                 ref.child(result.user.uid).updateChildValues(["userName": userName,
                                                               "email": email,
                                                               "admin": false])
-                
-                Auth.auth().currentUser?.sendEmailVerification { error in
-                    if let error = error {
-                        print("error sendEmailVerification", error)
-                        completion(2)
-                    } else {
-                        
-                    }
-                }
+                completion(true)
+//
+//                Auth.auth().currentUser?.sendEmailVerification { error in
+//                    if let error = error {
+//                        print("error sendEmailVerification", error)
+//                        completion(2)
+//                    } else {
+//                        completion(3)
+//                    }
+//                }
             }
         })
     }

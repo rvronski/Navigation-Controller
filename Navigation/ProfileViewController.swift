@@ -10,11 +10,11 @@ import StorageService
 
 class ProfileViewController: UIViewController {
     private let viewModel: LoginViewModelProtocol
-    private let user: User
+//    private let user: User
     
-    init(viewModel: LoginViewModelProtocol, user: User) {
+    init(viewModel: LoginViewModelProtocol) {
         self.viewModel = viewModel
-        self.user = user
+//        self.user = user
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -31,9 +31,9 @@ class ProfileViewController: UIViewController {
     
      lazy var profileView: ProfileView = {
         let profileView = ProfileView()
-        profileView.avatarImage.image = user.avatar
-        profileView.nameLabel.text = user.name
-        profileView.disctiptionLabel.text = user.status
+        profileView.avatarImage.image = UIImage(named: "IMG_1824")
+        profileView.nameLabel.text = "Роман Вронский"
+        profileView.disctiptionLabel.text = " "
         profileView.delegate = self
 
         return profileView

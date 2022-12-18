@@ -9,7 +9,7 @@ import UIKit
 
 class CurrentUserService: UserService {
     
-    var user = User(login: "rvronski", name: "Роман Вронский", status: " ", avatar: UIImage(named: "IMG_1824")!)
+    var user = User(login: "rvronski@gmail.com", name: "Роман Вронский", status: " ", avatar: UIImage(named: "IMG_1824")!)
     
     func input(login: String) throws -> User {
         

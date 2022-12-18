@@ -22,6 +22,7 @@ class RegisterViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -41,17 +42,18 @@ class RegisterViewController: UIViewController {
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Регистрация"
+        label.font = UIFont(name: "sysemFont", size: 22)
         return label
     }()
     
     private lazy var userNameTextField: UITextField = {
         let userNameTextField = UITextField()
         userNameTextField.translatesAutoresizingMaskIntoConstraints = false
-        userNameTextField.placeholder = "Введите email"
+        userNameTextField.placeholder = "Ваше имя"
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
         userNameTextField.leftView = paddingView
         userNameTextField.leftViewMode = .always
-        userNameTextField.becomeFirstResponder()
+//        userNameTextField.becomeFirstResponder()
         return userNameTextField
     }()
     
@@ -69,9 +71,11 @@ class RegisterViewController: UIViewController {
         let passwordTextField = UITextField()
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.placeholder = "Придумайте пароль"
+        passwordTextField.isSecureTextEntry = true
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
         passwordTextField.leftView = paddingView
         passwordTextField.leftViewMode = .always
+        //        passwordTextField.textInputMode =
         //        passwordTextField.becomeFirstResponder()
         return passwordTextField
     }()
@@ -85,6 +89,15 @@ class RegisterViewController: UIViewController {
         button.addTarget(self, action: #selector(didTapRegButton), for: .touchUpInside)
         button.clipsToBounds = true
         return button
+    }()
+    
+    private lazy var OutButton: UIButton = {
+        let OutButton = UIButton()
+        OutButton.translatesAutoresizingMaskIntoConstraints = false
+        OutButton.setTitle("Выход", for: .normal)
+        OutButton.setTitleColor(.systemBlue, for: .normal)
+        OutButton.addTarget(self, action: #selector(didPushOutButton), for: .touchUpInside)
+        return OutButton
     }()
     
     override func viewDidLoad() {
@@ -107,6 +120,11 @@ class RegisterViewController: UIViewController {
                                                object: nil)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.userNameTextField.becomeFirstResponder()
+    }
+    
     private func setupView() {
         self.view.backgroundColor = .white.withAlphaComponent(0.5)
         self.view.addSubview(self.scrollView)
@@ -116,6 +134,7 @@ class RegisterViewController: UIViewController {
         self.registerView.addSubview(self.passwordTextField)
         self.registerView.addSubview(self.registrationButton)
         self.registerView.addSubview(self.userNameTextField)
+        self.registerView.addSubview(self.OutButton)
         
         NSLayoutConstraint.activate([
             
@@ -125,8 +144,6 @@ class RegisterViewController: UIViewController {
             self.scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             
             self.registerView.centerYAnchor.constraint(equalTo: self.scrollView.centerYAnchor),
-            //            self.registerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            self.registerView.heightAnchor.constraint(equalToConstant: 350),
             self.registerView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20),
             self.registerView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20),
             
@@ -156,10 +173,18 @@ class RegisterViewController: UIViewController {
             self.registrationButton.leftAnchor.constraint(equalTo: self.registerView.leftAnchor, constant: 20),
             self.registrationButton.rightAnchor.constraint(equalTo: self.registerView.rightAnchor, constant: -20),
             
-            
-            
+            self.OutButton.heightAnchor.constraint(equalToConstant: 20),
+            self.OutButton.topAnchor.constraint(equalTo: self.registrationButton.bottomAnchor, constant: 16),
+            self.OutButton.leftAnchor.constraint(equalTo: self.registerView.leftAnchor, constant: 20),
+            self.OutButton.rightAnchor.constraint(equalTo: self.registerView.rightAnchor, constant: -20),
+            self.OutButton.bottomAnchor.constraint(equalTo: self.registerView.bottomAnchor, constant: -20),
         ])
         
+    }
+    
+    
+    @objc private func didPushOutButton() {
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @objc private func didShowKeyboard(_ notification: Notification) {
@@ -198,44 +223,36 @@ class RegisterViewController: UIViewController {
         
         present(alertController, animated: true, completion: nil)
     }
-    
-    func alertDismiss(title: String, message: String?, completionHandler: @escaping () -> Void) {
-        
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let ok = UIAlertAction(title: "ОК", style: .default) { _ in
-            completionHandler()
-        }
-        alertController.addAction(ok)
-        
-        present(alertController, animated: true, completion: nil)
-    }
+    private func alertDismiss(title: String, message: String?, completionHandler: @escaping () -> Void) {
+         
+         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+         let ok = UIAlertAction(title: "ОК", style: .default) { _ in
+             completionHandler()
+         }
+         alertController.addAction(ok)
+         
+         present(alertController, animated: true, completion: nil)
+     }
     
     @objc private func didTapRegButton() {
-        guard let email = emailTextField.text, !email.isEmpty,
-              let password = passwordTextField.text, !password.isEmpty,
-              let userName = userNameTextField.text, !userName.isEmpty else {
+        guard let email = self.emailTextField.text, !email.isEmpty,
+              let password = self.passwordTextField.text, !password.isEmpty,
+              let userName = self.userNameTextField.text, !userName.isEmpty else {
             self.alertOk(title: "Ошибка!", message: "Заполните все поля регистрации")
             return
         }
-        CheckerService().signUp(email: email, password: password, userName: userName) { result in
-            if result == 1 {
-                self.alertOk(title: "Не удалось создать аккаунт",
+        guard password.count >= 6 else { self.alertDismiss(title: "Пароль не надежный!", message: "Пароль должен содержать 6 символов или более") {
+            self.passwordTextField.becomeFirstResponder()
+        }
+            return
+        }
+        CheckerService().signUp(email: email, password: password, userName: userName) { [weak self] result in
+            if result == false {
+                self?.alertOk(title: "Не удалось создать аккаунт",
                              message: "Пользователь с таким email уже существует.")
-            } else if result == 2 {
-                self.alertOk(title: "Ошибка",
-                             message: "При отправке письма на почту произошла ошибка.")
-            } else if result == 3 {
+            } else if result == true {
                 print("Create account dooooone!")
-                self.alertDismiss(title:  "Успешная регистрация",
-                                  message: "Подтвердите email по ссылке в письме, отправленном на вашу почту.") {
-                    do {
-                        try Auth.auth().signOut()
-                        print("User SignOut")
-                        self.navigationController?.popToRootViewController(animated: true)
-                    } catch {
-                        print(error)
-                    }
-                }
+                self?.alertOk(title: "Добро пожаловать, \(userName)!", message: "Успешная регистрация")
             }
         }
     }
