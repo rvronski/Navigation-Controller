@@ -61,6 +61,7 @@ class RegisterViewController: UIViewController {
         let emailTextField = UITextField()
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         emailTextField.placeholder = "Введите email"
+        emailTextField.keyboardType = .emailAddress
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
         emailTextField.leftView = paddingView
         emailTextField.leftViewMode = .always

@@ -43,6 +43,7 @@ class LoginViewController: UIViewController {
         passwordTextField.layer.borderWidth = 0.5
         passwordTextField.textColor = .black
 //        passwordTextField.text = "qwerty"
+        passwordTextField.keyboardType = .emailAddress
         passwordTextField.font = UIFont(name: "sysemFont", size: 16)
         passwordTextField.autocapitalizationType = .none
         passwordTextField.isSecureTextEntry = true
