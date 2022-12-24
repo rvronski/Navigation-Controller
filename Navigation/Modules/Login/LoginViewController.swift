@@ -43,7 +43,6 @@ class LoginViewController: UIViewController {
         passwordTextField.layer.borderWidth = 0.5
         passwordTextField.textColor = .black
 //        passwordTextField.text = "qwerty"
-        passwordTextField.keyboardType = .emailAddress
         passwordTextField.font = UIFont(name: "sysemFont", size: 16)
         passwordTextField.autocapitalizationType = .none
         passwordTextField.isSecureTextEntry = true
@@ -63,6 +62,7 @@ class LoginViewController: UIViewController {
         loginTextfield.textColor = .black
         loginTextfield.autocapitalizationType = .none
         loginTextfield.textAlignment = .justified
+        loginTextfield.keyboardType = .emailAddress
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
         loginTextfield.leftView = paddingView
         loginTextfield.leftViewMode = .always

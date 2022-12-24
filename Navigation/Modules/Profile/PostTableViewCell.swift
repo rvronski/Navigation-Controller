@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import StorageService
+
 class PostTableViewCell: UITableViewCell {
     
     private lazy var postImageView: UIImageView = {
