@@ -15,6 +15,7 @@
 		451351FC291F0052007C7BC5 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451351FB291F0052007C7BC5 /* TabBarController.swift */; };
 		451351FE291F00F3007C7BC5 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451351FD291F00F3007C7BC5 /* LoginCoordinator.swift */; };
 		45135200291F11EC007C7BC5 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451351FF291F11EC007C7BC5 /* FeedCoordinator.swift */; };
+		4516B4022963A13700FB0358 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4516B4012963A13700FB0358 /* RealmSwift */; };
 		451FE93A2880BA240024A924 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451FE9392880BA240024A924 /* AppDelegate.swift */; };
 		451FE93C2880BA240024A924 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451FE93B2880BA240024A924 /* SceneDelegate.swift */; };
 		451FE9432880BA270024A924 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 451FE9422880BA270024A924 /* Assets.xcassets */; };
@@ -61,6 +62,7 @@
 		458F2656291188B60098C7EF /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F2655291188B60098C7EF /* ImageManager.swift */; };
 		459B5DD0290D5FA80046160C /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B5DCF290D5FA70046160C /* LoginFactory.swift */; };
 		45A1FDEF291BD1C4000F3320 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A1FDEE291BD1C4000F3320 /* CustomButton.swift */; };
+		45A32CF5296348F400CCA2B0 /* RealmLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A32CF4296348F300CCA2B0 /* RealmLoginModel.swift */; };
 		45AEBC6C294BC21900C4A7A2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45AEBC6B294BC21800C4A7A2 /* GoogleService-Info.plist */; };
 		45AEBC71294BCF0000C4A7A2 /* CheckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AEBC70294BCF0000C4A7A2 /* CheckService.swift */; };
 		45AEBC73294CA82B00C4A7A2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AEBC72294CA82B00C4A7A2 /* RegisterViewController.swift */; };
@@ -138,6 +140,7 @@
 		4594EEFA28A0695C000B408C /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		459B5DCF290D5FA70046160C /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		45A1FDEE291BD1C4000F3320 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		45A32CF4296348F300CCA2B0 /* RealmLoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmLoginModel.swift; path = ../../../../CustomTabBar/CustomTabBar/RealmLoginModel.swift; sourceTree = "<group>"; };
 		45AEBC6B294BC21800C4A7A2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		45AEBC70294BCF0000C4A7A2 /* CheckService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckService.swift; sourceTree = "<group>"; };
 		45AEBC72294CA82B00C4A7A2 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -153,6 +156,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4516B4022963A13700FB0358 /* RealmSwift in Frameworks */,
 				45378B1E294D2C41004900B6 /* FirebaseDatabase in Frameworks */,
 				4545DFC1291DBB9700F2BA9B /* iOSIntPackage in Frameworks */,
 				45378B1C294D2C41004900B6 /* FirebaseAuth in Frameworks */,
@@ -313,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				45832A3E289971D7005C65C2 /* LoginViewController.swift */,
+				45A32CF4296348F300CCA2B0 /* RealmLoginModel.swift */,
 				45AEBC70294BCF0000C4A7A2 /* CheckService.swift */,
 				45AEBC72294CA82B00C4A7A2 /* RegisterViewController.swift */,
 				4556F8B0293987EE00EF2AA9 /* BrutForce.swift */,
@@ -354,6 +359,7 @@
 				4545DFC0291DBB9700F2BA9B /* iOSIntPackage */,
 				45378B1B294D2C41004900B6 /* FirebaseAuth */,
 				45378B1D294D2C41004900B6 /* FirebaseDatabase */,
+				4516B4012963A13700FB0358 /* RealmSwift */,
 			);
 			productName = Navigation;
 			productReference = 451FE9362880BA240024A924 /* Navigation.app */;
@@ -386,6 +392,7 @@
 			packageReferences = (
 				4545DFBF291DBB9700F2BA9B /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
 				45378B1A294D2C41004900B6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				4516B4002963A13700FB0358 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 451FE9372880BA240024A924 /* Products */;
 			projectDirPath = "";
@@ -458,6 +465,7 @@
 				45EF991E292661E400AC3AF6 /* ProfileView.swift in Sources */,
 				453F93EA2944863C00A374DA /* MusicViewController.swift in Sources */,
 				458F2656291188B60098C7EF /* ImageManager.swift in Sources */,
+				45A32CF5296348F400CCA2B0 /* RealmLoginModel.swift in Sources */,
 				459B5DD0290D5FA80046160C /* LoginFactory.swift in Sources */,
 				451FE93C2880BA240024A924 /* SceneDelegate.swift in Sources */,
 				4549A94B294798E5005558C3 /* InfoViewModel.swift in Sources */,
@@ -679,6 +687,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4516B4002963A13700FB0358 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.33.0;
+			};
+		};
 		45378B1A294D2C41004900B6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -698,6 +714,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4516B4012963A13700FB0358 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4516B4002963A13700FB0358 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		45378B1B294D2C41004900B6 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 45378B1A294D2C41004900B6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

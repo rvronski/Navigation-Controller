@@ -7,8 +7,11 @@
 
 import UIKit
 import Firebase
+import RealmSwift
 
 class LoginViewController: UIViewController {
+    
+    let realm = try! Realm()
     
     enum LoginErrors: Error {
         case noLogin
@@ -133,7 +136,7 @@ class LoginViewController: UIViewController {
         self.setupView()
         self.setupGesture()
         self.tabBarController?.tabBar.isHidden = true
-        
+        print(realm.configuration.fileURL!)
     }
     private func setupView() {
         self.view.addSubview(scrollView)
