@@ -25,6 +25,10 @@ class AppFactory {
             let viewModel = MusicViewModel()
             let view = UINavigationController(rootViewController: MusicViewController())
             return Module(moduleType: moduleType, viewModel: viewModel, view: view)
+        case .info:
+            let viewModel = InfoViewModel()
+            let view = UINavigationController(rootViewController: InfoViewController())
+            return Module(moduleType: moduleType, viewModel: viewModel, view: view)
         }
     }
 }

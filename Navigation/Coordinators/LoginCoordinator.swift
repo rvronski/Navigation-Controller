@@ -10,7 +10,7 @@ import UIKit
 class LoginCoordinator: ModuleCoordinatable {
     
     enum PushVC {
-        case ProfileVC(User, ViewModelProtocol)
+        case ProfileVC(ViewModelProtocol)
         case PhotoVC
         
     }
@@ -38,10 +38,10 @@ class LoginCoordinator: ModuleCoordinatable {
         return viewController
     }
 
-    func pushProfileViewController(viewModel: ViewModelProtocol, user: User?, pushTo: PushVC) {
+    func pushProfileViewController(viewModel: ViewModelProtocol, pushTo: PushVC) {
         switch pushTo{
-        case let .ProfileVC(user, viewModel):
-            let viewControllerToPush = ProfileViewController(viewModel: viewModel as! LoginViewModelProtocol, user: user)
+        case let .ProfileVC(viewModel):
+            let viewControllerToPush = ProfileViewController(viewModel: viewModel as! LoginViewModelProtocol)
             
             (module!.view as? UINavigationController)?.pushViewController(viewControllerToPush, animated: true)
             print("🍑")

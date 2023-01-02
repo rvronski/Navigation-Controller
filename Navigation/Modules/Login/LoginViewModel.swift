@@ -13,7 +13,7 @@ protocol LoginViewModelProtocol: ViewModelProtocol {
 
 class LoginViewModel: LoginViewModelProtocol {
     enum ViewInput {
-        case tapLoginButton(User,ViewModelProtocol)
+        case tapLoginButton(ViewModelProtocol)
         case tapPhotoCell
     }
     
@@ -23,12 +23,12 @@ class LoginViewModel: LoginViewModelProtocol {
     
     func viewInputDidChange(viewInput: ViewInput) {
         switch viewInput {
-        case let .tapLoginButton(user, self):
-            coordinator?.pushProfileViewController(viewModel: self, user: user, pushTo: .ProfileVC(user, self))
+        case .tapLoginButton:
+            coordinator?.pushProfileViewController(viewModel: self, pushTo: .ProfileVC(self))
             print(coordinator ?? "nil")
             
         case .tapPhotoCell:
-            coordinator?.pushProfileViewController(viewModel: self, user: nil, pushTo: .PhotoVC)
+            coordinator?.pushProfileViewController(viewModel: self, pushTo: .PhotoVC)
             print(coordinator ?? "nil")
         }
     }
