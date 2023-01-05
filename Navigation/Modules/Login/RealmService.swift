@@ -25,7 +25,6 @@ class RealmService {
                 } else {
                     try! realm.write({
                         realm.add(user)
-                        
                     })
                 }
             }

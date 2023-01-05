@@ -62,9 +62,9 @@
 		458F2656291188B60098C7EF /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F2655291188B60098C7EF /* ImageManager.swift */; };
 		459B5DD0290D5FA80046160C /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B5DCF290D5FA70046160C /* LoginFactory.swift */; };
 		45A1FDEF291BD1C4000F3320 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A1FDEE291BD1C4000F3320 /* CustomButton.swift */; };
-		45A32CF5296348F400CCA2B0 /* RealmLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A32CF4296348F300CCA2B0 /* RealmLoginModel.swift */; };
 		45A685A029647EA70052FCD5 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 45A6859F29647EA70052FCD5 /* Realm */; };
 		45A685A229647EA70052FCD5 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 45A685A129647EA70052FCD5 /* RealmSwift */; };
+		45A685BC2967856D0052FCD5 /* RealmLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A685BB2967856D0052FCD5 /* RealmLoginModel.swift */; };
 		45AEBC6C294BC21900C4A7A2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45AEBC6B294BC21800C4A7A2 /* GoogleService-Info.plist */; };
 		45AEBC71294BCF0000C4A7A2 /* CheckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AEBC70294BCF0000C4A7A2 /* CheckService.swift */; };
 		45AEBC73294CA82B00C4A7A2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AEBC72294CA82B00C4A7A2 /* RegisterViewController.swift */; };
@@ -143,7 +143,7 @@
 		4594EEFA28A0695C000B408C /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		459B5DCF290D5FA70046160C /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		45A1FDEE291BD1C4000F3320 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
-		45A32CF4296348F300CCA2B0 /* RealmLoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmLoginModel.swift; path = ../../../../CustomTabBar/CustomTabBar/RealmLoginModel.swift; sourceTree = "<group>"; };
+		45A685BB2967856D0052FCD5 /* RealmLoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmLoginModel.swift; sourceTree = "<group>"; };
 		45AEBC6B294BC21800C4A7A2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		45AEBC70294BCF0000C4A7A2 /* CheckService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckService.swift; sourceTree = "<group>"; };
 		45AEBC72294CA82B00C4A7A2 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -321,8 +321,8 @@
 			isa = PBXGroup;
 			children = (
 				45832A3E289971D7005C65C2 /* LoginViewController.swift */,
-				45A32CF4296348F300CCA2B0 /* RealmLoginModel.swift */,
 				4516B4032963AB4D00FB0358 /* RealmService.swift */,
+				45A685BB2967856D0052FCD5 /* RealmLoginModel.swift */,
 				45AEBC70294BCF0000C4A7A2 /* CheckService.swift */,
 				45AEBC72294CA82B00C4A7A2 /* RegisterViewController.swift */,
 				4556F8B0293987EE00EF2AA9 /* BrutForce.swift */,
@@ -472,7 +472,7 @@
 				45EF991E292661E400AC3AF6 /* ProfileView.swift in Sources */,
 				453F93EA2944863C00A374DA /* MusicViewController.swift in Sources */,
 				458F2656291188B60098C7EF /* ImageManager.swift in Sources */,
-				45A32CF5296348F400CCA2B0 /* RealmLoginModel.swift in Sources */,
+				45A685BC2967856D0052FCD5 /* RealmLoginModel.swift in Sources */,
 				459B5DD0290D5FA80046160C /* LoginFactory.swift in Sources */,
 				451FE93C2880BA240024A924 /* SceneDelegate.swift in Sources */,
 				4549A94B294798E5005558C3 /* InfoViewModel.swift in Sources */,
