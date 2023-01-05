@@ -15,7 +15,7 @@
 		451351FC291F0052007C7BC5 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451351FB291F0052007C7BC5 /* TabBarController.swift */; };
 		451351FE291F00F3007C7BC5 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451351FD291F00F3007C7BC5 /* LoginCoordinator.swift */; };
 		45135200291F11EC007C7BC5 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451351FF291F11EC007C7BC5 /* FeedCoordinator.swift */; };
-		4516B4022963A13700FB0358 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4516B4012963A13700FB0358 /* RealmSwift */; };
+		4516B4042963AB4D00FB0358 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4516B4032963AB4D00FB0358 /* RealmService.swift */; };
 		451FE93A2880BA240024A924 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451FE9392880BA240024A924 /* AppDelegate.swift */; };
 		451FE93C2880BA240024A924 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451FE93B2880BA240024A924 /* SceneDelegate.swift */; };
 		451FE9432880BA270024A924 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 451FE9422880BA270024A924 /* Assets.xcassets */; };
@@ -63,6 +63,8 @@
 		459B5DD0290D5FA80046160C /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B5DCF290D5FA70046160C /* LoginFactory.swift */; };
 		45A1FDEF291BD1C4000F3320 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A1FDEE291BD1C4000F3320 /* CustomButton.swift */; };
 		45A32CF5296348F400CCA2B0 /* RealmLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A32CF4296348F300CCA2B0 /* RealmLoginModel.swift */; };
+		45A685A029647EA70052FCD5 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 45A6859F29647EA70052FCD5 /* Realm */; };
+		45A685A229647EA70052FCD5 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 45A685A129647EA70052FCD5 /* RealmSwift */; };
 		45AEBC6C294BC21900C4A7A2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45AEBC6B294BC21800C4A7A2 /* GoogleService-Info.plist */; };
 		45AEBC71294BCF0000C4A7A2 /* CheckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AEBC70294BCF0000C4A7A2 /* CheckService.swift */; };
 		45AEBC73294CA82B00C4A7A2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AEBC72294CA82B00C4A7A2 /* RegisterViewController.swift */; };
@@ -95,6 +97,7 @@
 		451351FB291F0052007C7BC5 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		451351FD291F00F3007C7BC5 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		451351FF291F11EC007C7BC5 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
+		4516B4032963AB4D00FB0358 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		451FE9362880BA240024A924 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		451FE9392880BA240024A924 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		451FE93B2880BA240024A924 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -156,9 +159,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4516B4022963A13700FB0358 /* RealmSwift in Frameworks */,
 				45378B1E294D2C41004900B6 /* FirebaseDatabase in Frameworks */,
 				4545DFC1291DBB9700F2BA9B /* iOSIntPackage in Frameworks */,
+				45A685A029647EA70052FCD5 /* Realm in Frameworks */,
+				45A685A229647EA70052FCD5 /* RealmSwift in Frameworks */,
 				45378B1C294D2C41004900B6 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,6 +322,7 @@
 			children = (
 				45832A3E289971D7005C65C2 /* LoginViewController.swift */,
 				45A32CF4296348F300CCA2B0 /* RealmLoginModel.swift */,
+				4516B4032963AB4D00FB0358 /* RealmService.swift */,
 				45AEBC70294BCF0000C4A7A2 /* CheckService.swift */,
 				45AEBC72294CA82B00C4A7A2 /* RegisterViewController.swift */,
 				4556F8B0293987EE00EF2AA9 /* BrutForce.swift */,
@@ -359,7 +364,8 @@
 				4545DFC0291DBB9700F2BA9B /* iOSIntPackage */,
 				45378B1B294D2C41004900B6 /* FirebaseAuth */,
 				45378B1D294D2C41004900B6 /* FirebaseDatabase */,
-				4516B4012963A13700FB0358 /* RealmSwift */,
+				45A6859F29647EA70052FCD5 /* Realm */,
+				45A685A129647EA70052FCD5 /* RealmSwift */,
 			);
 			productName = Navigation;
 			productReference = 451FE9362880BA240024A924 /* Navigation.app */;
@@ -392,7 +398,7 @@
 			packageReferences = (
 				4545DFBF291DBB9700F2BA9B /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
 				45378B1A294D2C41004900B6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				4516B4002963A13700FB0358 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				45A6859E29647EA70052FCD5 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 451FE9372880BA240024A924 /* Products */;
 			projectDirPath = "";
@@ -438,6 +444,7 @@
 				4549A9512949411B005558C3 /* InfoTableVIewCell.swift in Sources */,
 				453F94052944C1BE00A374DA /* VideoView.swift in Sources */,
 				455C903A2907381000A608C8 /* LoginModel.swift in Sources */,
+				4516B4042963AB4D00FB0358 /* RealmService.swift in Sources */,
 				451351FE291F00F3007C7BC5 /* LoginCoordinator.swift in Sources */,
 				455CCAC528AD81D7005590E2 /* PhotosCollectionViewCell.swift in Sources */,
 				45135200291F11EC007C7BC5 /* FeedCoordinator.swift in Sources */,
@@ -687,14 +694,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		4516B4002963A13700FB0358 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.33.0;
-			};
-		};
 		45378B1A294D2C41004900B6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -711,14 +710,17 @@
 				minimumVersion = 3.2.3;
 			};
 		};
+		45A6859E29647EA70052FCD5 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.27.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		4516B4012963A13700FB0358 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4516B4002963A13700FB0358 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
-		};
 		45378B1B294D2C41004900B6 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 45378B1A294D2C41004900B6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -733,6 +735,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4545DFBF291DBB9700F2BA9B /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
 			productName = iOSIntPackage;
+		};
+		45A6859F29647EA70052FCD5 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45A6859E29647EA70052FCD5 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		45A685A129647EA70052FCD5 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45A6859E29647EA70052FCD5 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

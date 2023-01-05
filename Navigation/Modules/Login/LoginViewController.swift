@@ -133,10 +133,12 @@ class LoginViewController: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let realm = try! Realm()
         self.setupView()
         self.setupGesture()
         self.tabBarController?.tabBar.isHidden = true
-        print(realm.configuration.fileURL!)
+        
+      
     }
     private func setupView() {
         self.view.addSubview(scrollView)
@@ -237,6 +239,7 @@ class LoginViewController: UIViewController {
 //#else
 //        let service = CurrentUserService()
 //#endif
+        let service = RealmService()
         guard let email = loginTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !email.isEmpty else {
             tapAlert()
@@ -247,8 +250,10 @@ class LoginViewController: UIViewController {
 //            let client = try service.input(login: email)
             let loginInspector = LoginInspector()
             self.loginDelegate? = loginInspector
-            let result = loginDelegate?.checkCredentials(email: email, password: password)
+           let result = loginInspector.checkCredentials(email: email, password: password)
                 if result == true {
+                    service.saveUser(password: password, login: email)
+                    
                     self.viewModel.viewInputDidChange(viewInput: .tapLoginButton(self.viewModel))
                 } else {
                     self.alertDismiss(title: "Пользователь не найден", message: "Зарегестрируйтесь в приложении") {

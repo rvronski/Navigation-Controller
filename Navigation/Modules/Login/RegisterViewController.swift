@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import RealmSwift
 
 class RegisterViewController: UIViewController {
     
@@ -236,6 +237,7 @@ class RegisterViewController: UIViewController {
      }
     
     @objc private func didTapRegButton() {
+        let service = RealmService()
         guard let email = self.emailTextField.text, !email.isEmpty,
               let password = self.passwordTextField.text, !password.isEmpty,
               let userName = self.userNameTextField.text, !userName.isEmpty else {
@@ -247,6 +249,7 @@ class RegisterViewController: UIViewController {
         }
             return
         }
+        service.saveUser(password: password, login: email)
         CheckerService().signUp(email: email, password: password, userName: userName) { [weak self] result in
             if result == false {
                 self?.alertOk(title: "Не удалось создать аккаунт",
