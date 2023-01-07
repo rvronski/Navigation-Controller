@@ -16,8 +16,10 @@ struct Module {
         case feed
         case music
         case info
+        case like
         
     }
+    
     let moduleType: ModuleType
     let viewModel: ViewModelProtocol
     let view: UIViewController
@@ -35,6 +37,8 @@ extension Module.ModuleType {
             return UITabBarItem(title: "Мультимедиа", image: UIImage(systemName: "tv.music.note"), tag: 1)
         case .info:
             return UITabBarItem(title: "Инфо", image: UIImage(systemName: "info"), tag: 3)
+        case .like:
+            return UITabBarItem(title: "Нравится", image: UIImage(systemName: "heart.fill"), tag: 4)
         }
     }
 }

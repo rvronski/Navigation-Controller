@@ -70,6 +70,10 @@
 		45AEBC73294CA82B00C4A7A2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AEBC72294CA82B00C4A7A2 /* RegisterViewController.swift */; };
 		45C7A21F29059031008C08CD /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C7A21E29059031008C08CD /* TestUserService.swift */; };
 		45CF81C628A2597A006F6960 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CF81C528A2597A006F6960 /* PostTableViewCell.swift */; };
+		45D4D3BB2969DCE70006512C /* LikeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D4D3BA2969DCE70006512C /* LikeCoordinator.swift */; };
+		45D4D3BD2969DD5E0006512C /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D4D3BC2969DD5E0006512C /* LikeViewController.swift */; };
+		45D4D3BF2969DDCF0006512C /* LikeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D4D3BE2969DDCF0006512C /* LikeViewModel.swift */; };
+		45D4D3C12969E3E30006512C /* LikeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D4D3C02969E3E30006512C /* LikeTableViewCell.swift */; };
 		45EF991C2922F3C700AC3AF6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF991B2922F3C700AC3AF6 /* LoginViewModel.swift */; };
 		45EF991E292661E400AC3AF6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF991D292661E400AC3AF6 /* ProfileView.swift */; };
 		45EF992229270A0C00AC3AF6 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF992129270A0C00AC3AF6 /* ProfileCoordinator.swift */; };
@@ -149,6 +153,10 @@
 		45AEBC72294CA82B00C4A7A2 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		45C7A21E29059031008C08CD /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
 		45CF81C528A2597A006F6960 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		45D4D3BA2969DCE70006512C /* LikeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCoordinator.swift; sourceTree = "<group>"; };
+		45D4D3BC2969DD5E0006512C /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
+		45D4D3BE2969DDCF0006512C /* LikeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewModel.swift; sourceTree = "<group>"; };
+		45D4D3C02969E3E30006512C /* LikeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeTableViewCell.swift; sourceTree = "<group>"; };
 		45EF991B2922F3C700AC3AF6 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		45EF991D292661E400AC3AF6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		45EF992129270A0C00AC3AF6 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
@@ -174,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				451351EF291EEC0A007C7BC5 /* AppCoordinator.swift */,
+				45D4D3BA2969DCE70006512C /* LikeCoordinator.swift */,
 				451351FF291F11EC007C7BC5 /* FeedCoordinator.swift */,
 				453F93F7294489F900A374DA /* MusicCoordinator.swift */,
 				4549A94C29479941005558C3 /* InfoCoordinator.swift */,
@@ -248,6 +257,7 @@
 				451FE94F2880CB8A0024A924 /* PostViewController.swift */,
 				451351FA291F0023007C7BC5 /* TabBar */,
 				451351F6291EF1DE007C7BC5 /* Modules */,
+				45D4D3B92969DBB80006512C /* Like */,
 				453F93E82944860E00A374DA /* Music */,
 				451351F3291EEDF4007C7BC5 /* Factory */,
 				451351EE291EEBD9007C7BC5 /* Coordinators */,
@@ -315,6 +325,16 @@
 				4549A94E2947E35B005558C3 /* InfoNetworkManager.swift */,
 			);
 			path = Info;
+			sourceTree = "<group>";
+		};
+		45D4D3B92969DBB80006512C /* Like */ = {
+			isa = PBXGroup;
+			children = (
+				45D4D3BC2969DD5E0006512C /* LikeViewController.swift */,
+				45D4D3C02969E3E30006512C /* LikeTableViewCell.swift */,
+				45D4D3BE2969DDCF0006512C /* LikeViewModel.swift */,
+			);
+			path = Like;
 			sourceTree = "<group>";
 		};
 		45EF991A2922F38F00AC3AF6 /* Login */ = {
@@ -446,6 +466,7 @@
 				455C903A2907381000A608C8 /* LoginModel.swift in Sources */,
 				4516B4042963AB4D00FB0358 /* RealmService.swift in Sources */,
 				451351FE291F00F3007C7BC5 /* LoginCoordinator.swift in Sources */,
+				45D4D3BB2969DCE70006512C /* LikeCoordinator.swift in Sources */,
 				455CCAC528AD81D7005590E2 /* PhotosCollectionViewCell.swift in Sources */,
 				45135200291F11EC007C7BC5 /* FeedCoordinator.swift in Sources */,
 				451351FC291F0052007C7BC5 /* TabBarController.swift in Sources */,
@@ -461,10 +482,12 @@
 				451351F0291EEC0A007C7BC5 /* AppCoordinator.swift in Sources */,
 				451FE94E2880C5620024A924 /* FeedViewController.swift in Sources */,
 				45A1FDEF291BD1C4000F3320 /* CustomButton.swift in Sources */,
+				45D4D3BD2969DD5E0006512C /* LikeViewController.swift in Sources */,
 				450CF2402944F50A0022BA08 /* VideoTableViewCell.swift in Sources */,
 				458CD4012901FFB10059BA45 /* CurrentUserService.swift in Sources */,
 				45378B19294D29BF004900B6 /* Post.swift in Sources */,
 				45AEBC71294BCF0000C4A7A2 /* CheckService.swift in Sources */,
+				45D4D3BF2969DDCF0006512C /* LikeViewModel.swift in Sources */,
 				4549A948294631F4005558C3 /* NetworkManager.swift in Sources */,
 				4556F8B1293987EE00EF2AA9 /* BrutForce.swift in Sources */,
 				457AA3A528A9855900BFB8A9 /* PhotosTableViewCell.swift in Sources */,
@@ -484,6 +507,7 @@
 				45C7A21F29059031008C08CD /* TestUserService.swift in Sources */,
 				455CCAC728B570B7005590E2 /* AvatarView.swift in Sources */,
 				451FE9502880CB8A0024A924 /* PostViewController.swift in Sources */,
+				45D4D3C12969E3E30006512C /* LikeTableViewCell.swift in Sources */,
 				4588176E291BFA56000693BA /* FeedModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
