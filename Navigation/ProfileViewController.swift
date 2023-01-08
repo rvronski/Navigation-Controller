@@ -176,6 +176,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 //            self.navigationController?.pushViewController(vc1, animated: true)
             self.viewModel.viewInputDidChange(viewInput: .tapPhotoCell)
         }
+          if indexPath.row > 0 && indexPath.section > 0 {
+            tableView.allowsSelection = false
+        }
     }
     
 }

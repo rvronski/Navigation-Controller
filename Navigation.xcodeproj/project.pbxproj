@@ -74,6 +74,8 @@
 		45D4D3BD2969DD5E0006512C /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D4D3BC2969DD5E0006512C /* LikeViewController.swift */; };
 		45D4D3BF2969DDCF0006512C /* LikeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D4D3BE2969DDCF0006512C /* LikeViewModel.swift */; };
 		45D4D3C12969E3E30006512C /* LikeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D4D3C02969E3E30006512C /* LikeTableViewCell.swift */; };
+		45D4D3C4296A22B40006512C /* LikeData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 45D4D3C2296A22B40006512C /* LikeData.xcdatamodeld */; };
+		45D4D3C6296A262E0006512C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D4D3C5296A262E0006512C /* CoreDataManager.swift */; };
 		45EF991C2922F3C700AC3AF6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF991B2922F3C700AC3AF6 /* LoginViewModel.swift */; };
 		45EF991E292661E400AC3AF6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF991D292661E400AC3AF6 /* ProfileView.swift */; };
 		45EF992229270A0C00AC3AF6 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF992129270A0C00AC3AF6 /* ProfileCoordinator.swift */; };
@@ -157,6 +159,8 @@
 		45D4D3BC2969DD5E0006512C /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
 		45D4D3BE2969DDCF0006512C /* LikeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewModel.swift; sourceTree = "<group>"; };
 		45D4D3C02969E3E30006512C /* LikeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeTableViewCell.swift; sourceTree = "<group>"; };
+		45D4D3C3296A22B40006512C /* LikeData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LikeData.xcdatamodel; sourceTree = "<group>"; };
+		45D4D3C5296A262E0006512C /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		45EF991B2922F3C700AC3AF6 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		45EF991D292661E400AC3AF6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		45EF992129270A0C00AC3AF6 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
@@ -333,6 +337,8 @@
 				45D4D3BC2969DD5E0006512C /* LikeViewController.swift */,
 				45D4D3C02969E3E30006512C /* LikeTableViewCell.swift */,
 				45D4D3BE2969DDCF0006512C /* LikeViewModel.swift */,
+				45D4D3C2296A22B40006512C /* LikeData.xcdatamodeld */,
+				45D4D3C5296A262E0006512C /* CoreDataManager.swift */,
 			);
 			path = Like;
 			sourceTree = "<group>";
@@ -505,7 +511,9 @@
 				451FE9542886F4690024A924 /* InfoViewController.swift in Sources */,
 				451351F5291EEE19007C7BC5 /* AppFactory.swift in Sources */,
 				45C7A21F29059031008C08CD /* TestUserService.swift in Sources */,
+				45D4D3C6296A262E0006512C /* CoreDataManager.swift in Sources */,
 				455CCAC728B570B7005590E2 /* AvatarView.swift in Sources */,
+				45D4D3C4296A22B40006512C /* LikeData.xcdatamodeld in Sources */,
 				451FE9502880CB8A0024A924 /* PostViewController.swift in Sources */,
 				45D4D3C12969E3E30006512C /* LikeTableViewCell.swift in Sources */,
 				4588176E291BFA56000693BA /* FeedModel.swift in Sources */,
@@ -771,6 +779,19 @@
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		45D4D3C2296A22B40006512C /* LikeData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				45D4D3C3296A22B40006512C /* LikeData.xcdatamodel */,
+			);
+			currentVersion = 45D4D3C3296A22B40006512C /* LikeData.xcdatamodel */;
+			path = LikeData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 451FE92E2880BA240024A924 /* Project object */;
 }

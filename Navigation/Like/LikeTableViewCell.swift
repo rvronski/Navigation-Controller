@@ -66,12 +66,12 @@ class LikeTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(with viewModel: Post) {
-        self.postImageView.image = UIImage(named: viewModel.image )
-        self.authorLabel.text = viewModel.author
-        self.descriptionLabel.text = viewModel.description
-        self.viewsLabel.text =  "Views: \(viewModel.views)"
-        self.likesLabel.text = "Likes: \(viewModel.likes)"
+    func setup(with viewModel: Like) {
+        self.postImageView.image = UIImage(data: viewModel.postImage!)
+        self.authorLabel.text = viewModel.authorText
+        self.descriptionLabel.text = viewModel.descriptionText
+        self.viewsLabel.text = viewModel.views
+        self.likesLabel.text = viewModel.likes
     }
     
     func setupView() {
