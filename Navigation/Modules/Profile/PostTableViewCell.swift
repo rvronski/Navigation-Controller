@@ -6,11 +6,14 @@
 //
 
 import UIKit
+protocol CellDelegate: AnyObject {
+    func reload()
+}
 
 class PostTableViewCell: UITableViewCell {
-    
+   weak var delegat: CellDelegate?
     let coreManager = CoreDataManager.shared
-    var isLike = UserDefaults.standard.bool(forKey: "isLike")
+    var counter = 0
     private lazy var postImageView: UIImageView = {
         let postImageView = UIImageView()
         postImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +41,7 @@ class PostTableViewCell: UITableViewCell {
         authorLabel.textColor = .black
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
         authorLabel.numberOfLines = 2
-
+        
         return authorLabel
     }()
     
@@ -51,12 +54,12 @@ class PostTableViewCell: UITableViewCell {
         return likesLabel
     }()
     
-    private lazy var likeButton: UIButton = {
+     lazy var likeButton: UIButton = {
         let likeImage = UIButton(type: .custom)
         likeImage.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         likeImage.translatesAutoresizingMaskIntoConstraints = false
         likeImage.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        likeImage.tintColor = isLike ? .systemRed : .lightGray
+//        likeImage.tintColor = .lightGray
         likeImage.addTarget(self, action: #selector(tapLike), for: .touchUpInside)
         return likeImage
     }()
@@ -74,6 +77,7 @@ class PostTableViewCell: UITableViewCell {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupView()
         self.imageViewGesture()
+            
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -84,7 +88,11 @@ class PostTableViewCell: UITableViewCell {
         self.authorLabel.text = viewModel.author
         self.descriptionLabel.text = viewModel.description
         self.viewsLabel.text =  "Views: \(viewModel.views)"
-        self.likesLabel.text = "Likes: \(viewModel.likes)"
+        self.likesLabel.text = "Likes: \(counter)"
+       
+       
+        
+        
     }
     
     func setupView() {
@@ -94,16 +102,25 @@ class PostTableViewCell: UITableViewCell {
         self.contentView.addSubview(likesLabel)
         self.contentView.addSubview(viewsLabel)
         self.contentView.addSubview(likeButton)
-        
+//        guard coreManager.likes.count > 0 else { return likeButton.tintColor = .lightGray }
+//        coreManager.likes.forEach { like in
+//            if like.descriptionText ==  self.descriptionLabel.text {
+//                if like.authorText == self.authorLabel.text {
+//                    likeButton.tintColor = .systemRed
+//                } else {
+//                    likeButton.tintColor = .lightGray
+//                }
+//            }
+//        }
         NSLayoutConstraint.activate([
             self.authorLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16),
             self.authorLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
             
             self.postImageView.topAnchor.constraint(equalTo: self.authorLabel.bottomAnchor, constant: 16),
-
+            
             self.postImageView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor),
             self.postImageView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor),
-
+            
             self.postImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
             self.postImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             self.postImageView.heightAnchor.constraint(equalTo: self.postImageView.widthAnchor),
@@ -140,27 +157,31 @@ class PostTableViewCell: UITableViewCell {
     
     
     @objc private func tapLike() {
+        guard let postImage = self.postImageView.image?.pngData() else { return }
         let likes =  self.likesLabel.text ?? ""
         let authorText = self.authorLabel.text ?? ""
-        let postImage = self.postImageView.image?.pngData()
         let views = self.viewsLabel.text ?? ""
         let descriptionText = self.descriptionLabel.text ?? ""
-        let like = Like(context: coreManager.persistentContainer.viewContext)
         
-        if isLike == true {
-            coreManager.deleteLike(like: like)
-            UserDefaults.standard.set(false, forKey: "isLike")
-        } else if isLike == false {
-            coreManager.createLike(authorText: authorText, descriptionText: descriptionText, likes: likes, postImage: postImage!, views: views)
-            UserDefaults.standard.set(true, forKey: "isLike")
+        if likeButton.tintColor == .lightGray {
+            coreManager.createLike(authorText: authorText, descriptionText: descriptionText, likes: likes, postImage: postImage, views: views)
+//            likeButton.tintColor = .systemRed
+            counter += 1
+            self.delegat?.reload()
+        } else {
+            coreManager.likes.forEach { like in
+                if like.descriptionText == descriptionText {
+                    if like.authorText == authorText {
+                        if like.postImage == postImage {
+                            coreManager.deleteLike(like: like)
+                            likeButton.tintColor = .lightGray
+                            counter -= 1
+                            self.delegat?.reload()
+                        }
+                        
+                    }
+                }
+            }
         }
-        
-        
-        
-        
-//       
-        likeButton.tintColor = isLike ? .systemRed : .lightGray
-        
     }
 }
-

@@ -10,7 +10,7 @@ import UIKit
 class LikeViewController: UIViewController {
     
     let coreManager = CoreDataManager.shared
-    
+    var post = [Like]()
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -32,6 +32,7 @@ class LikeViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        post = coreManager.likes
         self.tableView.reloadData()
         
     }
@@ -58,12 +59,15 @@ class LikeViewController: UIViewController {
 extension LikeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return coreManager.likes.count
+        return post.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: "LikeCell", for: indexPath) as! LikeTableViewCell
-        cell.setup(with: coreManager.likes[indexPath.row])
+      
+            cell.setup(with: self.post[indexPath.row])
+        
+        
         
         return cell
     }
@@ -75,7 +79,11 @@ extension LikeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            
+            let likeForDel = post[indexPath.row]
+            post.remove(at: indexPath.row)
+            coreManager.deleteLike(like: likeForDel)
+            UserDefaults.standard.set(false, forKey: "isLike")
+            tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
                //
         }

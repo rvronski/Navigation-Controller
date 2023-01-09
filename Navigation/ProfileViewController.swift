@@ -9,6 +9,8 @@ import UIKit
 
 
 class ProfileViewController: UIViewController {
+    let coreManager = CoreDataManager.shared
+    
     private let viewModel: LoginViewModelProtocol
 //    private let user: User
     
@@ -51,10 +53,10 @@ class ProfileViewController: UIViewController {
         self.setupView()
         self.setupGesture()
         self.tabBarController?.tabBar.isHidden = false
-        
+        UserDefaults.standard.set(false, forKey: "isLike")
         profileView.configureTableView(dataSource: self, delegate: self)
         profileView.delegate = self
-        
+        profileView.cellDelegate(self)
     }
     
     private var posts:[Post] = [post1, post2, post3]
@@ -65,6 +67,8 @@ class ProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
         self.avatarView.isHidden = true
+        coreManager.reloadLikes()
+        profileView.reload()
     }
     
     private func setupView(){
@@ -188,7 +192,12 @@ extension ProfileViewController: AvatarViewDelegate, ProfileViewDelegate {
         self.changeLayoutAvatar()
     }
 }
-
+ 
+extension ProfileViewController: CellDelegate {
+    func reload() {
+        profileView.reload()
+    }
+}
     
 
 
