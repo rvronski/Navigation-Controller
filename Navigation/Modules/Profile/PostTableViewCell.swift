@@ -13,9 +13,7 @@ protocol CellDelegate: AnyObject {
 class PostTableViewCell: UITableViewCell {
     weak var delegat: CellDelegate?
     let coreManager = CoreDataManager.shared
-    var count = 0
-        
-   
+
     private lazy var postImageView: UIImageView = {
         let postImageView = UIImageView()
         postImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -90,24 +88,14 @@ class PostTableViewCell: UITableViewCell {
         self.authorLabel.text = viewModel.author
         self.descriptionLabel.text = viewModel.description
         self.viewsLabel.text =  "Views: \(viewModel.views)"
-        self.likesLabel.text = "Likes: \(count)"
         self.likeButton.tag = index
-        
-        for i in coreManager.likes{
-            var temp = 0
-            if i.tag == "\(likeButton.tag)" {
-                var like1 = i
-                for v in coreManager.likes {
-                    if v == like1 {
-                            temp += 1
-                            count = temp
-                        }
-                    }
-            } else {
-                count = 0
+        var count = [Like]()
+        for like in coreManager.likes {
+            if like.tag == "\(index)" {
+                count.append(like)
             }
-                
-            }
+        }
+        self.likesLabel.text = "Likes: \(count.count)"
         }
 
     
@@ -118,16 +106,7 @@ class PostTableViewCell: UITableViewCell {
         self.contentView.addSubview(likesLabel)
         self.contentView.addSubview(viewsLabel)
         self.contentView.addSubview(likeButton)
-        //        guard coreManager.likes.count > 0 else { return likeButton.tintColor = .lightGray }
-        //        coreManager.likes.forEach { like in
-        //            if like.descriptionText ==  self.descriptionLabel.text {
-        //                if like.authorText == self.authorLabel.text {
-        //                    likeButton.tintColor = .systemRed
-        //                } else {
-        //                    likeButton.tintColor = .lightGray
-        //                }
-        //            }
-        //        }
+        
         NSLayoutConstraint.activate([
             self.authorLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16),
             self.authorLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
@@ -174,17 +153,12 @@ class PostTableViewCell: UITableViewCell {
     
     @objc private func tapLike() {
         guard let postImage = self.postImageView.image?.pngData() else { return }
-        let likes =  self.likesLabel.text ?? ""
         let authorText = self.authorLabel.text ?? ""
         let views = self.viewsLabel.text ?? ""
         let descriptionText = self.descriptionLabel.text ?? ""
         let tag = "\(self.likeButton.tag)"
-        
-        print("isLike\(likeButton.tag) delete")
-        
         if UserDefaults.standard.bool(forKey: "isLike\(likeButton.tag)") == false {
-            coreManager.createLike(authorText: authorText, descriptionText: descriptionText, likes: likes, postImage: postImage, views: views, tag: tag)
-            posts[self.likeButton.tag].likes += 1
+            coreManager.createLike(authorText: authorText, descriptionText: descriptionText, postImage: postImage, views: views, tag: tag)
             UserDefaults.standard.set(true, forKey: "isLike" + tag)
             self.delegat?.reload()
         } else {
@@ -192,9 +166,6 @@ class PostTableViewCell: UITableViewCell {
                 if like.tag == tag {
                     coreManager.deleteLike(like: like)
                     UserDefaults.standard.set(false, forKey: "isLike" + tag)
-                    if posts[self.likeButton.tag].likes > 0 {
-                        posts[self.likeButton.tag].likes -= 1
-                    }
                     self.delegat?.reload()
                 }
             }

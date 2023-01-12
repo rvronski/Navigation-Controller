@@ -9,6 +9,8 @@ import UIKit
 
 class LikeTableViewCell: UITableViewCell {
     
+    let coreManager = CoreDataManager.shared
+    
     private lazy var postImageView: UIImageView = {
         let postImageView = UIImageView()
         postImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -66,26 +68,26 @@ class LikeTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    func loadData(data: Like) async -> UIImage {
-//         let data = data.postImage
-//        guard data != nil else { return UIImage(systemName: "heart")!}
-//        let image = UIImage(data: data!)
-//        return image!
-//    }
+   
     func setup(with viewModel: Like)  {
         DispatchQueue.main.async {
             if let data = viewModel.postImage, let image = UIImage(data: data) {
                 self.postImageView.image = image
             }
         }
-                self.authorLabel.text = viewModel.authorText
-                self.descriptionLabel.text = viewModel.descriptionText
-                self.viewsLabel.text = viewModel.views
-                self.likesLabel.text = viewModel.likes
-      
-        
-       
+        self.authorLabel.text = viewModel.authorText
+        self.descriptionLabel.text = viewModel.descriptionText
+        self.viewsLabel.text = viewModel.views
+        var count = [Like]()
+        guard let tag = viewModel.tag else { return }
+        for like in coreManager.likes {
+            if like.tag == tag {
+                count.append(like)
+            }
+        }
+        self.likesLabel.text = "Likes: \(count.count)"
     }
+
     
     func setupView() {
         self.contentView.addSubview(postImageView)

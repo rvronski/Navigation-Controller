@@ -154,7 +154,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 
             }
             
-           
+            
             if UserDefaults.standard.bool(forKey: "isLike\(indexPath.row)") == true {
                 cell1.likeButton.tintColor = .systemRed
             } else if UserDefaults.standard.bool(forKey: "isLike\(indexPath.row)") == false {

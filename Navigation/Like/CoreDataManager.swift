@@ -46,9 +46,8 @@ class CoreDataManager {
         self.likes = likes
     }
     
-    func createLike(authorText: String, descriptionText: String, likes: String, postImage: Data, views: String, tag: String ) {
+    func createLike(authorText: String, descriptionText: String, postImage: Data, views: String, tag: String ) {
         let like = Like(context: persistentContainer.viewContext)
-        like.likes = likes
         like.authorText = authorText
         like.postImage = postImage
         like.views = views

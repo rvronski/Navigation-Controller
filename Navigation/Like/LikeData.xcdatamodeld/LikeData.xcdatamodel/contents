@@ -3,7 +3,6 @@
     <entity name="Like" representedClassName="Like" syncable="YES" codeGenerationType="class">
         <attribute name="authorText" optional="YES" attributeType="String"/>
         <attribute name="descriptionText" optional="YES" attributeType="String"/>
-        <attribute name="likes" optional="YES" attributeType="String"/>
         <attribute name="postImage" optional="YES" attributeType="Binary"/>
         <attribute name="tag" attributeType="String"/>
         <attribute name="views" optional="YES" attributeType="String"/>
