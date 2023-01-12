@@ -210,9 +210,7 @@ final class ProfileView: UIView {
         NSLayoutConstraint.activate(hederViewConsraints + tableViewConstaints + avatarViewConstraints + stackViewConstraints + statusTextFieldConstraints + buttonConstraints )
     }
     
-    func cellDelegate(_ view: UIViewController) {
-        PostTableViewCell().delegat = view as? any CellDelegate
-    }
+    
     
     func reload() {
         self.tableView.reloadData()

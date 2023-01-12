@@ -15,11 +15,7 @@ class CoreDataManager {
         reloadLikes()
     }
     
-    var likes: [Like] = {
-        didSet {
-            save()
-        }
-    }
+    var likes: [Like] = [] 
     
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "LikeData")
@@ -50,13 +46,14 @@ class CoreDataManager {
         self.likes = likes
     }
     
-    func createLike(authorText: String, descriptionText: String, likes: String, postImage: Data, views: String ) {
+    func createLike(authorText: String, descriptionText: String, likes: String, postImage: Data, views: String, tag: String ) {
         let like = Like(context: persistentContainer.viewContext)
         like.likes = likes
         like.authorText = authorText
         like.postImage = postImage
         like.views = views
         like.descriptionText = descriptionText
+        like.tag = tag
         
         saveContext()
         reloadLikes()
@@ -68,7 +65,7 @@ class CoreDataManager {
         reloadLikes()
     }
     
-    func save() {
-        UserDefaults.standard.set(true, forKey: "isLike")
-    }
+//    func save() {
+//        UserDefaults.standard.set(true, forKey: "isLike")
+//    }
 }

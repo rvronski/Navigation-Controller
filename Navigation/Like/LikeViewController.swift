@@ -81,8 +81,11 @@ extension LikeViewController: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             let likeForDel = post[indexPath.row]
             post.remove(at: indexPath.row)
+            guard let tag = likeForDel.tag else { return }
+            print("isLike" + (likeForDel.tag ?? ""))
             coreManager.deleteLike(like: likeForDel)
-            UserDefaults.standard.set(false, forKey: "isLike")
+            posts[Int(tag)!].likes -= 1
+            UserDefaults.standard.set(false, forKey: "isLike" + tag)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
                //

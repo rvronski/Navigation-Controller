@@ -53,13 +53,13 @@ class ProfileViewController: UIViewController {
         self.setupView()
         self.setupGesture()
         self.tabBarController?.tabBar.isHidden = false
-        UserDefaults.standard.set(false, forKey: "isLike")
+//        UserDefaults.standard.set(false, forKey: "isLike")
         profileView.configureTableView(dataSource: self, delegate: self)
         profileView.delegate = self
-        profileView.cellDelegate(self)
+        
     }
     
-    private var posts:[Post] = [post1, post2, post3]
+   
     
     
     
@@ -148,7 +148,22 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             guard let cell1 = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostTableViewCell else {  let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
                 return cell
             }
-            cell1.setup(with: posts[indexPath.row])
+            cell1.setup(with: posts[indexPath.row], index: indexPath.row)
+            if coreManager.likes.count == 0  {
+                UserDefaults.standard.set(false, forKey: "isLike\(indexPath.row)")
+                
+            }
+            
+           
+            if UserDefaults.standard.bool(forKey: "isLike\(indexPath.row)") == true {
+                cell1.likeButton.tintColor = .systemRed
+            } else if UserDefaults.standard.bool(forKey: "isLike\(indexPath.row)") == false {
+                cell1.likeButton.tintColor = .lightGray
+               
+            }
+            
+            
+            cell1.delegat = self
             return cell1
         }
         
@@ -165,14 +180,14 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         if section == 0 {
             return 1
         } else if section > 0 {
-            return self.posts.count
+            return posts.count
         }
         return 0
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        tableView.reloadData()
+//    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 0 && indexPath.section == 0 {
@@ -180,9 +195,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 //            self.navigationController?.pushViewController(vc1, animated: true)
             self.viewModel.viewInputDidChange(viewInput: .tapPhotoCell)
         }
-          if indexPath.row > 0 && indexPath.section > 0 {
-            tableView.allowsSelection = false
-        }
+         
     }
     
 }
