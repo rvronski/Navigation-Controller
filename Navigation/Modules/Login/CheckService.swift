@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 
-//func checkCredentials(email: String, password: String,  completion: @escaping ((Bool) -> Void)) throws
+
 protocol CheckerServiceProtocol {
     func checkCredentials(email: String, password: String,  completion: @escaping ((Bool) -> Void))
     func signUp(email: String, password: String, userName: String, completion: @escaping ((Bool) -> Void))

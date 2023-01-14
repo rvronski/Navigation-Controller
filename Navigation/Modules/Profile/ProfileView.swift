@@ -210,6 +210,12 @@ final class ProfileView: UIView {
         NSLayoutConstraint.activate(hederViewConsraints + tableViewConstaints + avatarViewConstraints + stackViewConstraints + statusTextFieldConstraints + buttonConstraints )
     }
     
+    
+    
+    func reload() {
+        self.tableView.reloadData()
+    }
+    
     func configureTableView(dataSource: UITableViewDataSource,
                             delegate: UITableViewDelegate) {
         tableView.dataSource = dataSource

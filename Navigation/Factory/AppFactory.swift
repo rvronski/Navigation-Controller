@@ -29,6 +29,10 @@ class AppFactory {
             let viewModel = InfoViewModel()
             let view = UINavigationController(rootViewController: InfoViewController())
             return Module(moduleType: moduleType, viewModel: viewModel, view: view)
+        case .like:
+            let viewModel = LikeViewodel()
+            let view = UINavigationController(rootViewController: LikeViewController())
+            return Module(moduleType: moduleType, viewModel: viewModel, view: view)
         }
     }
 }
