@@ -13,7 +13,7 @@ protocol CellDelegate: AnyObject {
 class PostTableViewCell: UITableViewCell {
     weak var delegat: CellDelegate?
     let coreManager = CoreDataManager.shared
-
+   
     private lazy var postImageView: UIImageView = {
         let postImageView = UIImageView()
         postImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -158,9 +158,16 @@ class PostTableViewCell: UITableViewCell {
         let descriptionText = self.descriptionLabel.text ?? ""
         let tag = "\(self.likeButton.tag)"
         if UserDefaults.standard.bool(forKey: "isLike\(likeButton.tag)") == false {
-            coreManager.createLike(authorText: authorText, descriptionText: descriptionText, postImage: postImage, views: views, tag: tag)
-            UserDefaults.standard.set(true, forKey: "isLike" + tag)
-            self.delegat?.reload()
+            coreManager.createLike(authorText: authorText, descriptionText: descriptionText, postImage: postImage, views: views, tag: tag) {
+                UserDefaults.standard.set(true, forKey: "isLike" + tag)
+                DispatchQueue.main.async {
+                    self.coreManager.reloadLikes()
+                    self.delegat?.reload()
+                   
+                }
+               
+            }
+            
         } else {
             coreManager.likes.forEach { like in
                 if like.tag == tag {
