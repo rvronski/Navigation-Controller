@@ -67,7 +67,6 @@ class ProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
         self.avatarView.isHidden = true
-        coreManager.reloadLikes()
         profileView.reload()
     }
     

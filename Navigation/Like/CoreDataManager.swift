@@ -12,7 +12,7 @@ class CoreDataManager {
     static let shared = CoreDataManager()
     
     init() {
-        reloadLikes()
+   reloadLikes()
     }
     
     var likes: [Like] = [] 
@@ -40,22 +40,40 @@ class CoreDataManager {
         }
     }
     
-    func reloadLikes() {
+    func searchLike(searchName: String?=nil) -> [Like] {
         let request = Like.fetchRequest()
-        let likes = (try? persistentContainer.viewContext.fetch(request)) ?? []
-        self.likes = likes
+        if let searchName, searchName != "" {
+            request.predicate = NSPredicate(format: "authorText contains[c] %@", searchName)
+        }
+        
+        return (try? persistentContainer.viewContext.fetch(request)) ?? []
+       
+    }
+    func reloadLikes(searchName: String?=nil) {
+        let request = Like.fetchRequest()
+        self.likes = (try? persistentContainer.viewContext.fetch(request)) ?? []
+       
     }
     
-    func createLike(authorText: String, descriptionText: String, postImage: Data, views: String, tag: String ) {
-        let like = Like(context: persistentContainer.viewContext)
-        like.authorText = authorText
-        like.postImage = postImage
-        like.views = views
-        like.descriptionText = descriptionText
-        like.tag = tag
-        
-        saveContext()
-        reloadLikes()
+    func createLike(authorText: String, descriptionText: String, postImage: Data, views: String, tag: String, completion: @escaping (() -> Void) ) {
+        persistentContainer.performBackgroundTask { contextBackground in
+            let like = Like(context: contextBackground)
+            like.authorText = authorText
+            like.postImage = postImage
+            like.views = views
+            like.descriptionText = descriptionText
+            like.tag = tag
+            
+            do {
+                try contextBackground.save()
+                self.reloadLikes()
+            } catch {
+                print(error)
+            }
+            completion()
+        }
+       
+       
     }
     
     func deleteLike(like: Like) {

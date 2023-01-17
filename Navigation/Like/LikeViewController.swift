@@ -7,10 +7,19 @@
 
 import UIKit
 
-class LikeViewController: UIViewController {
+class LikeViewController: UIViewController, UISearchResultsUpdating {
+    
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        post = coreManager.searchLike(searchName: searchController.searchBar.text)
+        self.tableView.reloadData()
+    }
+    
     
     let coreManager = CoreDataManager.shared
     var post = [Like]()
+    private lazy var searchController = UISearchController(searchResultsController: nil)
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -28,7 +37,7 @@ class LikeViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupNavigationBar()
-        
+        searchController.searchResultsUpdater = self
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -37,6 +46,7 @@ class LikeViewController: UIViewController {
         
     }
     private func setupNavigationBar() {
+        self.navigationItem.searchController = searchController
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationItem.title = "Понравившиеся публикции"
