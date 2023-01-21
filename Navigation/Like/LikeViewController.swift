@@ -6,14 +6,18 @@
 //
 
 import UIKit
+import CoreData
 
-class LikeViewController: UIViewController, UISearchResultsUpdating {
+class LikeViewController: UIViewController {
     
+    let fetchResultController: NSFetchedResultsController = {
+        let fetchRequest = Like.fetchRequest()
+        fetchRequest.sortDescriptors = []
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataManager.shared.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        return frc
+    }()
     
-    func updateSearchResults(for searchController: UISearchController) {
-        post = coreManager.searchLike(searchName: searchController.searchBar.text)
-        self.tableView.reloadData()
-    }
+   
     
     
     let coreManager = CoreDataManager.shared
@@ -38,6 +42,8 @@ class LikeViewController: UIViewController, UISearchResultsUpdating {
         setupView()
         setupNavigationBar()
         searchController.searchResultsUpdater = self
+        fetchResultController.delegate = self
+        try? self.fetchResultController.performFetch()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -69,13 +75,13 @@ class LikeViewController: UIViewController, UISearchResultsUpdating {
 extension LikeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return post.count
+        return fetchResultController.sections?[section].numberOfObjects ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: "LikeCell", for: indexPath) as! LikeTableViewCell
       
-            cell.setup(with: self.post[indexPath.row])
+        cell.setup(with: self.fetchResultController.object(at: indexPath))
         
         
         
@@ -98,5 +104,20 @@ extension LikeViewController: UITableViewDelegate, UITableViewDataSource {
         } else if editingStyle == .insert {
                //
         }
+    }
+}
+
+extension LikeViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        post = coreManager.searchLike(searchName: searchController.searchBar.text)
+        self.tableView.reloadData()
+    }
+}
+
+extension LikeViewController: NSFetchedResultsControllerDelegate {
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        self.tableView.reloadData()
     }
 }

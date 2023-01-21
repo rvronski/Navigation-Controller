@@ -11,9 +11,7 @@ class CoreDataManager {
     
     static let shared = CoreDataManager()
     
-    init() {
-   reloadLikes()
-    }
+    init() {}
     
     var likes: [Like] = [] 
     
@@ -25,6 +23,7 @@ class CoreDataManager {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        container.viewContext.automaticallyMergesChangesFromParent = true
         return container
     }()
     
@@ -55,7 +54,7 @@ class CoreDataManager {
        
     }
     
-    func createLike(authorText: String, descriptionText: String, postImage: Data, views: String, tag: String, completion: @escaping (() -> Void) ) {
+    func createLike(authorText: String, descriptionText: String, postImage: Data, views: String, tag: String, completion: (() -> Void) ) {
         persistentContainer.performBackgroundTask { contextBackground in
             let like = Like(context: contextBackground)
             like.authorText = authorText
@@ -70,9 +69,9 @@ class CoreDataManager {
             } catch {
                 print(error)
             }
-            completion()
+           
         }
-       
+       completion()
        
     }
     
