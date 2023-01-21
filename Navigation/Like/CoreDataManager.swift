@@ -54,7 +54,7 @@ class CoreDataManager {
        
     }
     
-    func createLike(authorText: String, descriptionText: String, postImage: Data, views: String, tag: String, completion: (() -> Void) ) {
+    func createLike(authorText: String, descriptionText: String, postImage: Data, views: String, tag: String, completion: @escaping (() -> Void) ) {
         persistentContainer.performBackgroundTask { contextBackground in
             let like = Like(context: contextBackground)
             like.authorText = authorText
@@ -69,9 +69,8 @@ class CoreDataManager {
             } catch {
                 print(error)
             }
-           
+            completion()
         }
-       completion()
        
     }
     

@@ -12,7 +12,7 @@ class LikeViewController: UIViewController {
     
     let fetchResultController: NSFetchedResultsController = {
         let fetchRequest = Like.fetchRequest()
-        fetchRequest.sortDescriptors = []
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "tag", ascending: false)]
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataManager.shared.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         return frc
     }()
@@ -95,12 +95,12 @@ extension LikeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let likeForDel = post[indexPath.row]
+            let likeForDel = self.fetchResultController.object(at: indexPath)
             post.remove(at: indexPath.row)
             guard let tag = likeForDel.tag else { return }
             coreManager.deleteLike(like: likeForDel)
             UserDefaults.standard.set(false, forKey: "isLike" + tag)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            
         } else if editingStyle == .insert {
                //
         }
@@ -118,6 +118,17 @@ extension LikeViewController: UISearchResultsUpdating {
 extension LikeViewController: NSFetchedResultsControllerDelegate {
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        self.tableView.reloadData()
+        switch type {
+        case .insert:
+            self.tableView.insertRows(at: [newIndexPath!], with: .automatic)
+        case .delete:
+            self.tableView.deleteRows(at: [indexPath!], with: .automatic)
+        case .move:
+            self.tableView.moveRow(at: indexPath!, to: newIndexPath!)
+        case .update:
+            self.tableView.reloadRows(at: [indexPath!], with: .automatic)
+        @unknown default:
+            self.tableView.reloadData()
+        }
     }
 }

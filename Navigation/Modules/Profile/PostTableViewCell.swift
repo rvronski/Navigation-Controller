@@ -158,10 +158,14 @@ class PostTableViewCell: UITableViewCell {
         let descriptionText = self.descriptionLabel.text ?? ""
         let tag = "\(self.likeButton.tag)"
         if UserDefaults.standard.bool(forKey: "isLike\(likeButton.tag)") == false {
-            coreManager.createLike(authorText: authorText, descriptionText: descriptionText, postImage: postImage, views: views, tag: tag) {
+            coreManager.createLike(authorText: authorText, descriptionText: descriptionText, postImage: postImage, views: views, tag: tag)  {
                 UserDefaults.standard.set(true, forKey: "isLike" + tag)
-                self.coreManager.reloadLikes()
-                self.delegat?.reload()
+                DispatchQueue.main.async {
+                    self.coreManager.reloadLikes()
+                    self.delegat?.reload()
+                   
+                }
+               
             }
         } else {
             coreManager.likes.forEach { like in
