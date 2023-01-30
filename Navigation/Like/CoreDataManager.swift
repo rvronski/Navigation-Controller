@@ -11,9 +11,7 @@ class CoreDataManager {
     
     static let shared = CoreDataManager()
     
-    init() {
-   reloadLikes()
-    }
+    init() {}
     
     var likes: [Like] = [] 
     
@@ -25,6 +23,7 @@ class CoreDataManager {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        container.viewContext.automaticallyMergesChangesFromParent = true
         return container
     }()
     
@@ -72,7 +71,6 @@ class CoreDataManager {
             }
             completion()
         }
-       
        
     }
     

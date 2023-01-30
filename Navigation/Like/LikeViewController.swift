@@ -6,14 +6,18 @@
 //
 
 import UIKit
+import CoreData
 
-class LikeViewController: UIViewController, UISearchResultsUpdating {
+class LikeViewController: UIViewController {
     
+    let fetchResultController: NSFetchedResultsController = {
+        let fetchRequest = Like.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "tag", ascending: false)]
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataManager.shared.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        return frc
+    }()
     
-    func updateSearchResults(for searchController: UISearchController) {
-        post = coreManager.searchLike(searchName: searchController.searchBar.text)
-        self.tableView.reloadData()
-    }
+   
     
     
     let coreManager = CoreDataManager.shared
@@ -38,6 +42,8 @@ class LikeViewController: UIViewController, UISearchResultsUpdating {
         setupView()
         setupNavigationBar()
         searchController.searchResultsUpdater = self
+        fetchResultController.delegate = self
+        try? self.fetchResultController.performFetch()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -69,13 +75,13 @@ class LikeViewController: UIViewController, UISearchResultsUpdating {
 extension LikeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return post.count
+        return fetchResultController.sections?[section].numberOfObjects ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: "LikeCell", for: indexPath) as! LikeTableViewCell
       
-            cell.setup(with: self.post[indexPath.row])
+        cell.setup(with: self.fetchResultController.object(at: indexPath))
         
         
         
@@ -89,14 +95,40 @@ extension LikeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let likeForDel = post[indexPath.row]
+            let likeForDel = self.fetchResultController.object(at: indexPath)
             post.remove(at: indexPath.row)
             guard let tag = likeForDel.tag else { return }
             coreManager.deleteLike(like: likeForDel)
             UserDefaults.standard.set(false, forKey: "isLike" + tag)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            
         } else if editingStyle == .insert {
                //
+        }
+    }
+}
+
+extension LikeViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        post = coreManager.searchLike(searchName: searchController.searchBar.text)
+        self.tableView.reloadData()
+    }
+}
+
+extension LikeViewController: NSFetchedResultsControllerDelegate {
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            self.tableView.insertRows(at: [newIndexPath!], with: .automatic)
+        case .delete:
+            self.tableView.deleteRows(at: [indexPath!], with: .automatic)
+        case .move:
+            self.tableView.moveRow(at: indexPath!, to: newIndexPath!)
+        case .update:
+            self.tableView.reloadRows(at: [indexPath!], with: .automatic)
+        @unknown default:
+            self.tableView.reloadData()
         }
     }
 }
