@@ -8,10 +8,11 @@
 import UIKit
 import Firebase
 import RealmSwift
+import KeychainAccess
+
 
 class LoginViewController: UIViewController {
-    
-    let realm = try! Realm()
+    let pass = try? keyChain.getData("pass")
     
     enum LoginErrors: Error {
         case noLogin
