@@ -15,6 +15,7 @@ class LoginViewModel: LoginViewModelProtocol {
     enum ViewInput {
         case tapLoginButton(ViewModelProtocol)
         case tapPhotoCell
+        case tapMapButton
     }
     
     var coordinator: LoginCoordinator?
@@ -30,6 +31,9 @@ class LoginViewModel: LoginViewModelProtocol {
         case .tapPhotoCell:
             coordinator?.pushProfileViewController(viewModel: self, pushTo: .PhotoVC)
             print(coordinator ?? "nil")
+            
+        case .tapMapButton:
+            coordinator?.pushProfileViewController(viewModel: self, pushTo: .MapVC)
         }
     }
 }

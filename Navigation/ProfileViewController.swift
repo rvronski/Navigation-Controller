@@ -203,6 +203,10 @@ extension ProfileViewController: AvatarViewDelegate, ProfileViewDelegate {
     func changeLayout() {
         self.changeLayoutAvatar()
     }
+    
+    func pushMapView() {
+        self.viewModel.viewInputDidChange(viewInput: .tapMapButton)
+    }
 }
  
 extension ProfileViewController: CellDelegate {
