@@ -30,7 +30,6 @@ class MapViewController: UIViewController {
         return button
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         location()
@@ -91,18 +90,6 @@ class MapViewController: UIViewController {
         self.locations.append(myLocation)
         mapView.addAnnotations(locations)
     }
-    
-   
-    
-//    private func checkLocation() {
-//        if CLLocationManager.locationServicesEnabled() {
-//           location()
-//           checkAuthorization()
-//        } else {
-//            locationAlert()
-//        }
-//    }
-    
     
     private func checkAuthorization() {
         switch locationManager.authorizationStatus {
