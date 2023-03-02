@@ -9,6 +9,7 @@ import UIKit
 
 protocol ProfileViewDelegate: AnyObject {
     func changeLayout()
+    func pushMapView()
 }
 
 final class ProfileView: UIView {
@@ -29,6 +30,13 @@ final class ProfileView: UIView {
         return tableView
     }()
     
+    private lazy var mapButton: UIButton = {
+        let button  = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(tapMapButton), for: .touchUpInside)
+        button.setImage(UIImage(named: "buttonGeo"), for: .normal)
+        return button
+    }()
     
     lazy var avatarImage: UIImageView = {
         let imageView = UIImageView()
@@ -179,6 +187,15 @@ final class ProfileView: UIView {
         return [topConstraint, leadingConstraint, heightConstraint, bottomConstraint, centerConstraint ]
     }
     
+    private func mapButtonConstraints() -> [NSLayoutConstraint] {
+        let topConstraint = self.mapButton.topAnchor.constraint(equalTo: self.headerView.topAnchor,constant: 16)
+        let trailingConstraint = self.mapButton.trailingAnchor.constraint(equalTo: self.headerView.trailingAnchor, constant: -16)
+        let widthConstraint = self.mapButton.widthAnchor.constraint(equalTo: self.headerView.widthAnchor, multiplier: 0.1)
+        let heightConstraint = self.mapButton.heightAnchor.constraint(equalTo: self.mapButton.widthAnchor)
+        
+        return [topConstraint, trailingConstraint, widthConstraint, heightConstraint]
+    }
+    
     private func tableViewConstaints() -> [NSLayoutConstraint] {
         let topConstraint = self.tableView.topAnchor.constraint(equalTo: self.headerView.bottomAnchor)
         let leftConsraint = self.tableView.leftAnchor.constraint(equalTo: self.leftAnchor)
@@ -194,11 +211,12 @@ final class ProfileView: UIView {
         self.headerView.addSubview(self.avatarImage)
         self.headerView.addSubview(self.stackView)
         self.headerView.addSubview(self.setStatusButton)
+        self.headerView.addSubview(self.mapButton)
         self.headerView.addSubview(statusTextField)
         self.stackView.addArrangedSubview(self.nameLabel)
         self.stackView.addArrangedSubview(self.disctiptionLabel)
         
-        
+        let mapButtonConstraints = self.mapButtonConstraints()
         let hederViewConsraints = self.headerViewConstraints()
         let tableViewConstaints = self.tableViewConstaints()
         let avatarViewConstraints = self.avatarViewConstraint()
@@ -207,7 +225,7 @@ final class ProfileView: UIView {
         let buttonConstraints = self.buttonConstraints()
         
         
-        NSLayoutConstraint.activate(hederViewConsraints + tableViewConstaints + avatarViewConstraints + stackViewConstraints + statusTextFieldConstraints + buttonConstraints )
+        NSLayoutConstraint.activate(hederViewConsraints + tableViewConstaints + avatarViewConstraints + stackViewConstraints + statusTextFieldConstraints + buttonConstraints + mapButtonConstraints )
     }
     
     
@@ -245,6 +263,10 @@ final class ProfileView: UIView {
         self.statusTextField.layer.borderWidth = 2
         self.statusTextField.layer.borderColor = UIColor.systemPink.cgColor
         greetingStatus()
+    }
+    
+    @objc private func tapMapButton() {
+        self.delegate?.pushMapView()
     }
     
 //     private func greetingStatus() {

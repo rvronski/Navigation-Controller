@@ -24,6 +24,8 @@ class AvatarView: UIView {
         return avatarImage
     }()
     
+   
+    
     lazy var closeButton: UIButton = {
         let closeButton = UIButton()
         closeButton.isHidden = true
@@ -57,6 +59,9 @@ class AvatarView: UIView {
         self.addSubview(avatarImageView)
         self.backgroundColor = .black
         NSLayoutConstraint.activate([
+            
+           
+            
             self.avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             self.avatarImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             self.avatarImageView.widthAnchor.constraint(lessThanOrEqualTo: self.widthAnchor, multiplier: 0.2415),

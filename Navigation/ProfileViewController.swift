@@ -6,11 +6,11 @@
 //
 
 import UIKit
-
+import CoreLocation
 
 class ProfileViewController: UIViewController {
     let coreManager = CoreDataManager.shared
-    
+    let locationManager = CLLocationManager()
     private let viewModel: LoginViewModelProtocol
 //    private let user: User
     
@@ -202,6 +202,11 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 extension ProfileViewController: AvatarViewDelegate, ProfileViewDelegate {
     func changeLayout() {
         self.changeLayoutAvatar()
+    }
+    
+    func pushMapView() {
+        locationManager.requestWhenInUseAuthorization()
+        self.viewModel.viewInputDidChange(viewInput: .tapMapButton)
     }
 }
  

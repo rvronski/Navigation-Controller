@@ -12,7 +12,7 @@ class LoginCoordinator: ModuleCoordinatable {
     enum PushVC {
         case ProfileVC(ViewModelProtocol)
         case PhotoVC
-        
+        case MapVC
     }
     
     let moduleType: Module.ModuleType
@@ -49,6 +49,9 @@ class LoginCoordinator: ModuleCoordinatable {
             let vc = PhotosViewController()
 //            viewModel.coordinator  = self
             (module!.view as? UINavigationController)?.pushViewController(vc, animated: true)
+        case .MapVC:
+            let vc = MapViewController()
+            (module!.view as! UINavigationController).pushViewController(vc, animated: true)
         }
     }
     
