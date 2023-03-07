@@ -81,7 +81,7 @@ final class ProfileView: UIView {
         let button = UIButton(frame: CGRect(x: 16, y: 166, width: 100, height: 50))
         button.layer.cornerRadius = 10
         button.backgroundColor = .systemBlue
-        button.setTitle("Show status", for: .normal)
+        button.setTitle("showsStatus".localized, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowRadius = 4
@@ -292,7 +292,7 @@ final class ProfileView: UIView {
 //        }
 //    }
     private func greetingStatus() {
-             let greeting = "Напишите статус"
+        let greeting = "status".localized
              var count = 0
              var ind = greeting.startIndex
              let times = greeting.count

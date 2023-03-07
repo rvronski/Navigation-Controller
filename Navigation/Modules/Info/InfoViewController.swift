@@ -46,7 +46,7 @@ class InfoViewController: UIViewController {
         button.layer.borderWidth = 2.0
         button.layer.borderColor = UIColor.white.cgColor
         button.backgroundColor = .link
-        button.setTitle("Text", for: .normal)
+        button.setTitle("text".localized, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(showText), for: .touchUpInside)
         return button
@@ -58,7 +58,7 @@ class InfoViewController: UIViewController {
         button.layer.borderWidth = 2.0
         button.layer.borderColor = UIColor.white.cgColor
         button.backgroundColor = .link
-        button.setTitle("Orbital Period", for: .normal)
+        button.setTitle("orbitalPeriod".localized, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(self.showPlanetOrbital), for: .touchUpInside)
         return button
@@ -135,7 +135,7 @@ class InfoViewController: UIViewController {
     @objc func showPlanetOrbital() {
         InfoNetworkManager.loadOrbitalPeriod { [weak self] orbital_period in
             DispatchQueue.main.async {
-                self?.infoPlanetLabel.text = "Орбитальный период - \(orbital_period ?? "0")"
+                self?.infoPlanetLabel.text = "\("orbitalPeriod".localized) - \(orbital_period ?? "0")"
             }
         }
     }

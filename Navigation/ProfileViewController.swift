@@ -34,7 +34,7 @@ class ProfileViewController: UIViewController {
      lazy var profileView: ProfileView = {
         let profileView = ProfileView()
         profileView.avatarImage.image = UIImage(named: "IMG_1824")
-        profileView.nameLabel.text = "Роман Вронский"
+         profileView.nameLabel.text = "userName".localized
         profileView.disctiptionLabel.text = " "
         profileView.delegate = self
 

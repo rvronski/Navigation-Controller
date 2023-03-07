@@ -1,0 +1,35 @@
+/* 
+  Localizable.strings
+  Navigation
+
+  Created by ROMAN VRONSKY on 08.03.2023.
+  
+*/
+
+"noUserAlert" = "Пользователь не найден";
+"registrationAlert" = "Зарегестрируйтесь в приложении";
+"brutForce" = "Подобрать пароль";
+"error" = "Ошибка";
+"fieldsAlert" = "Заполните все поля";
+"passwordAlert" = "Пароль не надежный!";
+"passwordMessage" = "Пароль должен содержать 6 символов или более";
+"faildAccount" = "Не удалось создать аккаунт";
+"emailExist" = "Пользователь с таким email уже существует";
+"welcomAlert" = "Добро пожаловать";
+"succsess" = "Успешная регистрация";
+"wrongWordAlert" = "Введено неверное слово";
+"enterWord" = "Введите слово ещё раз";
+"password" = "Пароль";
+"gallery" = "Фото галлерея";
+"text" = "Текст";
+"orbitalPeriod" = "Орбитальный период";
+"locationAlert" = "У вас выключена геолокация";
+"on?" = "Хотите включить?";
+"settings" = "Настройки";
+"cancel" = "Отмена";
+"locationNameAlert" = "Введите имя локации";
+"name" = "Имя";
+"enter" = "Ввести";
+"userName" = "Роман Вронский";
+"showsStatus" = "Показать статус";
+"status" = "Напишите статус";

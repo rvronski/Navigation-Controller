@@ -13,7 +13,7 @@ protocol FeedViewModelProtocol: ViewModelProtocol {
 
 class FeedViewModel: FeedViewModelProtocol {
     
-    var secretWord = "Пароль"
+    var secretWord = "password".localized
     
     func check(word: String, completiton: (Result <Bool, Error>) -> Void)  {
         if word == secretWord {
