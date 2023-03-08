@@ -77,7 +77,7 @@ class LoginViewController: UIViewController {
     private lazy var brutForceButton: UIButton = {
         let brutForceButton = UIButton()
         brutForceButton.translatesAutoresizingMaskIntoConstraints = false
-        brutForceButton.setTitle("Подобрать пароль", for: .normal)
+        brutForceButton.setTitle("brutForce".localized, for: .normal)
         brutForceButton.setTitleColor(.systemBlue, for: .normal)
         brutForceButton.addTarget(self, action: #selector(brutForceButtonDidTap), for: .touchUpInside)
         return brutForceButton
@@ -257,7 +257,7 @@ class LoginViewController: UIViewController {
                     
                     self.viewModel.viewInputDidChange(viewInput: .tapLoginButton(self.viewModel))
                 } else {
-                    self.alertDismiss(title: "Пользователь не найден", message: "Зарегестрируйтесь в приложении") {
+                    self.alertDismiss(title: "noUserAlert".localized, message: "registrationAlert".localized) {
                         self.navigationController?.pushViewController(RegisterViewController(viewModel: self.viewModel), animated: false)
                     }
                 }
@@ -294,7 +294,7 @@ class LoginViewController: UIViewController {
     }
     
     func tapAlert()  {
-        let alertControler = UIAlertController(title: "Ошибка", message: "Заполните все поля", preferredStyle: .alert)
+        let alertControler = UIAlertController(title: "error".localized, message: "fieldsAlert".localized, preferredStyle: .alert)
        let firstAction = UIAlertAction(title: "Ok", style: .default){ _ in
            self.loginTextField.becomeFirstResponder()
        }

@@ -120,13 +120,13 @@ class MapViewController: UIViewController {
    
     
     private func locationAlert() {
-        let alert = UIAlertController(title: "У вас выключена геолокация", message: "Хотите включить", preferredStyle: .alert)
-        let settingsAction = UIAlertAction(title: "Настройки", style: .default) { (alert) in
+        let alert = UIAlertController(title: "locationAlert".localized, message: "on?".localized, preferredStyle: .alert)
+        let settingsAction = UIAlertAction(title: "settings".localized, style: .default) { (alert) in
             if let url = URL(string: "App-Prefs:root=LOCATION_SERVICES") {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         }
-        let cancelActtion = UIAlertAction(title: "Отмена", style: .default)
+        let cancelActtion = UIAlertAction(title: "cancel".localized, style: .default)
         
         alert.addAction(cancelActtion)
         alert.addAction(settingsAction)
@@ -143,13 +143,13 @@ class MapViewController: UIViewController {
     }
     
     private func createAnyLocation(coordinate: CLLocationCoordinate2D) {
-        let alertController = UIAlertController(title: "Введите имя локации", message: "", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "locationNameAlert".localized, message: "", preferredStyle: .alert)
         
         alertController.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "Имя"
+            textField.placeholder = "name".localized
         }
         
-        let saveAction = UIAlertAction(title: "Ввести", style: .default, handler: { alert -> Void in
+        let saveAction = UIAlertAction(title: "enter".localized, style: .default, handler: { alert -> Void in
             let firstTextField = alertController.textFields![0] as UITextField
             guard let name = firstTextField.text else {return}
             let newLocation = AnyLocations(coordinate: coordinate, name: name)
@@ -157,7 +157,7 @@ class MapViewController: UIViewController {
             self.mapView.addAnnotation(newLocation)
             
         })
-        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil )
+        let cancelAction = UIAlertAction(title: "cancel".localized, style: .cancel, handler: nil )
         
         
         alertController.addAction(saveAction)

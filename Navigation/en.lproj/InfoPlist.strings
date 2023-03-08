@@ -1,0 +1,9 @@
+/* 
+  infoPlist.strings
+  Navigation
+
+  Created by ROMAN VRONSKY on 07.03.2023.
+  
+*/
+
+"NSLocationWhenInUseUsageDescription" = "For better application performance";

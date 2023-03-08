@@ -241,10 +241,10 @@ class RegisterViewController: UIViewController {
         guard let email = self.emailTextField.text, !email.isEmpty,
               let password = self.passwordTextField.text, !password.isEmpty,
               let userName = self.userNameTextField.text, !userName.isEmpty else {
-            self.alertOk(title: "Ошибка!", message: "Заполните все поля регистрации")
+            self.alertOk(title: "error".localized, message: "fieldsAlert".localized)
             return
         }
-        guard password.count >= 6 else { self.alertDismiss(title: "Пароль не надежный!", message: "Пароль должен содержать 6 символов или более") {
+        guard password.count >= 6 else { self.alertDismiss(title: "passwordAlert".localized, message: "passwordMessage".localized) {
             self.passwordTextField.becomeFirstResponder()
         }
             return
@@ -252,11 +252,11 @@ class RegisterViewController: UIViewController {
         service.saveUser(password: password, login: email)
         CheckerService().signUp(email: email, password: password, userName: userName) { [weak self] result in
             if result == false {
-                self?.alertOk(title: "Не удалось создать аккаунт",
-                             message: "Пользователь с таким email уже существует.")
+                self?.alertOk(title: "faildAccount".localized,
+                              message: "emailExist".localized)
             } else if result == true {
                 print("Create account dooooone!")
-                self?.alertOk(title: "Добро пожаловать, \(userName)!", message: "Успешная регистрация")
+                self?.alertOk(title:"\("welcomAlert".localized), \(userName)!", message: "succsess".localized)
             }
         }
     }

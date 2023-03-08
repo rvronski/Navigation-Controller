@@ -80,16 +80,6 @@ class VideoView: UIView {
     }
     
     func loadYoutube(videoID:String, completion: ((String) -> Void)) {
-        //            guard
-        //                let youtubeURL = URL(string: "https://www.youtube.com/embed/\(videoID)")
-        //                else { return }
-        //        wv.load( URLRequest(url: youtubeURL) )
-        //        let width: CGFloat = wv.frame.size.width
-        //        let height: CGFloat = wv.frame.size.height
-        //        let URL = "<iframe width=\"\(width)\" height=\"\(height)\" src=\"https://www.youtube.com/embed/\(videoID)\" frameborder=\"0\" allowfullscreen></iframe>"
-        
-        
-        
         let toLoadInWebView = "<body style=\"margin:0px;padding:0px;overflow:hidden\">"
         + " <iframe  style=\"overflow: hidden; overflow-x: hidden; overflow-y:hidden; height: 0;" + " max-height: 100%; max-width: 100%; min-height: 100%; min-width: 100%; width: 0;scrolling:no;position:absolute;top:0px;left:0px;right:0px;bottom:0px\" " + "src=\"https://www.youtube.com/embed/\(videoID)\"></iframe>" + "</body>"
         

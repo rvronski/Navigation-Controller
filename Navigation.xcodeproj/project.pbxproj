@@ -25,6 +25,9 @@
 		451FE9502880CB8A0024A924 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451FE94F2880CB8A0024A924 /* PostViewController.swift */; };
 		451FE95228834D240024A924 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451FE95128834D240024A924 /* ProfileViewController.swift */; };
 		451FE9542886F4690024A924 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451FE9532886F4690024A924 /* InfoViewController.swift */; };
+		4529CF4A29B7F370001C6AD3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529CF4929B7F370001C6AD3 /* String.swift */; };
+		4529CF4D29B7F3D0001C6AD3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4529CF4F29B7F3D0001C6AD3 /* Localizable.strings */; };
+		4529CF5329B8FDE3001C6AD3 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 4529CF5529B8FDE3001C6AD3 /* Localizable.stringsdict */; };
 		4529EE5229AE2CA4005ECC69 /* AnyLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529EE5129AE2CA4005ECC69 /* AnyLocations.swift */; };
 		45378B19294D29BF004900B6 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4594EEFA28A0695C000B408C /* Post.swift */; };
 		45378B1C294D2C41004900B6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 45378B1B294D2C41004900B6 /* FirebaseAuth */; };
@@ -83,6 +86,7 @@
 		45EF991C2922F3C700AC3AF6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF991B2922F3C700AC3AF6 /* LoginViewModel.swift */; };
 		45EF991E292661E400AC3AF6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF991D292661E400AC3AF6 /* ProfileView.swift */; };
 		45EF992229270A0C00AC3AF6 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF992129270A0C00AC3AF6 /* ProfileCoordinator.swift */; };
+		45F469E529B7B57A00788D1F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45F469E729B7B57A00788D1F /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -114,11 +118,16 @@
 		451FE93B2880BA240024A924 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		451FE9422880BA270024A924 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		451FE9452880BA270024A924 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		451FE9472880BA270024A924 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		451FE94D2880C5620024A924 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		451FE94F2880CB8A0024A924 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		451FE95128834D240024A924 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = Navigation/ProfileViewController.swift; sourceTree = SOURCE_ROOT; };
 		451FE9532886F4690024A924 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		4529CF4829B7F11D001C6AD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		4529CF4929B7F370001C6AD3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		4529CF4E29B7F3D0001C6AD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4529CF5029B7F3DE001C6AD3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4529CF5429B8FDE3001C6AD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		4529CF5629B8FDEA001C6AD3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		4529EE5129AE2CA4005ECC69 /* AnyLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyLocations.swift; sourceTree = "<group>"; };
 		453F93E92944863C00A374DA /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
 		453F93EB294486B000A374DA /* MusicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewModel.swift; sourceTree = "<group>"; };
@@ -171,6 +180,9 @@
 		45EF991B2922F3C700AC3AF6 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		45EF991D292661E400AC3AF6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		45EF992129270A0C00AC3AF6 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
+		45F469D429B7A20E00788D1F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		45F469E629B7B57A00788D1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		45F469E929B7B5AA00788D1F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +269,7 @@
 		451FE92D2880BA240024A924 = {
 			isa = PBXGroup;
 			children = (
+				4529CF4929B7F370001C6AD3 /* String.swift */,
 				451FE9382880BA240024A924 /* Navigation */,
 				451FE9372880BA240024A924 /* Products */,
 			);
@@ -288,7 +301,9 @@
 				45832A402899C067005C65C2 /* logo.png */,
 				453F93F929448E2200A374DA /* Albums */,
 				451FE9442880BA270024A924 /* LaunchScreen.storyboard */,
-				451FE9472880BA270024A924 /* Info.plist */,
+				45F469E729B7B57A00788D1F /* InfoPlist.strings */,
+				4529CF5529B8FDE3001C6AD3 /* Localizable.stringsdict */,
+				4529CF4F29B7F3D0001C6AD3 /* Localizable.strings */,
 				45AEBC6B294BC21800C4A7A2 /* GoogleService-Info.plist */,
 			);
 			path = Navigation;
@@ -439,6 +454,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 451FE92D2880BA240024A924;
 			packageReferences = (
@@ -461,7 +477,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4529CF4D29B7F3D0001C6AD3 /* Localizable.strings in Resources */,
 				451FE9462880BA270024A924 /* LaunchScreen.storyboard in Resources */,
+				45F469E529B7B57A00788D1F /* InfoPlist.strings in Resources */,
 				453F940129448E3F00A374DA /* IMG_8284.JPG in Resources */,
 				45AEBC6C294BC21900C4A7A2 /* GoogleService-Info.plist in Resources */,
 				451FE9432880BA270024A924 /* Assets.xcassets in Resources */,
@@ -470,6 +488,7 @@
 				453F940329448E3F00A374DA /* IMG_8286.JPG in Resources */,
 				453F93EE2944881700A374DA /* Queen.mp3 in Resources */,
 				453F93F22944883000A374DA /* 09 We Like Songs.mp3 in Resources */,
+				4529CF5329B8FDE3001C6AD3 /* Localizable.stringsdict in Resources */,
 				45832A43289C3B50005C65C2 /* Blue_pixel.png in Resources */,
 				453F93FF29448E3F00A374DA /* IMG_8285.JPG in Resources */,
 				453F93F02944882600A374DA /* Just The Two Of Us.mp3 in Resources */,
@@ -532,6 +551,7 @@
 				45D4D3C8296B1FAF0006512C /* ExtensionLike.swift in Sources */,
 				45832A3F289971D7005C65C2 /* LoginViewController.swift in Sources */,
 				451FE9542886F4690024A924 /* InfoViewController.swift in Sources */,
+				4529CF4A29B7F370001C6AD3 /* String.swift in Sources */,
 				451351F5291EEE19007C7BC5 /* AppFactory.swift in Sources */,
 				45C7A21F29059031008C08CD /* TestUserService.swift in Sources */,
 				45D4D3C6296A262E0006512C /* CoreDataManager.swift in Sources */,
@@ -551,8 +571,37 @@
 			isa = PBXVariantGroup;
 			children = (
 				451FE9452880BA270024A924 /* Base */,
+				45F469D429B7A20E00788D1F /* ru */,
+				4529CF4829B7F11D001C6AD3 /* en */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		4529CF4F29B7F3D0001C6AD3 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4529CF4E29B7F3D0001C6AD3 /* en */,
+				4529CF5029B7F3DE001C6AD3 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		4529CF5529B8FDE3001C6AD3 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4529CF5429B8FDE3001C6AD3 /* en */,
+				4529CF5629B8FDEA001C6AD3 /* ru */,
+			);
+			name = Localizable.stringsdict;
+			sourceTree = "<group>";
+		};
+		45F469E729B7B57A00788D1F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				45F469E629B7B57A00788D1F /* en */,
+				45F469E929B7B5AA00788D1F /* ru */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -562,6 +611,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -622,6 +672,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -682,6 +733,7 @@
 				DEVELOPMENT_TEAM = JZPU7337NX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = fdghfujfj;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -709,6 +761,7 @@
 				DEVELOPMENT_TEAM = JZPU7337NX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = fdghfujfj;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
