@@ -27,6 +27,7 @@
 		451FE9542886F4690024A924 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451FE9532886F4690024A924 /* InfoViewController.swift */; };
 		4529CF4A29B7F370001C6AD3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529CF4929B7F370001C6AD3 /* String.swift */; };
 		4529CF4D29B7F3D0001C6AD3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4529CF4F29B7F3D0001C6AD3 /* Localizable.strings */; };
+		4529CF5329B8FDE3001C6AD3 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 4529CF5529B8FDE3001C6AD3 /* Localizable.stringsdict */; };
 		4529EE5229AE2CA4005ECC69 /* AnyLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529EE5129AE2CA4005ECC69 /* AnyLocations.swift */; };
 		45378B19294D29BF004900B6 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4594EEFA28A0695C000B408C /* Post.swift */; };
 		45378B1C294D2C41004900B6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 45378B1B294D2C41004900B6 /* FirebaseAuth */; };
@@ -125,6 +126,8 @@
 		4529CF4929B7F370001C6AD3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		4529CF4E29B7F3D0001C6AD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4529CF5029B7F3DE001C6AD3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4529CF5429B8FDE3001C6AD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		4529CF5629B8FDEA001C6AD3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		4529EE5129AE2CA4005ECC69 /* AnyLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyLocations.swift; sourceTree = "<group>"; };
 		453F93E92944863C00A374DA /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
 		453F93EB294486B000A374DA /* MusicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewModel.swift; sourceTree = "<group>"; };
@@ -299,6 +302,7 @@
 				453F93F929448E2200A374DA /* Albums */,
 				451FE9442880BA270024A924 /* LaunchScreen.storyboard */,
 				45F469E729B7B57A00788D1F /* InfoPlist.strings */,
+				4529CF5529B8FDE3001C6AD3 /* Localizable.stringsdict */,
 				4529CF4F29B7F3D0001C6AD3 /* Localizable.strings */,
 				45AEBC6B294BC21800C4A7A2 /* GoogleService-Info.plist */,
 			);
@@ -484,6 +488,7 @@
 				453F940329448E3F00A374DA /* IMG_8286.JPG in Resources */,
 				453F93EE2944881700A374DA /* Queen.mp3 in Resources */,
 				453F93F22944883000A374DA /* 09 We Like Songs.mp3 in Resources */,
+				4529CF5329B8FDE3001C6AD3 /* Localizable.stringsdict in Resources */,
 				45832A43289C3B50005C65C2 /* Blue_pixel.png in Resources */,
 				453F93FF29448E3F00A374DA /* IMG_8285.JPG in Resources */,
 				453F93F02944882600A374DA /* Just The Two Of Us.mp3 in Resources */,
@@ -579,6 +584,15 @@
 				4529CF5029B7F3DE001C6AD3 /* ru */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		4529CF5529B8FDE3001C6AD3 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4529CF5429B8FDE3001C6AD3 /* en */,
+				4529CF5629B8FDEA001C6AD3 /* ru */,
+			);
+			name = Localizable.stringsdict;
 			sourceTree = "<group>";
 		};
 		45F469E729B7B57A00788D1F /* InfoPlist.strings */ = {

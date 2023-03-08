@@ -33,3 +33,12 @@
 "userName" = "Roman Vronsky";
 "showsStatus" = "Show status";
 "status" = "Write status";
+"postComment" = "Resting on the sea";
+"footballPostComment" = "Krasnodar beat CSKA (1:0) and overtook the army team in the table. Krasnodar midfielder Nikita Krivtsov scored the only goal in the 75th minute of the meeting. 49 points in 29 matches. CSKA dropped to fifth place (47 points in 29 games).";
+"likedPublications" = "Liked publications";
+"profileTabBar" = "Profile";
+"newslineTabBar" = "Newsline";
+"multimediaTabBar" = "Multimedia";
+"infoTabBar" = "Info";
+"likeTabBar" = "Like";
+"likeMeas" = "Like";
