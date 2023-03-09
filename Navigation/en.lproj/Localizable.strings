@@ -1,0 +1,44 @@
+/* 
+  Localizable.strings
+  Navigation
+
+  Created by ROMAN VRONSKY on 08.03.2023.
+  
+*/
+
+"noUserAlert" = "User not found";
+"registrationAlert" = "Register in the application";
+"brutForce" = "Pick up a password";
+"error" = "Error";
+"fieldsAlert" = "Fill in all the fields";
+"passwordAlert" = "The password is not secure!";
+"passwordMessage" = "Password must be 6 characters or more";
+"faildAccount" = "Failed to create an account";
+"emailExist" = "User with this email already exists";
+"welcomAlert" = "Welcome";
+"succsess" = "Successful registration";
+"wrongWordAlert" = "Wrong word entered";
+"enterWord" = "Enter the word again";
+"password" = "Password";
+"gallery" = "Photo Gallery";
+"text" = "Text";
+"orbitalPeriod" = "Orbital Period";
+"locationAlert" = "Geolocation is off";
+"on?" = "Want to enable?";
+"settings" = "Settings";
+"cancel" = " Cancel";
+"locationNameAlert" = "Enter location name";
+"name" = "Name";
+"enter" = "Enter";
+"userName" = "Roman Vronsky";
+"showsStatus" = "Show status";
+"status" = "Write status";
+"postComment" = "Resting on the sea";
+"footballPostComment" = "Krasnodar beat CSKA (1:0) and overtook the army team in the table. Krasnodar midfielder Nikita Krivtsov scored the only goal in the 75th minute of the meeting. 49 points in 29 matches. CSKA dropped to fifth place (47 points in 29 games).";
+"likedPublications" = "Liked publications";
+"profileTabBar" = "Profile";
+"newslineTabBar" = "Newsline";
+"multimediaTabBar" = "Multimedia";
+"infoTabBar" = "Info";
+"likeTabBar" = "Like";
+"likeMeas" = "Like";

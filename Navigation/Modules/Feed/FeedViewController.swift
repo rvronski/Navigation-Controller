@@ -35,7 +35,7 @@ class FeedViewController: UIViewController {
     }
         
     private func wrongWordAlert() {
-        let alertController = UIAlertController(title: "Введено неверное слово ", message: "Введите слово ещё раз", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "wrongWordAlert".localized, message: "enterWord".localized, preferredStyle: .alert)
         let firstAction = UIAlertAction(title: "OK", style: .default) { _ in
             self.textField.becomeFirstResponder()
         }

@@ -30,15 +30,15 @@ extension Module.ModuleType {
     var tabBarItem: UITabBarItem {
         switch self {
         case .login:
-            return UITabBarItem(title: "Профиль", image: UIImage(systemName: "person"), tag: 0)
+            return UITabBarItem(title: "profileTabBar".localized, image: UIImage(systemName: "person"), tag: 0)
         case .feed:
-            return UITabBarItem(title: "Лента", image: UIImage(systemName: "chart.bar.doc.horizontal"), tag: 2)
+            return UITabBarItem(title: "newslineTabBar".localized, image: UIImage(systemName: "chart.bar.doc.horizontal"), tag: 2)
             case .music:
-            return UITabBarItem(title: "Мультимедиа", image: UIImage(systemName: "tv.music.note"), tag: 1)
+            return UITabBarItem(title: "multimediaTabBar".localized, image: UIImage(systemName: "tv.music.note"), tag: 1)
         case .info:
-            return UITabBarItem(title: "Инфо", image: UIImage(systemName: "info"), tag: 3)
+            return UITabBarItem(title: "infoTabBar".localized, image: UIImage(systemName: "info"), tag: 3)
         case .like:
-            return UITabBarItem(title: "Нравится", image: UIImage(systemName: "heart.fill"), tag: 4)
+            return UITabBarItem(title: "likeTabBar".localized, image: UIImage(systemName: "heart.fill"), tag: 4)
         }
     }
 }

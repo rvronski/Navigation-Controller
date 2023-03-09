@@ -55,7 +55,7 @@ class LikeViewController: UIViewController {
         self.navigationItem.searchController = searchController
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.prefersLargeTitles = false
-        self.navigationItem.title = "Понравившиеся публикции"
+        self.navigationItem.title = "likedPublications".localized
     }
     
     private func setupView() {
