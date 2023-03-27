@@ -50,7 +50,7 @@ class PhotosTableViewCell: UITableViewCell {
        let photosLabel = UILabel()
         photosLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         photosLabel.translatesAutoresizingMaskIntoConstraints = false
-        photosLabel.textColor = .black
+        photosLabel.textColor = .createColor(light: .black, dark: .white)
         photosLabel.text = "Photos"
         return photosLabel
     }()

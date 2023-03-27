@@ -54,7 +54,7 @@ final class ProfileView: UIView {
     lazy var nameLabel: UILabel = {
         let nameLabel = UILabel(frame: CGRect(x: 152, y: 27, width: 100, height: 21.5))
         nameLabel.font = UIFont(name: "bold", size: 18)
-        nameLabel.textColor = .black
+        nameLabel.textColor = .createColor(light: .black, dark: .white)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         return nameLabel
     }()
@@ -62,7 +62,7 @@ final class ProfileView: UIView {
     lazy var disctiptionLabel: UILabel = {
         let discriptionLabel = UILabel(frame: CGRect(x: 152 , y: 58.5, width: 100, height: 21.5))
         discriptionLabel.font = UIFont(name: "regular", size: 14)
-        discriptionLabel.textColor = .gray
+        discriptionLabel.textColor = .createColor(light: .gray, dark: .white)
         discriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         return discriptionLabel
     }()
@@ -100,9 +100,9 @@ final class ProfileView: UIView {
         status.layer.borderColor = UIColor.black.cgColor
         status.font = UIFont(name: "regular", size: 15)
         status.backgroundColor = .white
+        status.attributedPlaceholder = NSAttributedString(string: " ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray ])
         status.addTarget(self, action: #selector(self.statusTextChanged), for: .editingChanged)
         status.textAlignment = .center
-        status.placeholder = " "
         status.clearsOnBeginEditing = true
         //        status.becomeFirstResponder()
         status.translatesAutoresizingMaskIntoConstraints = false
