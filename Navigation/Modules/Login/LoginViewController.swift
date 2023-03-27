@@ -42,7 +42,7 @@ class LoginViewController: UIViewController {
     private lazy var passwordTextField: UITextField = {
         let passwordTextField = UITextField()
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        passwordTextField.placeholder = "Password"
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray ])
         passwordTextField.layer.borderColor = UIColor.lightGray.cgColor
         passwordTextField.layer.borderWidth = 0.5
         passwordTextField.textColor = .black
@@ -50,6 +50,7 @@ class LoginViewController: UIViewController {
         passwordTextField.font = UIFont(name: "sysemFont", size: 16)
         passwordTextField.autocapitalizationType = .none
         passwordTextField.isSecureTextEntry = true
+        passwordTextField.backgroundColor = .white
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
         passwordTextField.leftView = paddingView
         passwordTextField.leftViewMode = .always
@@ -59,11 +60,13 @@ class LoginViewController: UIViewController {
     private lazy var loginTextField: UITextField = {
         var loginTextfield = UITextField()
         loginTextfield.translatesAutoresizingMaskIntoConstraints = false
-        loginTextfield.placeholder = "Login/email"
+//        loginTextfield.placeholder = "Login/email"
 //        loginTextfield.text = "rvronski"
         loginTextfield.layer.borderColor = UIColor.gray.cgColor
+        loginTextfield.backgroundColor = .white
         loginTextfield.font = UIFont(name: "sysemFont", size: 16)
         loginTextfield.textColor = .black
+        loginTextfield.attributedPlaceholder = NSAttributedString(string: "Login/email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray ])
         loginTextfield.autocapitalizationType = .none
         loginTextfield.textAlignment = .justified
         loginTextfield.keyboardType = .emailAddress
@@ -143,7 +146,7 @@ class LoginViewController: UIViewController {
     }
     private func setupView() {
         self.view.addSubview(scrollView)
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .createColor(light: .white, dark: .darkGray)
         self.scrollView.addSubview(self.stackView)
         self.scrollView.addSubview(self.brutForceButton)
         self.scrollView.addSubview(self.signUpButton)

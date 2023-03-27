@@ -30,7 +30,7 @@ class PostTableViewCell: UITableViewCell {
         descriptionLabel.lineBreakMode = .byWordWrapping
         descriptionLabel.numberOfLines = 0
         descriptionLabel.font = UIFont.systemFont(ofSize: 14)
-        descriptionLabel.textColor = .systemGray
+        descriptionLabel.textColor = .createColor(light: .systemGray, dark: .white)
         descriptionLabel.setContentHuggingPriority(UILayoutPriority(1), for: .vertical)
         return descriptionLabel
     }()
@@ -38,7 +38,7 @@ class PostTableViewCell: UITableViewCell {
     private lazy var authorLabel: UILabel = {
         let authorLabel = UILabel()
         authorLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        authorLabel.textColor = .black
+        authorLabel.textColor = .createColor(light: .black, dark: .white)
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
         authorLabel.numberOfLines = 2
         
@@ -49,7 +49,7 @@ class PostTableViewCell: UITableViewCell {
         let likesLabel = UILabel()
         likesLabel.translatesAutoresizingMaskIntoConstraints = false
         likesLabel.font = UIFont.systemFont(ofSize: 16)
-        likesLabel.textColor = .black
+        likesLabel.textColor = .createColor(light: .black, dark: .white)
         likesLabel.setContentHuggingPriority(UILayoutPriority(1), for: .horizontal)
         return likesLabel
     }()
@@ -67,7 +67,7 @@ class PostTableViewCell: UITableViewCell {
     private lazy var viewsLabel: UILabel = {
         let viewsLabel = UILabel()
         viewsLabel.font = UIFont.systemFont(ofSize: 16)
-        viewsLabel.textColor = .black
+        viewsLabel.textColor = .createColor(light: .black, dark: .white)
         viewsLabel.translatesAutoresizingMaskIntoConstraints = false
         viewsLabel.setContentHuggingPriority(UILayoutPriority(1), for: .horizontal)
         return viewsLabel

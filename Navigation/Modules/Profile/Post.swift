@@ -17,5 +17,5 @@ public struct Post {
 
 public var post1 = Post(author: "boris", description: "postComment".localized, image: "878i7", likes: 0,  views: 41)
 public var post2 = Post(author: "Anna", description: "😂", image: "img2134", likes: 0, views: 250)
-public var post3 = Post(author: "gamer", description: "«footballPostComment".localized, image: "football", likes: 0,  views: 290)
+public var post3 = Post(author: "gamer", description: "footballPostComment".localized, image: "football", likes: 0,  views: 290)
  var posts:[Post] = [post1, post2, post3]
