@@ -42,7 +42,7 @@ class FeedViewController: UIViewController {
         alertController.addAction(firstAction)
         self.present(alertController, animated: true)
     }
-    private lazy var button = CustomButton(buttonText: "Push", textColor: .white, background: .systemBlue, frame: .zero)
+    private lazy var button = CustomButton(buttonText: "Push", textColor: .white, background: .systemBlue, fontSize: 20, fontWeight: .bold)
     
     private lazy var textField: UITextField = {
         let textField = UITextField()
