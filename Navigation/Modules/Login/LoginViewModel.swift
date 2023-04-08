@@ -5,7 +5,7 @@
 //  Created by ROMAN VRONSKY on 15.11.2022.
 //
 
-import UIKit
+import Foundation
 
 protocol LoginViewModelProtocol: ViewModelProtocol {
     func viewInputDidChange(viewInput: LoginViewModel.ViewInput)
@@ -18,7 +18,7 @@ class LoginViewModel: LoginViewModelProtocol {
         case tapMapButton
     }
     
-    var coordinator: LoginCoordinator?
+    var coordinator: LoginCoordinatable?
     
     
     
