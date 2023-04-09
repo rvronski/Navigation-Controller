@@ -60,6 +60,7 @@
 		4578B99829E0723500720FD7 /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4578B99729E0723500720FD7 /* LoginViewModelTests.swift */; };
 		4578B9A029E1BE1700720FD7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 4578B99F29E1BE1700720FD7 /* Realm */; };
 		4578B9A229E1BEB700720FD7 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 4578B9A129E1BEB700720FD7 /* FirebaseDatabase */; };
+		4578B9A629E3110A00720FD7 /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4578B9A529E3110A00720FD7 /* LocalAuthorizationService.swift */; };
 		457AA3A528A9855900BFB8A9 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457AA3A428A9855900BFB8A9 /* PhotosTableViewCell.swift */; };
 		457AA3A728AC3CB600BFB8A9 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457AA3A628AC3CB600BFB8A9 /* Photos.swift */; };
 		457AA3A928AC415400BFB8A9 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457AA3A828AC415400BFB8A9 /* PhotosViewController.swift */; };
@@ -169,6 +170,7 @@
 		455CCAC628B570B7005590E2 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		4578B99529E0723500720FD7 /* NavigationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NavigationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4578B99729E0723500720FD7 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
+		4578B9A529E3110A00720FD7 /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
 		457AA3A428A9855900BFB8A9 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		457AA3A628AC3CB600BFB8A9 /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
 		457AA3A828AC415400BFB8A9 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
@@ -436,6 +438,7 @@
 				45832A3E289971D7005C65C2 /* LoginViewController.swift */,
 				4516B4032963AB4D00FB0358 /* RealmService.swift */,
 				45A685BB2967856D0052FCD5 /* RealmLoginModel.swift */,
+				4578B9A529E3110A00720FD7 /* LocalAuthorizationService.swift */,
 				45AEBC70294BCF0000C4A7A2 /* CheckService.swift */,
 				45AEBC72294CA82B00C4A7A2 /* RegisterViewController.swift */,
 				4556F8B0293987EE00EF2AA9 /* BrutForce.swift */,
@@ -649,6 +652,7 @@
 				451FE9502880CB8A0024A924 /* PostViewController.swift in Sources */,
 				45D4D3C12969E3E30006512C /* LikeTableViewCell.swift in Sources */,
 				4588176E291BFA56000693BA /* FeedModel.swift in Sources */,
+				4578B9A629E3110A00720FD7 /* LocalAuthorizationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -837,6 +841,7 @@
 				DEVELOPMENT_TEAM = JZPU7337NX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Использовать FaceID для входа в приложение?";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = fdghfujfj;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -865,6 +870,7 @@
 				DEVELOPMENT_TEAM = JZPU7337NX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Использовать FaceID для входа в приложение?";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = fdghfujfj;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
