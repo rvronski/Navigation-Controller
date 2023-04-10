@@ -57,6 +57,9 @@
 		455C903A2907381000A608C8 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455C90392907381000A608C8 /* LoginModel.swift */; };
 		455CCAC528AD81D7005590E2 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455CCAC428AD81D7005590E2 /* PhotosCollectionViewCell.swift */; };
 		455CCAC728B570B7005590E2 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455CCAC628B570B7005590E2 /* AvatarView.swift */; };
+		4578B99829E0723500720FD7 /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4578B99729E0723500720FD7 /* LoginViewModelTests.swift */; };
+		4578B9A029E1BE1700720FD7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 4578B99F29E1BE1700720FD7 /* Realm */; };
+		4578B9A229E1BEB700720FD7 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 4578B9A129E1BEB700720FD7 /* FirebaseDatabase */; };
 		457AA3A528A9855900BFB8A9 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457AA3A428A9855900BFB8A9 /* PhotosTableViewCell.swift */; };
 		457AA3A728AC3CB600BFB8A9 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457AA3A628AC3CB600BFB8A9 /* Photos.swift */; };
 		457AA3A928AC415400BFB8A9 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457AA3A828AC415400BFB8A9 /* PhotosViewController.swift */; };
@@ -89,6 +92,16 @@
 		45EF992229270A0C00AC3AF6 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF992129270A0C00AC3AF6 /* ProfileCoordinator.swift */; };
 		45F469E529B7B57A00788D1F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45F469E729B7B57A00788D1F /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4578B99929E0723500720FD7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 451FE92E2880BA240024A924 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 451FE9352880BA240024A924;
+			remoteInfo = Navigation;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		45FA849F28F8CCF300F71E79 /* Embed Frameworks */ = {
@@ -154,6 +167,8 @@
 		455C90392907381000A608C8 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		455CCAC428AD81D7005590E2 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		455CCAC628B570B7005590E2 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
+		4578B99529E0723500720FD7 /* NavigationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NavigationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4578B99729E0723500720FD7 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		457AA3A428A9855900BFB8A9 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		457AA3A628AC3CB600BFB8A9 /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
 		457AA3A828AC415400BFB8A9 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +213,15 @@
 				45A685A029647EA70052FCD5 /* Realm in Frameworks */,
 				45A685A229647EA70052FCD5 /* RealmSwift in Frameworks */,
 				45378B1C294D2C41004900B6 /* FirebaseAuth in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4578B99229E0723500720FD7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4578B9A229E1BEB700720FD7 /* FirebaseDatabase in Frameworks */,
+				4578B9A029E1BE1700720FD7 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,7 +296,9 @@
 			isa = PBXGroup;
 			children = (
 				451FE9382880BA240024A924 /* Navigation */,
+				4578B99629E0723500720FD7 /* NavigationTests */,
 				451FE9372880BA240024A924 /* Products */,
+				4578B99E29E1BE1700720FD7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -280,6 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				451FE9362880BA240024A924 /* Navigation.app */,
+				4578B99529E0723500720FD7 /* NavigationTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -375,6 +402,21 @@
 			path = Info;
 			sourceTree = "<group>";
 		};
+		4578B99629E0723500720FD7 /* NavigationTests */ = {
+			isa = PBXGroup;
+			children = (
+				4578B99729E0723500720FD7 /* LoginViewModelTests.swift */,
+			);
+			path = NavigationTests;
+			sourceTree = "<group>";
+		};
+		4578B99E29E1BE1700720FD7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		45D4D3B92969DBB80006512C /* Like */ = {
 			isa = PBXGroup;
 			children = (
@@ -443,6 +485,28 @@
 			productReference = 451FE9362880BA240024A924 /* Navigation.app */;
 			productType = "com.apple.product-type.application";
 		};
+		4578B99429E0723500720FD7 /* NavigationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4578B99D29E0723600720FD7 /* Build configuration list for PBXNativeTarget "NavigationTests" */;
+			buildPhases = (
+				4578B99129E0723500720FD7 /* Sources */,
+				4578B99229E0723500720FD7 /* Frameworks */,
+				4578B99329E0723500720FD7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4578B99A29E0723500720FD7 /* PBXTargetDependency */,
+			);
+			name = NavigationTests;
+			packageProductDependencies = (
+				4578B99F29E1BE1700720FD7 /* Realm */,
+				4578B9A129E1BEB700720FD7 /* FirebaseDatabase */,
+			);
+			productName = NavigationTests;
+			productReference = 4578B99529E0723500720FD7 /* NavigationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -450,11 +514,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1340;
+				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					451FE9352880BA240024A924 = {
 						CreatedOnToolsVersion = 13.4.1;
+					};
+					4578B99429E0723500720FD7 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 451FE9352880BA240024A924;
 					};
 				};
 			};
@@ -479,6 +547,7 @@
 			projectRoot = "";
 			targets = (
 				451FE9352880BA240024A924 /* Navigation */,
+				4578B99429E0723500720FD7 /* NavigationTests */,
 			);
 		};
 /* End PBXProject section */
@@ -506,6 +575,13 @@
 				45832A412899C067005C65C2 /* logo.png in Resources */,
 				453F93F42944883B00A374DA /* Chet Faker  - No Diggity Live Sessions.mp3 in Resources */,
 				453F940029448E3F00A374DA /* IMG_8282.JPG in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4578B99329E0723500720FD7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,7 +652,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4578B99129E0723500720FD7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4578B99829E0723500720FD7 /* LoginViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4578B99A29E0723500720FD7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 451FE9352880BA240024A924 /* Navigation */;
+			targetProxy = 4578B99929E0723500720FD7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		451FE9442880BA270024A924 /* LaunchScreen.storyboard */ = {
@@ -791,6 +883,46 @@
 			};
 			name = Release;
 		};
+		4578B99B29E0723600720FD7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JZPU7337NX;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Roman-Vronsky.NavigationTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Navigation.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Navigation";
+			};
+			name = Debug;
+		};
+		4578B99C29E0723600720FD7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JZPU7337NX;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Roman-Vronsky.NavigationTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Navigation.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Navigation";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -808,6 +940,15 @@
 			buildConfigurations = (
 				451FE94B2880BA270024A924 /* Debug */,
 				451FE94C2880BA270024A924 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4578B99D29E0723600720FD7 /* Build configuration list for PBXNativeTarget "NavigationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4578B99B29E0723600720FD7 /* Debug */,
+				4578B99C29E0723600720FD7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -864,6 +1005,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4545DFBF291DBB9700F2BA9B /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
 			productName = iOSIntPackage;
+		};
+		4578B99F29E1BE1700720FD7 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45A6859E29647EA70052FCD5 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		4578B9A129E1BEB700720FD7 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45378B1A294D2C41004900B6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
 		};
 		45A6859F29647EA70052FCD5 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -7,7 +7,11 @@
 
 import UIKit
 
-class LoginCoordinator: ModuleCoordinatable {
+protocol LoginCoordinatable: AnyObject {
+    func pushProfileViewController(viewModel: ViewModelProtocol, pushTo: LoginCoordinator.PushVC)
+}
+
+class LoginCoordinator: LoginCoordinatable, ModuleCoordinatable {
     
     enum PushVC {
         case ProfileVC(ViewModelProtocol)
