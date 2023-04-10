@@ -9,22 +9,43 @@ import Foundation
 import LocalAuthentication
 
 class LocalAuthorizationService {
+    var context = LAContext()
+    var biometricType: Int = 0
     
-    func authorizeIfPossible(_ authorizationFinished: @escaping (Bool) -> Void) {
+    func isFaceIdSupported() {
+        context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
+            if context.biometryType == .faceID {
+                self.biometricType = 2
+            } else if context.biometryType == .touchID {
+                self.biometricType = 1
+            } else {
+                self.biometricType = 0
+            }
+    }
+    
+    func authorizeIfPossible(_ authorizationFinished: @escaping (Bool?, Error?) -> Void) {
+        
         var error: NSError?
-        let context = LAContext()
-        let canUseBiometricks = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
-        if let error = error {
+        let canUseBiometricks = context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error)
+        if let error = error as? LAError {
             print(error)
-            authorizationFinished(false)
+            authorizationFinished(nil, error)
         }
+        
+        print(biometricType)
         guard canUseBiometricks else {
-            authorizationFinished(false)
+            authorizationFinished(false, nil)
             return
         }
-        context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Войти с помощью пароля") { success, error in
+        context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "Войти с помощью пароля") { success, error in
             if let error = error {
                 print(error)
+                authorizationFinished(nil, error)
+            }
+            if success {
+                authorizationFinished(true, nil)
+            } else {
+                authorizationFinished(false, nil)
             }
         }
     }
