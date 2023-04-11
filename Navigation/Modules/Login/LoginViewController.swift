@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import RealmSwift
 import KeychainAccess
+import LocalAuthentication
 
 
 class LoginViewController: UIViewController {
@@ -19,6 +20,8 @@ class LoginViewController: UIViewController {
         case userNotFound
         
     }
+    
+    private let localAuth = LocalAuthorizationService()
     
     private let brutForce = BrutForce()
     
@@ -37,6 +40,13 @@ class LoginViewController: UIViewController {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
+    }()
+    private lazy var faceIDButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(faceIDAuth), for: .touchUpInside)
+        return button
     }()
     
     private lazy var passwordTextField: UITextField = {
@@ -142,7 +152,6 @@ class LoginViewController: UIViewController {
         self.setupGesture()
         self.tabBarController?.tabBar.isHidden = true
         
-      
     }
     private func setupView() {
         self.view.addSubview(scrollView)
@@ -155,6 +164,7 @@ class LoginViewController: UIViewController {
         self.stackView.addArrangedSubview(passwordTextField)
         self.scrollView.addSubview(self.button)
         self.scrollView.addSubview(self.logoImage)
+        self.scrollView.addSubview(self.faceIDButton)
         self.passwordTextField.bringSubviewToFront(activityIndicator)
        
         
@@ -191,9 +201,11 @@ class LoginViewController: UIViewController {
             
             self.activityIndicator.centerYAnchor.constraint(equalTo: self.passwordTextField.centerYAnchor),
             self.activityIndicator.centerXAnchor.constraint(equalTo: self.passwordTextField.centerXAnchor),
-//            self.activityIndicator.bottomAnchor.constraint(equalTo: self.passwordTextField.bottomAnchor, constant: -2),
-//            self.activityIndicator.topAnchor.constraint(equalTo: self.passwordTextField.topAnchor, constant: 2),
             
+            self.faceIDButton.topAnchor.constraint(equalTo: self.signUpButton.bottomAnchor,constant: 16),
+            self.faceIDButton.centerXAnchor.constraint(equalTo: self.signUpButton.centerXAnchor),
+           
+//
         ])
     }
   private var loginDelegate: LoginViewControllerDelegate?
@@ -208,13 +220,30 @@ class LoginViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        Auth.auth().addStateDidChangeListener { auth, user in
-            if user == nil {
-                return
-            } else {
-                self.viewModel.viewInputDidChange(viewInput: .tapLoginButton(self.viewModel))
-            }
+        localAuth.isFaceIdSupported()
+        let config = UIImage.SymbolConfiguration(textStyle: .largeTitle)
+        switch localAuth.biometricType {
+        case 0:
+            self.faceIDButton.isHidden = true
+            self.faceIDButton.isEnabled = true
+        case 1:
+            let image = UIImage(systemName: "touchid", withConfiguration: config)
+            self.faceIDButton.setImage(image, for: .normal)
+        case 2:
+            let image = UIImage(systemName: "faceid", withConfiguration: config)
+            self.faceIDButton.setImage(image, for: .normal)
+        default:
+            self.faceIDButton.isHidden = true
+            self.faceIDButton.isEnabled = true
         }
+        
+//        Auth.auth().addStateDidChangeListener { auth, user in
+//            if user == nil {
+//                return
+//            } else {
+//                self.viewModel.viewInputDidChange(viewInput: .tapLoginButton(self.viewModel))
+//            }
+//        }
         
         navigationController?.setNavigationBarHidden(true, animated: false)
         NotificationCenter.default.addObserver(self,
@@ -333,6 +362,36 @@ class LoginViewController: UIViewController {
         self.view.addGestureRecognizer(tapGesture)
     }
     
+    @objc private func faceIDAuth() {
+       let authLocal = LocalAuthorizationService()
+        authLocal.authorizeIfPossible { success, error  in
+            if let error = error {
+                let errorCode = error._code
+                if [LAError.biometryLockout.rawValue,
+                    LAError.biometryNotEnrolled.rawValue].contains(where: { $0 == errorCode }) {
+                    DispatchQueue.main.async {
+                        self.alertDismiss(title: "Невозможно пройти аутентификацию", message: "Перейти в настройки приватности?") {
+                            self.showDeviceSettings()
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.alertOk(title: "Не возможно пройти аутентификацию", message: "Проверьте настройки приватности")
+                    }
+                }
+            }
+            DispatchQueue.main.async {
+                if let success = success {
+                    if success {
+                        self.viewModel.viewInputDidChange(viewInput: .tapLoginButton(self.viewModel))
+                    } else {
+                        self.alertOk(title: "Не возможно пройти аутентификацию", message: "Проверьте настройки приватности")
+                    }
+                }
+            }
+        }
+    }
+    
     @objc private func brutForceButtonDidTap() {
         var newPassword = ""
         self.passwordTextField.text = ""
@@ -356,6 +415,17 @@ class LoginViewController: UIViewController {
     @objc private func didPushSignUpButton() {
         let vcReg = RegisterViewController(viewModel: viewModel)
         self.navigationController?.pushViewController(vcReg, animated: true)
+    }
+    
+    func showDeviceSettings() {
+        guard let settingURL = URL(string: "App-Prefs:") else { return }
+        if UIApplication.shared.canOpenURL(settingURL){
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(settingURL, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(settingURL)
+            }
+        }
     }
 }
 
