@@ -30,6 +30,7 @@
 		4529CF5329B8FDE3001C6AD3 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 4529CF5529B8FDE3001C6AD3 /* Localizable.stringsdict */; };
 		4529EE5229AE2CA4005ECC69 /* AnyLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529EE5129AE2CA4005ECC69 /* AnyLocations.swift */; };
 		452D9D0F29D1CF7C00BE0BE0 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D9D0E29D1CF7C00BE0BE0 /* Color.swift */; };
+		4535D8F229F41425001085C1 /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4535D8F129F41425001085C1 /* LocalNotificationsService.swift */; };
 		45378B19294D29BF004900B6 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4594EEFA28A0695C000B408C /* Post.swift */; };
 		45378B1C294D2C41004900B6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 45378B1B294D2C41004900B6 /* FirebaseAuth */; };
 		45378B1E294D2C41004900B6 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 45378B1D294D2C41004900B6 /* FirebaseDatabase */; };
@@ -145,6 +146,7 @@
 		4529CF5629B8FDEA001C6AD3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		4529EE5129AE2CA4005ECC69 /* AnyLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyLocations.swift; sourceTree = "<group>"; };
 		452D9D0E29D1CF7C00BE0BE0 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		4535D8F129F41425001085C1 /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		453F93E92944863C00A374DA /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
 		453F93EB294486B000A374DA /* MusicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewModel.swift; sourceTree = "<group>"; };
 		453F93ED2944881700A374DA /* Queen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Queen.mp3; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 				451FE93B2880BA240024A924 /* SceneDelegate.swift */,
 				4549A947294631F4005558C3 /* NetworkManager.swift */,
 				451FE94F2880CB8A0024A924 /* PostViewController.swift */,
+				4535D8F129F41425001085C1 /* LocalNotificationsService.swift */,
 				452D9D0D29D1CF5000BE0BE0 /* Extension */,
 				451351FA291F0023007C7BC5 /* TabBar */,
 				451351F6291EF1DE007C7BC5 /* Modules */,
@@ -606,6 +609,7 @@
 				455CCAC528AD81D7005590E2 /* PhotosCollectionViewCell.swift in Sources */,
 				45135200291F11EC007C7BC5 /* FeedCoordinator.swift in Sources */,
 				451351FC291F0052007C7BC5 /* TabBarController.swift in Sources */,
+				4535D8F229F41425001085C1 /* LocalNotificationsService.swift in Sources */,
 				452D9D0F29D1CF7C00BE0BE0 /* Color.swift in Sources */,
 				457AA3A928AC415400BFB8A9 /* PhotosViewController.swift in Sources */,
 				45CF81C628A2597A006F6960 /* PostTableViewCell.swift in Sources */,
@@ -824,6 +828,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";

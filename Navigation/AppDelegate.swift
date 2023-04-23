@@ -22,6 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //            SecRandomCopyBytes(kSecRandomDefault, 64, pointer.baseAddress!)
         //        }
         //        keyChain[data: "pass"] = key
+        
+        let notificationCenter = LocalNotificationsService()
+        notificationCenter.registeForLatestUpdatesIfPossible()
+        
         let pass = try? keyChain.getData("pass")
         
         FirebaseApp.configure()
