@@ -10,6 +10,7 @@ import Firebase
 import FirebaseCore
 import RealmSwift
 import KeychainAccess
+import UserNotifications
 let keyChain = Keychain(service: "Roman-Vronsky.Navigation")
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,7 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let notificationCenter = LocalNotificationsService()
         notificationCenter.registeForLatestUpdatesIfPossible()
-        
+       let center = UNUserNotificationCenter.current()
+        center.delegate = self
+//        UNUserNotificationCenter.current().delegate = notificationCenter
         let pass = try? keyChain.getData("pass")
         
         FirebaseApp.configure()
@@ -52,4 +55,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
 }
-
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        switch response.actionIdentifier {
+        case UNNotificationDefaultActionIdentifier :
+            UIApplication.shared.applicationIconBadgeNumber = 0
+        case "updating":
+            UIApplication.shared.applicationIconBadgeNumber = 0
+        default:
+            print("default")
+        }
+        completionHandler()
+    }
+}
