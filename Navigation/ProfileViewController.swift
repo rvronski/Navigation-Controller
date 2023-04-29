@@ -7,8 +7,10 @@
 
 import UIKit
 import CoreLocation
+import UniformTypeIdentifiers
 
 class ProfileViewController: UIViewController {
+   
     let coreManager = CoreDataManager.shared
     let locationManager = CLLocationManager()
     private let viewModel: LoginViewModelProtocol
@@ -54,7 +56,7 @@ class ProfileViewController: UIViewController {
         self.setupGesture()
         self.tabBarController?.tabBar.isHidden = false
 //        UserDefaults.standard.set(false, forKey: "isLike")
-        profileView.configureTableView(dataSource: self, delegate: self)
+        profileView.configureTableView(dataSource: self, delegate: self, dropDelegate: self, dragDelegate: self)
         profileView.delegate = self
         
     }
@@ -133,7 +135,8 @@ class ProfileViewController: UIViewController {
         self.view.endEditing(true)
         
     }
-    
+    var string = ""
+    var image: UIImage?
 }
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
@@ -215,6 +218,53 @@ extension ProfileViewController: CellDelegate {
         profileView.reload()
     }
 }
+extension ProfileViewController: UITableViewDragDelegate, UITableViewDropDelegate {
     
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let string = posts[indexPath.row].description
+        let image =  posts[indexPath.row].image
+        
+        let stringItemProvider = NSItemProvider(object: string as NSItemProviderWriting)
+        
+        let imageItemProvider = NSItemProvider(object: image)
+
+        return [UIDragItem(itemProvider: stringItemProvider), UIDragItem(itemProvider: imageItemProvider)]
+    }
+    
+    
+    
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        guard let destinationIndexPath = coordinator.destinationIndexPath else {
+            return
+        }
+       
+        _ = coordinator.session.loadObjects(ofClass: String.self) { string in
+            if let str = string.first {
+                self.string = str
+            }
+            
+        }
+        _ = coordinator.session.loadObjects(ofClass: UIImage.self) { image in
+            if let img = image.first as? UIImage {
+                self.image = img
+            }
+        }
+        let newPost = Post(author: "Drag&Drop", description: string, image: image ?? UIImage(systemName: "person")!, likes: 0, views: 0)
+        posts.insert(newPost, at: destinationIndexPath.row)
+        tableView.reloadData()
+    }
+    
+    
+    func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
+        return session.canLoadObjects(ofClass: String.self) && session.canLoadObjects(ofClass: UIImage.self)
+       
+    }
+    
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        return UITableViewDropProposal(operation: .copy)
+    }
+    
+  
+}
 
 
