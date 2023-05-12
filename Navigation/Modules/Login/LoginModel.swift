@@ -41,7 +41,6 @@ struct LoginInspector: LoginViewControllerDelegate {
     }
     
     func checkCredentials(email: String, password: String) -> Bool {
-        
         CheckerService().checkCredentials(email: email, password: password) { result in
             if result == false {
                 return

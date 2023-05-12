@@ -9,11 +9,15 @@ import UIKit
 
 class AppFactory {
     
-   
+    private let checkService: CheckerServiceProtocol
+    
+    init(checkService: CheckerServiceProtocol) {
+        self.checkService = checkService
+    }
     func makeModule(ofType moduleType: Module.ModuleType) -> Module {
         switch moduleType {
         case .login:
-            let viewModel = LoginViewModel()
+            let viewModel = LoginViewModel(checkService: checkService)
             let view = UINavigationController(rootViewController: LoginViewController(viewModel: viewModel))
             return Module(moduleType: moduleType, viewModel: viewModel, view: view)
         case .feed:
@@ -32,6 +36,10 @@ class AppFactory {
         case .like:
             let viewModel = LikeViewodel()
             let view = UINavigationController(rootViewController: LikeViewController())
+            return Module(moduleType: moduleType, viewModel: viewModel, view: view)
+        case .profile:
+            let viewModel = ProfileViewModel()
+            let view = UINavigationController(rootViewController: ProfileViewController(viewModel: viewModel))
             return Module(moduleType: moduleType, viewModel: viewModel, view: view)
         }
     }
