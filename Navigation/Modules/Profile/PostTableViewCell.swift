@@ -84,7 +84,7 @@ class PostTableViewCell: UITableViewCell {
     }
     
     func setup(with viewModel: Post, index: Int ) {
-        self.postImageView.image = UIImage(named: viewModel.image )
+        self.postImageView.image = viewModel.image
         self.authorLabel.text = viewModel.author
         self.descriptionLabel.text = viewModel.description
         self.viewsLabel.text =  "Views: \(viewModel.views)"

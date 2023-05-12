@@ -15,5 +15,6 @@ extension UIColor {
             return traitCollection.userInterfaceStyle == .light ? light : dark
         }
     }
+    static var buttonColor: UIColor = #colorLiteral(red: 0.0608272329, green: 0.488943398, blue: 0.9880504012, alpha: 1)
 }
 

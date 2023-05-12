@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
-import RealmSwift
+
 
 class RegisterViewController: UIViewController {
     
@@ -216,48 +216,21 @@ class RegisterViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         self.view.addGestureRecognizer(tapGesture)
     }
-    private func alertOk(title: String, message: String?) {
-        
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let ok = UIAlertAction(title: "ОК", style: .default)
-        
-        alertController.addAction(ok)
-        
-        present(alertController, animated: true, completion: nil)
-    }
-    private func alertDismiss(title: String, message: String?, completionHandler: @escaping () -> Void) {
-         
-         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-         let ok = UIAlertAction(title: "ОК", style: .default) { _ in
-             completionHandler()
-         }
-         alertController.addAction(ok)
-         
-         present(alertController, animated: true, completion: nil)
-     }
     
     @objc private func didTapRegButton() {
-        let service = RealmService()
-        guard let email = self.emailTextField.text, !email.isEmpty,
-              let password = self.passwordTextField.text, !password.isEmpty,
-              let userName = self.userNameTextField.text, !userName.isEmpty else {
-            self.alertOk(title: "error".localized, message: "fieldsAlert".localized)
+        guard let email = emailTextField.text, !email.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty,
+              let userName = userNameTextField.text, !userName.isEmpty
+        else {
+            self.alertOk(title: "Заполните все поля", message: nil)
             return
         }
-        guard password.count >= 6 else { self.alertDismiss(title: "passwordAlert".localized, message: "passwordMessage".localized) {
-            self.passwordTextField.becomeFirstResponder()
-        }
+        guard email.isValidEmail else {
+            self.alertOk(title: "Неверный формат email", message: "Проверьте email адрес")
             return
         }
-        service.saveUser(password: password, login: email)
-        CheckerService().signUp(email: email, password: password, userName: userName) { [weak self] result in
-            if result == false {
-                self?.alertOk(title: "faildAccount".localized,
-                              message: "emailExist".localized)
-            } else if result == true {
-                print("Create account dooooone!")
-                self?.alertOk(title:"\("welcomAlert".localized), \(userName)!", message: "succsess".localized)
-            }
+        viewModel.registration(email: email, password: password, userName: userName) { [weak self] in
+            self?.alertOk(title: "Ошибка создания аккаунта", message: nil)
         }
     }
 }
