@@ -8,7 +8,6 @@
 import UIKit
 import Firebase
 import FirebaseCore
-import RealmSwift
 import KeychainAccess
 import UserNotifications
 let keyChain = Keychain(service: "Roman-Vronsky.Navigation")
@@ -18,22 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        //        var key = Data(count: 64)
-        //        _ = key.withUnsafeMutableBytes { (pointer: UnsafeMutableRawBufferPointer) in
-        //            SecRandomCopyBytes(kSecRandomDefault, 64, pointer.baseAddress!)
-        //        }
-        //        keyChain[data: "pass"] = key
-        
+                
         let notificationCenter = LocalNotificationsService()
         notificationCenter.registeForLatestUpdatesIfPossible()
        let center = UNUserNotificationCenter.current()
         center.delegate = self
-//        UNUserNotificationCenter.current().delegate = notificationCenter
         let pass = try? keyChain.getData("pass")
         
         FirebaseApp.configure()
-        let config = Realm.Configuration(encryptionKey: pass)
-        Realm.Configuration.defaultConfiguration = config
         
         return true
     }

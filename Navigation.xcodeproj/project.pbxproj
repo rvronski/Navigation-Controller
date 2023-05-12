@@ -15,7 +15,6 @@
 		451351FC291F0052007C7BC5 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451351FB291F0052007C7BC5 /* TabBarController.swift */; };
 		451351FE291F00F3007C7BC5 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451351FD291F00F3007C7BC5 /* LoginCoordinator.swift */; };
 		45135200291F11EC007C7BC5 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451351FF291F11EC007C7BC5 /* FeedCoordinator.swift */; };
-		4516B4042963AB4D00FB0358 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4516B4032963AB4D00FB0358 /* RealmService.swift */; };
 		451C88BF29A63D6300F91C8D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C88BE29A63D6300F91C8D /* MapViewController.swift */; };
 		451FE93A2880BA240024A924 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451FE9392880BA240024A924 /* AppDelegate.swift */; };
 		451FE93C2880BA240024A924 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451FE93B2880BA240024A924 /* SceneDelegate.swift */; };
@@ -29,11 +28,9 @@
 		4529CF4D29B7F3D0001C6AD3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4529CF4F29B7F3D0001C6AD3 /* Localizable.strings */; };
 		4529CF5329B8FDE3001C6AD3 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 4529CF5529B8FDE3001C6AD3 /* Localizable.stringsdict */; };
 		4529EE5229AE2CA4005ECC69 /* AnyLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529EE5129AE2CA4005ECC69 /* AnyLocations.swift */; };
-		452D9D0F29D1CF7C00BE0BE0 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D9D0E29D1CF7C00BE0BE0 /* Color.swift */; };
+		452D9D0F29D1CF7C00BE0BE0 /* UIColor+createColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D9D0E29D1CF7C00BE0BE0 /* UIColor+createColor.swift */; };
 		4535D8F229F41425001085C1 /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4535D8F129F41425001085C1 /* LocalNotificationsService.swift */; };
 		45378B19294D29BF004900B6 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4594EEFA28A0695C000B408C /* Post.swift */; };
-		45378B1C294D2C41004900B6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 45378B1B294D2C41004900B6 /* FirebaseAuth */; };
-		45378B1E294D2C41004900B6 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 45378B1D294D2C41004900B6 /* FirebaseDatabase */; };
 		453F93EA2944863C00A374DA /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453F93E92944863C00A374DA /* MusicViewController.swift */; };
 		453F93EC294486B000A374DA /* MusicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453F93EB294486B000A374DA /* MusicViewModel.swift */; };
 		453F93EE2944881700A374DA /* Queen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 453F93ED2944881700A374DA /* Queen.mp3 */; };
@@ -48,19 +45,27 @@
 		453F940229448E3F00A374DA /* IMG_8283.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 453F93FD29448E3E00A374DA /* IMG_8283.JPG */; };
 		453F940329448E3F00A374DA /* IMG_8286.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 453F93FE29448E3F00A374DA /* IMG_8286.JPG */; };
 		453F94052944C1BE00A374DA /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453F94042944C1BE00A374DA /* VideoView.swift */; };
+		453FFDCF2A0C720E00AAFA35 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 453FFDCE2A0C720E00AAFA35 /* FirebaseAuth */; };
+		453FFDD12A0C720E00AAFA35 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 453FFDD02A0C720E00AAFA35 /* FirebaseDatabase */; };
+		453FFDD32A0C720E00AAFA35 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 453FFDD22A0C720E00AAFA35 /* FirebaseStorage */; };
+		453FFDD62A0C76FF00AAFA35 /* AuthResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FFDD52A0C76FF00AAFA35 /* AuthResult.swift */; };
+		453FFDD82A0C776E00AAFA35 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FFDD72A0C776E00AAFA35 /* AuthError.swift */; };
+		453FFDDA2A0C77CA00AAFA35 /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FFDD92A0C77CA00AAFA35 /* Validators.swift */; };
+		453FFDDC2A0C790400AAFA35 /* TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FFDDB2A0C790400AAFA35 /* TextFields.swift */; };
+		453FFDDE2A0C81C400AAFA35 /* Button+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FFDDD2A0C81C400AAFA35 /* Button+Extension.swift */; };
+		453FFDE22A0D325300AAFA35 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FFDE12A0D325300AAFA35 /* ProfileViewModel.swift */; };
+		453FFDE42A0D41B800AAFA35 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FFDE32A0D41B800AAFA35 /* UIViewController+Alert.swift */; };
+		453FFDE62A0E10C900AAFA35 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FFDE52A0E10C900AAFA35 /* String+Extension.swift */; };
 		4545DFC1291DBB9700F2BA9B /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 4545DFC0291DBB9700F2BA9B /* iOSIntPackage */; };
 		4549A948294631F4005558C3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549A947294631F4005558C3 /* NetworkManager.swift */; };
 		4549A94B294798E5005558C3 /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549A94A294798E5005558C3 /* InfoViewModel.swift */; };
 		4549A94D29479941005558C3 /* InfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549A94C29479941005558C3 /* InfoCoordinator.swift */; };
 		4549A94F2947E35B005558C3 /* InfoNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549A94E2947E35B005558C3 /* InfoNetworkManager.swift */; };
 		4549A9512949411B005558C3 /* InfoTableVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549A9502949411A005558C3 /* InfoTableVIewCell.swift */; };
-		4556F8B1293987EE00EF2AA9 /* BrutForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4556F8B0293987EE00EF2AA9 /* BrutForce.swift */; };
 		455C903A2907381000A608C8 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455C90392907381000A608C8 /* LoginModel.swift */; };
 		455CCAC528AD81D7005590E2 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455CCAC428AD81D7005590E2 /* PhotosCollectionViewCell.swift */; };
 		455CCAC728B570B7005590E2 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455CCAC628B570B7005590E2 /* AvatarView.swift */; };
 		4578B99829E0723500720FD7 /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4578B99729E0723500720FD7 /* LoginViewModelTests.swift */; };
-		4578B9A029E1BE1700720FD7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 4578B99F29E1BE1700720FD7 /* Realm */; };
-		4578B9A229E1BEB700720FD7 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 4578B9A129E1BEB700720FD7 /* FirebaseDatabase */; };
 		4578B9A629E3110A00720FD7 /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4578B9A529E3110A00720FD7 /* LocalAuthorizationService.swift */; };
 		457AA3A528A9855900BFB8A9 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457AA3A428A9855900BFB8A9 /* PhotosTableViewCell.swift */; };
 		457AA3A728AC3CB600BFB8A9 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457AA3A628AC3CB600BFB8A9 /* Photos.swift */; };
@@ -72,10 +77,6 @@
 		458CD4012901FFB10059BA45 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458CD4002901FFB10059BA45 /* CurrentUserService.swift */; };
 		458F2656291188B60098C7EF /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F2655291188B60098C7EF /* ImageManager.swift */; };
 		459B5DD0290D5FA80046160C /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B5DCF290D5FA70046160C /* LoginFactory.swift */; };
-		45A1FDEF291BD1C4000F3320 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A1FDEE291BD1C4000F3320 /* CustomButton.swift */; };
-		45A685A029647EA70052FCD5 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 45A6859F29647EA70052FCD5 /* Realm */; };
-		45A685A229647EA70052FCD5 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 45A685A129647EA70052FCD5 /* RealmSwift */; };
-		45A685BC2967856D0052FCD5 /* RealmLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A685BB2967856D0052FCD5 /* RealmLoginModel.swift */; };
 		45AEBC6C294BC21900C4A7A2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45AEBC6B294BC21800C4A7A2 /* GoogleService-Info.plist */; };
 		45AEBC71294BCF0000C4A7A2 /* CheckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AEBC70294BCF0000C4A7A2 /* CheckService.swift */; };
 		45AEBC73294CA82B00C4A7A2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AEBC72294CA82B00C4A7A2 /* RegisterViewController.swift */; };
@@ -127,7 +128,6 @@
 		451351FB291F0052007C7BC5 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		451351FD291F00F3007C7BC5 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		451351FF291F11EC007C7BC5 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
-		4516B4032963AB4D00FB0358 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		451C88BE29A63D6300F91C8D /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		451FE9362880BA240024A924 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		451FE9392880BA240024A924 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 		4529CF5429B8FDE3001C6AD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		4529CF5629B8FDEA001C6AD3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		4529EE5129AE2CA4005ECC69 /* AnyLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyLocations.swift; sourceTree = "<group>"; };
-		452D9D0E29D1CF7C00BE0BE0 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		452D9D0E29D1CF7C00BE0BE0 /* UIColor+createColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+createColor.swift"; sourceTree = "<group>"; };
 		4535D8F129F41425001085C1 /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		453F93E92944863C00A374DA /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
 		453F93EB294486B000A374DA /* MusicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewModel.swift; sourceTree = "<group>"; };
@@ -161,12 +161,19 @@
 		453F93FD29448E3E00A374DA /* IMG_8283.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_8283.JPG; sourceTree = "<group>"; };
 		453F93FE29448E3F00A374DA /* IMG_8286.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_8286.JPG; sourceTree = "<group>"; };
 		453F94042944C1BE00A374DA /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
+		453FFDD52A0C76FF00AAFA35 /* AuthResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResult.swift; sourceTree = "<group>"; };
+		453FFDD72A0C776E00AAFA35 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
+		453FFDD92A0C77CA00AAFA35 /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
+		453FFDDB2A0C790400AAFA35 /* TextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFields.swift; sourceTree = "<group>"; };
+		453FFDDD2A0C81C400AAFA35 /* Button+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Extension.swift"; sourceTree = "<group>"; };
+		453FFDE12A0D325300AAFA35 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		453FFDE32A0D41B800AAFA35 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
+		453FFDE52A0E10C900AAFA35 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		4549A947294631F4005558C3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		4549A94A294798E5005558C3 /* InfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewModel.swift; sourceTree = "<group>"; };
 		4549A94C29479941005558C3 /* InfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoordinator.swift; sourceTree = "<group>"; };
 		4549A94E2947E35B005558C3 /* InfoNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoNetworkManager.swift; sourceTree = "<group>"; };
 		4549A9502949411A005558C3 /* InfoTableVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableVIewCell.swift; sourceTree = "<group>"; };
-		4556F8B0293987EE00EF2AA9 /* BrutForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrutForce.swift; sourceTree = "<group>"; };
 		455C90392907381000A608C8 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		455CCAC428AD81D7005590E2 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		455CCAC628B570B7005590E2 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
@@ -184,8 +191,6 @@
 		458F2655291188B60098C7EF /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		4594EEFA28A0695C000B408C /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		459B5DCF290D5FA70046160C /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
-		45A1FDEE291BD1C4000F3320 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
-		45A685BB2967856D0052FCD5 /* RealmLoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmLoginModel.swift; sourceTree = "<group>"; };
 		45AEBC6B294BC21800C4A7A2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		45AEBC70294BCF0000C4A7A2 /* CheckService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckService.swift; sourceTree = "<group>"; };
 		45AEBC72294CA82B00C4A7A2 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -211,12 +216,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45378B1E294D2C41004900B6 /* FirebaseDatabase in Frameworks */,
 				4545DFC1291DBB9700F2BA9B /* iOSIntPackage in Frameworks */,
+				453FFDCF2A0C720E00AAFA35 /* FirebaseAuth in Frameworks */,
+				453FFDD12A0C720E00AAFA35 /* FirebaseDatabase in Frameworks */,
+				453FFDD32A0C720E00AAFA35 /* FirebaseStorage in Frameworks */,
 				45BE242A29882F5200111720 /* KeychainAccess in Frameworks */,
-				45A685A029647EA70052FCD5 /* Realm in Frameworks */,
-				45A685A229647EA70052FCD5 /* RealmSwift in Frameworks */,
-				45378B1C294D2C41004900B6 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,8 +228,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4578B9A229E1BEB700720FD7 /* FirebaseDatabase in Frameworks */,
-				4578B9A029E1BE1700720FD7 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,12 +352,12 @@
 				451FE95128834D240024A924 /* ProfileViewController.swift */,
 				45EF991D292661E400AC3AF6 /* ProfileView.swift */,
 				455CCAC628B570B7005590E2 /* AvatarView.swift */,
+				453FFDE12A0D325300AAFA35 /* ProfileViewModel.swift */,
 				45CF81C528A2597A006F6960 /* PostTableViewCell.swift */,
 				4594EEFA28A0695C000B408C /* Post.swift */,
 				457AA3A428A9855900BFB8A9 /* PhotosTableViewCell.swift */,
 				45C7A21E29059031008C08CD /* TestUserService.swift */,
 				458CD4002901FFB10059BA45 /* CurrentUserService.swift */,
-				45A1FDEE291BD1C4000F3320 /* CustomButton.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -363,7 +365,11 @@
 		452D9D0D29D1CF5000BE0BE0 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				452D9D0E29D1CF7C00BE0BE0 /* Color.swift */,
+				452D9D0E29D1CF7C00BE0BE0 /* UIColor+createColor.swift */,
+				453FFDE32A0D41B800AAFA35 /* UIViewController+Alert.swift */,
+				453FFDDB2A0C790400AAFA35 /* TextFields.swift */,
+				453FFDDD2A0C81C400AAFA35 /* Button+Extension.swift */,
+				453FFDE52A0E10C900AAFA35 /* String+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -394,6 +400,16 @@
 				453F93FE29448E3F00A374DA /* IMG_8286.JPG */,
 			);
 			path = Albums;
+			sourceTree = "<group>";
+		};
+		453FFDD42A0C76DD00AAFA35 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				453FFDD52A0C76FF00AAFA35 /* AuthResult.swift */,
+				453FFDD72A0C776E00AAFA35 /* AuthError.swift */,
+				453FFDD92A0C77CA00AAFA35 /* Validators.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		4549A949294798AB005558C3 /* Info */ = {
@@ -439,12 +455,10 @@
 			isa = PBXGroup;
 			children = (
 				45832A3E289971D7005C65C2 /* LoginViewController.swift */,
-				4516B4032963AB4D00FB0358 /* RealmService.swift */,
-				45A685BB2967856D0052FCD5 /* RealmLoginModel.swift */,
 				4578B9A529E3110A00720FD7 /* LocalAuthorizationService.swift */,
 				45AEBC70294BCF0000C4A7A2 /* CheckService.swift */,
 				45AEBC72294CA82B00C4A7A2 /* RegisterViewController.swift */,
-				4556F8B0293987EE00EF2AA9 /* BrutForce.swift */,
+				453FFDD42A0C76DD00AAFA35 /* Helpers */,
 				45EF991B2922F3C700AC3AF6 /* LoginViewModel.swift */,
 				455C90392907381000A608C8 /* LoginModel.swift */,
 			);
@@ -481,11 +495,10 @@
 			name = Navigation;
 			packageProductDependencies = (
 				4545DFC0291DBB9700F2BA9B /* iOSIntPackage */,
-				45378B1B294D2C41004900B6 /* FirebaseAuth */,
-				45378B1D294D2C41004900B6 /* FirebaseDatabase */,
-				45A6859F29647EA70052FCD5 /* Realm */,
-				45A685A129647EA70052FCD5 /* RealmSwift */,
 				45BE242929882F5200111720 /* KeychainAccess */,
+				453FFDCE2A0C720E00AAFA35 /* FirebaseAuth */,
+				453FFDD02A0C720E00AAFA35 /* FirebaseDatabase */,
+				453FFDD22A0C720E00AAFA35 /* FirebaseStorage */,
 			);
 			productName = Navigation;
 			productReference = 451FE9362880BA240024A924 /* Navigation.app */;
@@ -506,8 +519,6 @@
 			);
 			name = NavigationTests;
 			packageProductDependencies = (
-				4578B99F29E1BE1700720FD7 /* Realm */,
-				4578B9A129E1BEB700720FD7 /* FirebaseDatabase */,
 			);
 			productName = NavigationTests;
 			productReference = 4578B99529E0723500720FD7 /* NavigationTests.xctest */;
@@ -544,9 +555,8 @@
 			mainGroup = 451FE92D2880BA240024A924;
 			packageReferences = (
 				4545DFBF291DBB9700F2BA9B /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
-				45378B1A294D2C41004900B6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				45A6859E29647EA70052FCD5 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				45BE242829882F5100111720 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				453FFDCD2A0C720E00AAFA35 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 451FE9372880BA240024A924 /* Products */;
 			projectDirPath = "";
@@ -599,18 +609,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				457AA3A728AC3CB600BFB8A9 /* Photos.swift in Sources */,
+				453FFDE62A0E10C900AAFA35 /* String+Extension.swift in Sources */,
 				45AEBC73294CA82B00C4A7A2 /* RegisterViewController.swift in Sources */,
 				4549A9512949411B005558C3 /* InfoTableVIewCell.swift in Sources */,
 				453F94052944C1BE00A374DA /* VideoView.swift in Sources */,
 				455C903A2907381000A608C8 /* LoginModel.swift in Sources */,
-				4516B4042963AB4D00FB0358 /* RealmService.swift in Sources */,
+				453FFDDE2A0C81C400AAFA35 /* Button+Extension.swift in Sources */,
 				451351FE291F00F3007C7BC5 /* LoginCoordinator.swift in Sources */,
 				45D4D3BB2969DCE70006512C /* LikeCoordinator.swift in Sources */,
 				455CCAC528AD81D7005590E2 /* PhotosCollectionViewCell.swift in Sources */,
+				453FFDDA2A0C77CA00AAFA35 /* Validators.swift in Sources */,
+				453FFDD62A0C76FF00AAFA35 /* AuthResult.swift in Sources */,
 				45135200291F11EC007C7BC5 /* FeedCoordinator.swift in Sources */,
 				451351FC291F0052007C7BC5 /* TabBarController.swift in Sources */,
 				4535D8F229F41425001085C1 /* LocalNotificationsService.swift in Sources */,
-				452D9D0F29D1CF7C00BE0BE0 /* Color.swift in Sources */,
+				452D9D0F29D1CF7C00BE0BE0 /* UIColor+createColor.swift in Sources */,
 				457AA3A928AC415400BFB8A9 /* PhotosViewController.swift in Sources */,
 				45CF81C628A2597A006F6960 /* PostTableViewCell.swift in Sources */,
 				45EF992229270A0C00AC3AF6 /* ProfileCoordinator.swift in Sources */,
@@ -621,9 +634,10 @@
 				451351F2291EEC64007C7BC5 /* Coordinatable.swift in Sources */,
 				451FE93A2880BA240024A924 /* AppDelegate.swift in Sources */,
 				4549A94D29479941005558C3 /* InfoCoordinator.swift in Sources */,
+				453FFDD82A0C776E00AAFA35 /* AuthError.swift in Sources */,
 				451351F0291EEC0A007C7BC5 /* AppCoordinator.swift in Sources */,
+				453FFDE42A0D41B800AAFA35 /* UIViewController+Alert.swift in Sources */,
 				451FE94E2880C5620024A924 /* FeedViewController.swift in Sources */,
-				45A1FDEF291BD1C4000F3320 /* CustomButton.swift in Sources */,
 				45D4D3BD2969DD5E0006512C /* LikeViewController.swift in Sources */,
 				450CF2402944F50A0022BA08 /* VideoTableViewCell.swift in Sources */,
 				458CD4012901FFB10059BA45 /* CurrentUserService.swift in Sources */,
@@ -631,21 +645,21 @@
 				45AEBC71294BCF0000C4A7A2 /* CheckService.swift in Sources */,
 				45D4D3BF2969DDCF0006512C /* LikeViewModel.swift in Sources */,
 				4549A948294631F4005558C3 /* NetworkManager.swift in Sources */,
-				4556F8B1293987EE00EF2AA9 /* BrutForce.swift in Sources */,
 				457AA3A528A9855900BFB8A9 /* PhotosTableViewCell.swift in Sources */,
 				451FE95228834D240024A924 /* ProfileViewController.swift in Sources */,
 				45EF991E292661E400AC3AF6 /* ProfileView.swift in Sources */,
 				453F93EA2944863C00A374DA /* MusicViewController.swift in Sources */,
 				458F2656291188B60098C7EF /* ImageManager.swift in Sources */,
-				45A685BC2967856D0052FCD5 /* RealmLoginModel.swift in Sources */,
 				459B5DD0290D5FA80046160C /* LoginFactory.swift in Sources */,
 				451FE93C2880BA240024A924 /* SceneDelegate.swift in Sources */,
 				4549A94B294798E5005558C3 /* InfoViewModel.swift in Sources */,
 				451351F9291EF2BC007C7BC5 /* Module.swift in Sources */,
 				453F93F8294489F900A374DA /* MusicCoordinator.swift in Sources */,
 				45D4D3C8296B1FAF0006512C /* ExtensionLike.swift in Sources */,
+				453FFDE22A0D325300AAFA35 /* ProfileViewModel.swift in Sources */,
 				45832A3F289971D7005C65C2 /* LoginViewController.swift in Sources */,
 				451FE9542886F4690024A924 /* InfoViewController.swift in Sources */,
+				453FFDDC2A0C790400AAFA35 /* TextFields.swift in Sources */,
 				4529CF4A29B7F370001C6AD3 /* String.swift in Sources */,
 				451351F5291EEE19007C7BC5 /* AppFactory.swift in Sources */,
 				45C7A21F29059031008C08CD /* TestUserService.swift in Sources */,
@@ -967,7 +981,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		45378B1A294D2C41004900B6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		453FFDCD2A0C720E00AAFA35 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
@@ -983,14 +997,6 @@
 				minimumVersion = 3.2.3;
 			};
 		};
-		45A6859E29647EA70052FCD5 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.27.0;
-			};
-		};
 		45BE242829882F5100111720 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
@@ -1002,40 +1008,25 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		45378B1B294D2C41004900B6 /* FirebaseAuth */ = {
+		453FFDCE2A0C720E00AAFA35 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 45378B1A294D2C41004900B6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 453FFDCD2A0C720E00AAFA35 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		45378B1D294D2C41004900B6 /* FirebaseDatabase */ = {
+		453FFDD02A0C720E00AAFA35 /* FirebaseDatabase */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 45378B1A294D2C41004900B6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 453FFDCD2A0C720E00AAFA35 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabase;
+		};
+		453FFDD22A0C720E00AAFA35 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 453FFDCD2A0C720E00AAFA35 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 		4545DFC0291DBB9700F2BA9B /* iOSIntPackage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4545DFBF291DBB9700F2BA9B /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
 			productName = iOSIntPackage;
-		};
-		4578B99F29E1BE1700720FD7 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 45A6859E29647EA70052FCD5 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		4578B9A129E1BEB700720FD7 /* FirebaseDatabase */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 45378B1A294D2C41004900B6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseDatabase;
-		};
-		45A6859F29647EA70052FCD5 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 45A6859E29647EA70052FCD5 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		45A685A129647EA70052FCD5 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 45A6859E29647EA70052FCD5 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
 		};
 		45BE242929882F5200111720 /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;

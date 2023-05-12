@@ -27,6 +27,7 @@ final class ProfileView: UIView {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+        tableView.dragInteractionEnabled = true
         return tableView
     }()
     
@@ -235,9 +236,11 @@ final class ProfileView: UIView {
     }
     
     func configureTableView(dataSource: UITableViewDataSource,
-                            delegate: UITableViewDelegate) {
+                            delegate: UITableViewDelegate, dropDelegate: UITableViewDropDelegate, dragDelegate: UITableViewDragDelegate) {
         tableView.dataSource = dataSource
         tableView.delegate = delegate
+        tableView.dragDelegate = dragDelegate
+        tableView.dropDelegate = dropDelegate
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")

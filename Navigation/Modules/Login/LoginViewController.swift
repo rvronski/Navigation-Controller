@@ -7,7 +7,6 @@
 
 import UIKit
 import Firebase
-import RealmSwift
 import KeychainAccess
 import LocalAuthentication
 
@@ -22,8 +21,6 @@ class LoginViewController: UIViewController {
     }
     
     private let localAuth = LocalAuthorizationService()
-    
-    private let brutForce = BrutForce()
     
     private let viewModel: LoginViewModelProtocol
     
@@ -49,53 +46,9 @@ class LoginViewController: UIViewController {
         return button
     }()
     
-    private lazy var passwordTextField: UITextField = {
-        let passwordTextField = UITextField()
-        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray ])
-        passwordTextField.layer.borderColor = UIColor.lightGray.cgColor
-        passwordTextField.layer.borderWidth = 0.5
-        passwordTextField.textColor = .black
-//        passwordTextField.text = "qwerty"
-        passwordTextField.font = UIFont(name: "sysemFont", size: 16)
-        passwordTextField.autocapitalizationType = .none
-        passwordTextField.isSecureTextEntry = true
-        passwordTextField.backgroundColor = .white
-        let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
-        passwordTextField.leftView = paddingView
-        passwordTextField.leftViewMode = .always
-        return passwordTextField
-    }()
-    
-    private lazy var loginTextField: UITextField = {
-        var loginTextfield = UITextField()
-        loginTextfield.translatesAutoresizingMaskIntoConstraints = false
-//        loginTextfield.placeholder = "Login/email"
-//        loginTextfield.text = "rvronski"
-        loginTextfield.layer.borderColor = UIColor.gray.cgColor
-        loginTextfield.backgroundColor = .white
-        loginTextfield.font = UIFont(name: "sysemFont", size: 16)
-        loginTextfield.textColor = .black
-        loginTextfield.attributedPlaceholder = NSAttributedString(string: "Login/email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray ])
-        loginTextfield.autocapitalizationType = .none
-        loginTextfield.textAlignment = .justified
-        loginTextfield.keyboardType = .emailAddress
-        let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
-        loginTextfield.leftView = paddingView
-        loginTextfield.leftViewMode = .always
-        loginTextfield.becomeFirstResponder()
-        return loginTextfield
-    }()
-    
-    private lazy var brutForceButton: UIButton = {
-        let brutForceButton = UIButton()
-        brutForceButton.translatesAutoresizingMaskIntoConstraints = false
-        brutForceButton.setTitle("brutForce".localized, for: .normal)
-        brutForceButton.setTitleColor(.systemBlue, for: .normal)
-        brutForceButton.addTarget(self, action: #selector(brutForceButtonDidTap), for: .touchUpInside)
-        return brutForceButton
-    }()
-    
+    private lazy var passwordTextField = PasswordTF()
+    private lazy var loginTextField = LoginTF()
+   
     private lazy var signUpButton: UIButton = {
         let signUpButton = UIButton()
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
@@ -130,7 +83,7 @@ class LoginViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
-        button.setBackgroundImage(UIImage(named: "Blue_pixel.png"), for: .normal)
+        button.backgroundColor = .buttonColor
         button.setTitle("Log in", for: .normal)
         button.addTarget(self, action: #selector(self.didTapButton), for: .touchUpInside)
         button.clipsToBounds = true
@@ -141,13 +94,12 @@ class LoginViewController: UIViewController {
         let logoImage = UIImageView()
         logoImage.translatesAutoresizingMaskIntoConstraints = false
         logoImage.backgroundColor = .clear
-        logoImage.image = UIImage(named: "logo.png")
+        logoImage.image = UIImage(named: "navigationLogo")
         logoImage.clipsToBounds = true
         return logoImage
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let realm = try! Realm()
         self.setupView()
         self.setupGesture()
         self.tabBarController?.tabBar.isHidden = true
@@ -157,7 +109,6 @@ class LoginViewController: UIViewController {
         self.view.addSubview(scrollView)
         self.view.backgroundColor = .createColor(light: .white, dark: .darkGray)
         self.scrollView.addSubview(self.stackView)
-        self.scrollView.addSubview(self.brutForceButton)
         self.scrollView.addSubview(self.signUpButton)
         self.stackView.addArrangedSubview(loginTextField)
         self.stackView.addArrangedSubview(activityIndicator)
@@ -189,12 +140,7 @@ class LoginViewController: UIViewController {
             self.button.rightAnchor.constraint(equalTo: self.stackView.rightAnchor),
             self.button.heightAnchor.constraint(equalToConstant: 50),
             
-            self.brutForceButton.topAnchor.constraint(equalTo: self.button.bottomAnchor, constant: 16),
-            self.brutForceButton.leftAnchor.constraint(equalTo: self.button.leftAnchor),
-            self.brutForceButton.rightAnchor.constraint(equalTo: self.button.rightAnchor),
-            self.brutForceButton.heightAnchor.constraint(equalToConstant: 20),
-            
-            self.signUpButton.topAnchor.constraint(equalTo: self.brutForceButton.bottomAnchor, constant: 10),
+            self.signUpButton.topAnchor.constraint(equalTo: self.button.bottomAnchor, constant: 16),
             self.signUpButton.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
             self.signUpButton.widthAnchor.constraint(equalToConstant: 100),
             self.signUpButton.heightAnchor.constraint(equalToConstant: 20),
@@ -214,10 +160,7 @@ class LoginViewController: UIViewController {
 //        let regVC = RegisterViewController(viewModel: LoginViewModel())
 //        self.window?.rootViewController?.present(regVC, animated: true)
 //    }
-    override func loadView() {
-        super.loadView()
-        
-    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         localAuth.isFaceIdSupported()
@@ -237,14 +180,6 @@ class LoginViewController: UIViewController {
             self.faceIDButton.isEnabled = true
         }
         
-//        Auth.auth().addStateDidChangeListener { auth, user in
-//            if user == nil {
-//                return
-//            } else {
-//                self.viewModel.viewInputDidChange(viewInput: .tapLoginButton(self.viewModel))
-//            }
-//        }
-        
         navigationController?.setNavigationBarHidden(true, animated: false)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.didShowKeyboard(_:)),
@@ -261,80 +196,28 @@ class LoginViewController: UIViewController {
         self.loginTextField.becomeFirstResponder()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-//        Auth.auth().removeStateDidChangeListener(handle!)
-    }
     
     @objc func didTapButton()  {
-//#if DEBUG
-//        let service = TestUserService()
-//
-//#else
-//        let service = CurrentUserService()
-//#endif
-        let service = RealmService()
         guard let email = loginTextField.text, !email.isEmpty,
-              let password = passwordTextField.text, !email.isEmpty else {
-            tapAlert()
+              let password = passwordTextField.text, !password.isEmpty else {
+            self.alertOk(title: "Заполните все поля", message: nil)
+            return
+        }
+        guard email.isValidEmail else {
+            self.alertOk(title: "Неверный формат email", message: "Проверьте email адрес")
             return
         }
         
-//        do {
-//            let client = try service.input(login: email)
-            let loginInspector = LoginInspector()
-            self.loginDelegate? = loginInspector
-           let result = loginInspector.checkCredentials(email: email, password: password)
-                if result == true {
-                    service.saveUser(password: password, login: email)
-                    
-                    self.viewModel.viewInputDidChange(viewInput: .tapLoginButton(self.viewModel))
-                } else {
-                    self.alertDismiss(title: "noUserAlert".localized, message: "registrationAlert".localized) {
-                        self.navigationController?.pushViewController(RegisterViewController(viewModel: self.viewModel), animated: false)
-                    }
-                }
-                
+        viewModel.authorization(email: email, password: password) { [weak self] in
+            DispatchQueue.main.async {
+                self?.alertOk(title: "Ошибка авторизации", message: "Пользователь не найден")
             }
-//            let input = try loginInspector.check(log: loginTextField.text!, pass: passwordTextField.text!)
-//            if input == true {
-//                viewModel.viewInputDidChange(viewInput: .tapLoginButton( client, viewModel))
-            
-//        } catch {
-//            tapAlert()
-//        }
-    
-    
-    private func alertDismiss(title: String, message: String?, completionHandler: @escaping () -> Void) {
-         
-         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-         let ok = UIAlertAction(title: "ОК", style: .default) { _ in
-             completionHandler()
-         }
-         alertController.addAction(ok)
-         
-         present(alertController, animated: true, completion: nil)
-     }
-    
-    private func alertOk(title: String, message: String?) {
+        }
         
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let ok = UIAlertAction(title: "ОК", style: .default)
-        
-        alertController.addAction(ok)
-        
-        present(alertController, animated: true, completion: nil)
     }
     
-    func tapAlert()  {
-        let alertControler = UIAlertController(title: "error".localized, message: "fieldsAlert".localized, preferredStyle: .alert)
-       let firstAction = UIAlertAction(title: "Ok", style: .default){ _ in
-           self.loginTextField.becomeFirstResponder()
-       }
-
-       alertControler.addAction(firstAction)
-        self.present(alertControler, animated: true)
-
-   }
+    
+    
     @objc func didShowKeyboard(_ notification: Notification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
@@ -383,7 +266,7 @@ class LoginViewController: UIViewController {
             DispatchQueue.main.async {
                 if let success = success {
                     if success {
-                        self.viewModel.viewInputDidChange(viewInput: .tapLoginButton(self.viewModel))
+                        self.viewModel.viewInputDidChange(viewInput: .tapLogin)
                     } else {
                         self.alertOk(title: "Не возможно пройти аутентификацию", message: "Проверьте настройки приватности")
                     }
@@ -392,29 +275,8 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @objc private func brutForceButtonDidTap() {
-        var newPassword = ""
-        self.passwordTextField.text = ""
-        self.activityIndicator.isHidden = false
-        self.activityIndicator.startAnimating()
-        let group = DispatchGroup()
-        group.enter()
-        DispatchQueue.global().async {
-           let password = LoginModel.shared.randomString(length: 4)
-            newPassword = self.brutForce.bruteForce(passwordToUnlock: password)
-            group.leave()
-        }
-        group.notify(queue: .main) {
-            self.passwordTextField.text = newPassword
-            self.passwordTextField.isSecureTextEntry = false
-            self.activityIndicator.stopAnimating()
-            self.activityIndicator.isHidden = true
-        }
-    }
-  
     @objc private func didPushSignUpButton() {
-        let vcReg = RegisterViewController(viewModel: viewModel)
-        self.navigationController?.pushViewController(vcReg, animated: true)
+        viewModel.viewInputDidChange(viewInput: .tapSignUp)
     }
     
     func showDeviceSettings() {
@@ -428,8 +290,3 @@ class LoginViewController: UIViewController {
         }
     }
 }
-
-
-
-
-
